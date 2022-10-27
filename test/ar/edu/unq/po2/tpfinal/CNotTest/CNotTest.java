@@ -92,7 +92,7 @@ class CNotTest {
 
 	@Test
 	void TestCNot1() {
-		//Testeo CNot sobre lista vacia
+		//Testeo CNot 
 		
 		evaluador=new CNot(new CCustom(listaCorta));
 		resultado=evaluador.evaluar(lista);
@@ -100,5 +100,7 @@ class CNotTest {
 
 		assertTrue(listaResto.equals(resultado));
 	}
+	
 
 }
+

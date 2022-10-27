@@ -13,9 +13,13 @@ public class  CNot extends   Filtrador{
 		this.filtradorANegar = filtradorANegar;
 	}
 	public ArrayList<Evaluable> evaluar(ArrayList<Evaluable> lista) {
+		ArrayList<Evaluable> listaANegar = this.filtradorANegar.evaluar(lista);
 		
 		ArrayList<Evaluable> listaNegada = lista;
-		listaNegada.removeAll(this.filtradorANegar.evaluar(lista));
+
+		
+		listaNegada.removeAll(listaANegar);
+		
 		return  listaNegada;
 	}
 }
