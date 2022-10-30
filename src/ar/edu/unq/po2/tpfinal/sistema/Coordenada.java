@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.tpfinal.clases;
+package ar.edu.unq.po2.tpfinal.sistema;
 
 public class Coordenada {
 	private float x;

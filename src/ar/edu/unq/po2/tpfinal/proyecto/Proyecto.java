@@ -1,7 +1,10 @@
-package ar.edu.unq.po2.tpfinal.clases;
+package ar.edu.unq.po2.tpfinal.proyecto;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ar.edu.unq.po2.tpfinal.muestra.Muestra;
+import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
 
 public class Proyecto {

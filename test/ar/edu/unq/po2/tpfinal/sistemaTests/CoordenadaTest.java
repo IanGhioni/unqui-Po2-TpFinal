@@ -1,11 +1,11 @@
-package ar.edu.unq.po2.tpfinal.tests;
+package ar.edu.unq.po2.tpfinal.sistemaTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ar.edu.unq.po2.tpfinal.clases.Coordenada;
+import ar.edu.unq.po2.tpfinal.sistema.Coordenada;
 
 class CoordenadaTest {
 	

@@ -1,12 +1,12 @@
-package ar.edu.unq.po2.tpfinal.tests;
+package ar.edu.unq.po2.tpfinal.proyectoTests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ar.edu.unq.po2.tpfinal.clases.Muestra;
-import ar.edu.unq.po2.tpfinal.clases.Proyecto;
-import ar.edu.unq.po2.tpfinal.clases.Usuario;
+import ar.edu.unq.po2.tpfinal.muestra.Muestra;
+import ar.edu.unq.po2.tpfinal.proyecto.Proyecto;
+import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
 import static org.mockito.Mockito.*;
 

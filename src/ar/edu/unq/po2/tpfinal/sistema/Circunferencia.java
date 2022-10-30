@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.tpfinal.clases;
+package ar.edu.unq.po2.tpfinal.sistema;
 
 public class Circunferencia {
 	
@@ -35,9 +35,6 @@ public class Circunferencia {
 		return
 			(Math.abs(a-x)*Math.abs(a-x))  +  (Math.abs(b-y)*Math.abs(b-y))	
 			<= 
-			r*r;
-		
-				
-				
+			r*r;			
 	}
 }

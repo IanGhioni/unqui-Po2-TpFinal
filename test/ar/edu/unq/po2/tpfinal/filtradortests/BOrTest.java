@@ -7,24 +7,7 @@ import org.junit.jupiter.api.Test;
 import ar.edu.unq.po2.tpfinal.filtrador.*;
 
 
-class EvaluableDumy implements Evaluable{
-	private String nombre;
-	private String clase;
 
-	
-	public EvaluableDumy(String nombre,String clase) {
-		this.clase=clase;
-		this.nombre=nombre;
-	}
-
-	public String getName() {
-		return nombre;
-	}
-
-	public String getCategoriaName() {
-		return clase;
-	}
-}
 
 class BOrTest {
 	private ArrayList<Evaluable> lista ;
