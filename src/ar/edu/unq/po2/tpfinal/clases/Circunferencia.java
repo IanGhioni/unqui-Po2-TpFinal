@@ -5,9 +5,16 @@ public class Circunferencia {
 	private Coordenada centro;
 	private int radio;
 	
-	public Circunferencia(Coordenada centro, int radio) {
+	public Circunferencia(Coordenada centro, int radio) throws Exception {
+		if (radio <= 0) {
+			throw new Exception( this.mensajeDeErrorRadioMenorIgualA0() );
+		}
 		this.centro = centro;
 		this.radio = radio;
+	}
+
+	private String mensajeDeErrorRadioMenorIgualA0() {
+		return "El Radio no puede ser menor o igual a 0.";
 	}
 
 	public Coordenada getCentro() {

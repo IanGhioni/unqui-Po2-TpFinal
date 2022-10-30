@@ -1,8 +1,4 @@
-package ar.edu.unq.po2.tpfinal.BAnd;
-import ar.edu.unq.po2.tpfinal.filtrador.*;
-import ar.edu.unq.po2.tpfinal.evaluable.*;
-import ar.edu.unq.po2.tpfinal.condicion.*;
-import java.util.List; // import the ArrayList class
+package ar.edu.unq.po2.tpfinal.filtrador;
 import java.util.ArrayList; // import the ArrayList class
 
 

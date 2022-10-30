@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.tpfinal.evaluable;
+package ar.edu.unq.po2.tpfinal.filtrador;
 
 public interface Evaluable {
 
