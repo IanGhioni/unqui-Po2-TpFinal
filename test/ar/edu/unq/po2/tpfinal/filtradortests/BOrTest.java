@@ -1,17 +1,9 @@
-package ar.edu.unq.po2.tpfinal.BAndTest;
-import java.util.List; // import the ArrayList class
+package ar.edu.unq.po2.tpfinal.filtradortests;
 import java.util.ArrayList; // import the ArrayList class
 
 import static org.junit.jupiter.api.Assertions.*;
-import ar.edu.unq.po2.tpfinal.evaluable.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ar.edu.unq.po2.tpfinal.BAnd.*;
-import ar.edu.unq.po2.tpfinal.condicion.Condicion;
-
-
-
 import ar.edu.unq.po2.tpfinal.filtrador.*;
 
 
@@ -34,9 +26,8 @@ class EvaluableDumy implements Evaluable{
 	}
 }
 
-class BAndTest {
+class BOrTest {
 	private ArrayList<Evaluable> lista ;
-	private ArrayList<Evaluable> listaVacia;
 	private ArrayList<Evaluable> listaCorta;
 	private ArrayList<Evaluable>listaResto;
 	private ArrayList<Evaluable>lista1;
@@ -69,7 +60,7 @@ class BAndTest {
 	@BeforeEach
 	void setUp() {
 
-		listaVacia = new ArrayList<Evaluable>();
+		new ArrayList<Evaluable>();
 		lista = new ArrayList<Evaluable>();
 		listaCorta = new ArrayList<Evaluable>();
 		listaResto = new ArrayList<Evaluable>();
@@ -97,14 +88,16 @@ class BAndTest {
 	
 
 	@Test
-	void TestBand1() {
+	void TestBOr1() {
 		//Testeo BOR listas disjuntas
 		lista1.add(evaluable1);
 		lista2.add(evaluable2);
 		lista2.add(evaluable3);
-
+		resultadoEsperado.add(evaluable1);
+		resultadoEsperado.add(evaluable2);
+		resultadoEsperado.add(evaluable3);
 		
-		evaluador=new BAnd(new CCustom(lista1),new CCustom(lista2));
+		evaluador=new BOr(new CCustom(lista1),new CCustom(lista2));
 		resultado=evaluador.evaluar(lista);
 		
 
@@ -114,17 +107,17 @@ class BAndTest {
 
 
 @Test
-void TestBAnd2() {
-	//Testeo Band listas con datos en la interseccion
+void TestBor2() {
+	//Testeo BOR listas con datos en la interseccion
 	lista1.add(evaluable1);
 	lista1.add(evaluable2);
 	lista2.add(evaluable2);
 	lista2.add(evaluable3);
-
+	resultadoEsperado.add(evaluable1);
 	resultadoEsperado.add(evaluable2);
-
+	resultadoEsperado.add(evaluable3);
 	
-	evaluador=new BAnd(new CCustom(lista1),new CCustom(lista2));
+	evaluador=new BOr(new CCustom(lista1),new CCustom(lista2));
 	resultado=evaluador.evaluar(lista);
 	
 

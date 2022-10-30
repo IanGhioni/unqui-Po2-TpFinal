@@ -1,19 +1,9 @@
-package ar.edu.unq.po2.tpfinal.CNameTest;
-import java.util.List; // import the ArrayList class
+package ar.edu.unq.po2.tpfinal.filtradortests;
 import java.util.ArrayList; // import the ArrayList class
 
 import static org.junit.jupiter.api.Assertions.*;
-import ar.edu.unq.po2.tpfinal.evaluable.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import ar.edu.unq.po2.tpfinal.CCategoria.CCategoria;
-import ar.edu.unq.po2.tpfinal.CName.*;
-import ar.edu.unq.po2.tpfinal.condicion.Condicion;
-
-
-
 import ar.edu.unq.po2.tpfinal.filtrador.*;
 
 
@@ -36,7 +26,7 @@ class EvaluableDumy implements Evaluable{
 	}
 }
 
-class CNameTest {
+class CCategoriaTest {
 	private ArrayList<Evaluable> lista ;
 	private ArrayList<Evaluable> listaVacia;
 	private Evaluable evaluable1;
@@ -65,22 +55,22 @@ class CNameTest {
 	
 
 	@Test
-	void TestCName1() {
+	void TestCCategoria1() {
 		//Testeo Ctrue sobre lista vacia
-		evaluador=new CName("nombre1");
+		evaluador=new CCategoria("nombre1");
 		assertTrue(listaVacia.equals(evaluador.evaluar(listaVacia)));
 	}
 	@Test
-	void TestCName2() {
+	void TestCCategoria2() {
 		//Testeo Ctrue sobre lista llena y patron .*
-		evaluador=new CName(".*");
+		evaluador=new CCategoria(".*");
 		assertTrue(lista.equals(evaluador.evaluar(lista)));
 	}
 	@Test
-	void TestCName3() {
+	void TestCCategoria3() {
 		ArrayList<Evaluable> listaTarget = new ArrayList<Evaluable>();
 		//Testeo Ctrue sobre lista llena y patron e2
-		evaluador=new CName(".*e2.*");
+		evaluador=new CCategoria(".*e2.*");
 		listaTarget.add(evaluable2);
 		assertTrue(listaTarget.equals(evaluador.evaluar(lista)));
 	}

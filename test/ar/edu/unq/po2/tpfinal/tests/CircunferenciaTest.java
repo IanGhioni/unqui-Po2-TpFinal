@@ -139,4 +139,28 @@ class CircunferenciaTest {
 	}
 	
 	// CASOS DE ERROR
+	// radio valor 0
+	
+	@Test
+	void testVerificarExceptionCuandoElRadioEs0() {
+		Throwable exception = assertThrows(Exception.class, () -> {
+			new Circunferencia(coordenada,0);
+		});
+		assertEquals(exception.getMessage(), "El Radio no puede ser menor o igual a 0.");
+	}
+	
+	@Test
+	void testVerificarExceptionCuandoElRadioEsNegativo() {
+		Throwable exception = assertThrows(Exception.class, () -> {
+			new Circunferencia(coordenada,-6);
+		});
+		assertEquals(exception.getMessage(), "El Radio no puede ser menor o igual a 0.");
+	}
+	
+	@Test
+	void testVerificarQueNoHayExceptionCuandoElRadioEs1() {
+		assertDoesNotThrow(() -> {
+			new Circunferencia(coordenada,1);
+		});
+	}
 }

@@ -1,17 +1,9 @@
-package ar.edu.unq.po2.tpfinal.BOrTest;
-import java.util.List; // import the ArrayList class
+package ar.edu.unq.po2.tpfinal.filtradortests;
 import java.util.ArrayList; // import the ArrayList class
 
 import static org.junit.jupiter.api.Assertions.*;
-import ar.edu.unq.po2.tpfinal.evaluable.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ar.edu.unq.po2.tpfinal.BOr.*;
-import ar.edu.unq.po2.tpfinal.condicion.Condicion;
-
-
-
 import ar.edu.unq.po2.tpfinal.filtrador.*;
 
 
@@ -34,13 +26,12 @@ class EvaluableDumy implements Evaluable{
 	}
 }
 
-class BOrTest {
+class BAndTest {
 	private ArrayList<Evaluable> lista ;
-	private ArrayList<Evaluable> listaVacia;
 	private ArrayList<Evaluable> listaCorta;
-	private ArrayList<Evaluable>listaResto;
-	private ArrayList<Evaluable>lista1;
-	private ArrayList<Evaluable>lista2;
+	private ArrayList<Evaluable> listaResto;
+	private ArrayList<Evaluable> lista1;
+	private ArrayList<Evaluable> lista2;
 	private Evaluable evaluable1;
 	private Evaluable evaluable2;
 	private Evaluable evaluable3;
@@ -69,7 +60,7 @@ class BOrTest {
 	@BeforeEach
 	void setUp() {
 
-		listaVacia = new ArrayList<Evaluable>();
+		new ArrayList<Evaluable>();
 		lista = new ArrayList<Evaluable>();
 		listaCorta = new ArrayList<Evaluable>();
 		listaResto = new ArrayList<Evaluable>();
@@ -97,16 +88,14 @@ class BOrTest {
 	
 
 	@Test
-	void TestBOr1() {
+	void TestBand1() {
 		//Testeo BOR listas disjuntas
 		lista1.add(evaluable1);
 		lista2.add(evaluable2);
 		lista2.add(evaluable3);
-		resultadoEsperado.add(evaluable1);
-		resultadoEsperado.add(evaluable2);
-		resultadoEsperado.add(evaluable3);
+
 		
-		evaluador=new BOr(new CCustom(lista1),new CCustom(lista2));
+		evaluador=new BAnd(new CCustom(lista1),new CCustom(lista2));
 		resultado=evaluador.evaluar(lista);
 		
 
@@ -116,17 +105,17 @@ class BOrTest {
 
 
 @Test
-void TestBor2() {
-	//Testeo BOR listas con datos en la interseccion
+void TestBAnd2() {
+	//Testeo Band listas con datos en la interseccion
 	lista1.add(evaluable1);
 	lista1.add(evaluable2);
 	lista2.add(evaluable2);
 	lista2.add(evaluable3);
-	resultadoEsperado.add(evaluable1);
+
 	resultadoEsperado.add(evaluable2);
-	resultadoEsperado.add(evaluable3);
+
 	
-	evaluador=new BOr(new CCustom(lista1),new CCustom(lista2));
+	evaluador=new BAnd(new CCustom(lista1),new CCustom(lista2));
 	resultado=evaluador.evaluar(lista);
 	
 
