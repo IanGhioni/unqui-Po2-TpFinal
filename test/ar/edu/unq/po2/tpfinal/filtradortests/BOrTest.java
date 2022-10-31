@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ar.edu.unq.po2.tpfinal.filtrador.*;
-
+import java.util.regex.Pattern;
 
 
 
@@ -50,10 +50,10 @@ class BOrTest {
 		lista1 = new ArrayList<Evaluable>();
 		lista2 = new ArrayList<Evaluable>();		
 		resultadoEsperado = new ArrayList<Evaluable>();	
-		evaluable1=new EvaluableDumy("nombre1","clase1");
-		evaluable2=new EvaluableDumy("nombre2","clase2");
-		evaluable3=new EvaluableDumy("nombre3","clase3");
-		evaluable4=new EvaluableDumy("nombre4","clase4");
+		evaluable1=new EvaluableDumy("nombre1");
+		evaluable2=new EvaluableDumy("nombre2");
+		evaluable3=new EvaluableDumy("nombre3");
+		evaluable4=new EvaluableDumy("nombre4");
 		lista.add(evaluable1);
 		lista.add(evaluable2);
 		lista.add(evaluable3);

@@ -1,5 +1,6 @@
 package ar.edu.unq.po2.tpfinal.filtradortests;
 import java.util.ArrayList; // import the ArrayList class
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,11 +10,12 @@ import ar.edu.unq.po2.tpfinal.filtrador.*;
 
 class EvaluableDumy implements Evaluable{
 	private String nombre;
-	private String clase;
+	private Pattern pattern;
+
 
 	
-	public EvaluableDumy(String nombre,String clase) {
-		this.clase=clase;
+	public EvaluableDumy(String nombre) {
+
 		this.nombre=nombre;
 	}
 
@@ -21,8 +23,12 @@ class EvaluableDumy implements Evaluable{
 		return nombre;
 	}
 
-	public String getCategoriaName() {
-		return clase;
+	public Boolean mach(String regex) {
+
+
+		 this.pattern = Pattern.compile(regex);
+		 return pattern.matcher(this.nombre).matches();
+
 	}
 }
 

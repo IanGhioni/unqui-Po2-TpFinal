@@ -5,14 +5,14 @@ import java.util.ArrayList; // import the ArrayList class
 
 
 public class  CName extends Condicion{
-	private Pattern pattern;
+	private String regexString;
 	public CName(String regexString) {
-		this.pattern = Pattern.compile(regexString);
+		this.regexString = regexString;
 	}
 	public ArrayList<Evaluable> evaluar(ArrayList<Evaluable> lista) {
 		return   (ArrayList<Evaluable>) lista
 			      .stream()
-			      .filter(e -> pattern.matcher(e.getName()).matches())
+			      .filter(e -> e.mach(this.regexString))
 			      .collect(Collectors.toList());
 	}
 }
