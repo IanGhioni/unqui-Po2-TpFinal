@@ -11,13 +11,6 @@ public class DesafioAceptado extends Desafio {
 	private LocalDate momentoCompletado;
 	private int calificacion;
 
-//	public DesafioAceptado(Usuario usuario) {
-//		super(area, muestrasTomadas, muestrasTomadas, muestrasTomadas);
-//		this.usuario = usuario;
-//		this.estado = new EstadoDesafioEnCurso();
-//		this.muestrasTomadas = 0;
-//	}
-
 	public void setMomentoCompletado(LocalDate momento) {
 		this.momentoCompletado = momento;
 	}
@@ -43,7 +36,7 @@ public class DesafioAceptado extends Desafio {
 	}
 
 	public void setCalificacion(int calificacion) {
-		this.estado.calificar(calificacion, this);
+		this.calificacion = calificacion;
 	}
 
 	public double porcentajeCompletitud(DesafioAceptado desafio) {
@@ -52,6 +45,10 @@ public class DesafioAceptado extends Desafio {
 
 	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
 		this.estado.agregarMuestra(cantidad, this);
+	}
+
+	public boolean faltaUnaMuestra() {
+		return ((this.getMuestrasTomadas() + 1) == this.getCantidadMinimaMuestras());
 	}
 
 }
