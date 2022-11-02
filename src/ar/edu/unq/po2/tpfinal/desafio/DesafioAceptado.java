@@ -11,8 +11,22 @@ public class DesafioAceptado extends Desafio {
 	private LocalDate momentoCompletado;
 	private int calificacion;
 
+	public DesafioAceptado(Circunferencia area, int cantidadMinimaMuestras, int dificultad, int recompensa,
+			Usuario usuario, EstadoDesafio estado, int muestrasTomadas, LocalDate momentoCompletado, int calificacion) {
+		super(area, cantidadMinimaMuestras, dificultad, recompensa);
+		this.usuario = usuario;
+		this.setEstado(estado);
+		this.setMuestrasTomadas(muestrasTomadas);
+		this.setMomentoCompletado(momentoCompletado);
+		this.setCalificacion(calificacion);
+	}
+
 	public void setMomentoCompletado(LocalDate momento) {
 		this.momentoCompletado = momento;
+	}
+
+	public LocalDate getMomentoCompletado() {
+		return momentoCompletado;
 	}
 
 	public Usuario getUsuario() {
@@ -37,6 +51,10 @@ public class DesafioAceptado extends Desafio {
 
 	public void setCalificacion(int calificacion) {
 		this.calificacion = calificacion;
+	}
+
+	public int getCalificacion() {
+		return calificacion;
 	}
 
 	public double porcentajeCompletitud(DesafioAceptado desafio) {

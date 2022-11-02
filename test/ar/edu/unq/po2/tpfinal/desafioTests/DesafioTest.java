@@ -10,40 +10,44 @@ import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.desafio.Restriccion;
 import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
 
-class DesafioTest {
+public class DesafioTest {
 	Desafio desafio;
 	Circunferencia area;
 	Restriccion restriccion;
 
 	@BeforeEach
-	void setUp() {
+	public void setUp() {
 		area = mock(Circunferencia.class);
 		restriccion = mock(Restriccion.class);
+	}
+
+	@Test
+	public void testDesafioDevuelveSuArea() {
 		desafio = new Desafio(area, 3, 1, 300);
+		assertEquals(area, desafio.getArea());
 	}
 
 	@Test
-	void testDesafioDevuelveSuArea() {
-		assertEquals(desafio.getArea(), area);
+	public void testDesafioDevuelveCantidadMuestras() {
+		desafio = new Desafio(area, 3, 1, 300);
+		assertEquals(3, desafio.getCantidadMinimaMuestras());
 	}
 
 	@Test
-	void testDesafioDevuelveCantidadMuestras() {
-		assertEquals(desafio.getCantidadMinimaMuestras(), 3);
+	public void testDesafioDevuelveDificultad() {
+		desafio = new Desafio(area, 3, 1, 300);
+		assertEquals(1, desafio.getDificultad());
 	}
 
 	@Test
-	void testDesafioDevuelveDificultad() {
-		assertEquals(desafio.getDificultad(), 1);
+	public void testDesafioDevuelveRecompensa() {
+		desafio = new Desafio(area, 3, 1, 300);
+		assertEquals(300, desafio.getRecompensa());
 	}
 
 	@Test
-	void testDesafioDevuelveRecompensa() {
-		assertEquals(desafio.getRecompensa(), 300);
-	}
-
-	@Test
-	void testDesafioAgregaRestriccion() {
+	public void testDesafioAgregaRestriccion() {
+		desafio = new Desafio(area, 3, 1, 300);
 		desafio.agregarRestriccion(restriccion);
 		assertTrue(desafio.getRestricciones().contains(restriccion));
 	}
