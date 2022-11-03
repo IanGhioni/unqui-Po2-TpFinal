@@ -23,15 +23,15 @@ public class Desafio {
 		return area;
 	}
 
-	public double getCantidadMinimaMuestras() {
+	public int getCantidadMinimaMuestras() {
 		return cantidadMinimaMuestras;
 	}
 
-	public double getDificultad() {
+	public int getDificultad() {
 		return dificultad;
 	}
 
-	public double getRecompensa() {
+	public int getRecompensa() {
 		return recompensa;
 	}
 
