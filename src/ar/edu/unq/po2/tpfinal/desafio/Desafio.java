@@ -12,12 +12,12 @@ public class Desafio {
 	protected int dificultad;
 	protected int recompensa;
 
-//	public Desafio(Circunferencia area, int cantidadMinimaMuestras, int dificultad, int recompensa) {
-//		this.area = area;
-//		this.cantidadMinimaMuestras = cantidadMinimaMuestras;
-//		this.dificultad = dificultad;
-//		this.recompensa = recompensa;
-//	}
+	public Desafio(Circunferencia area, int cantidadMinimaMuestras, int dificultad, int recompensa) {
+		this.area = area;
+		this.cantidadMinimaMuestras = cantidadMinimaMuestras;
+		this.dificultad = dificultad;
+		this.recompensa = recompensa;
+	}
 
 	public Circunferencia getArea() {
 		return area;
@@ -33,6 +33,10 @@ public class Desafio {
 
 	public int getRecompensa() {
 		return recompensa;
+	}
+
+	public List<Restriccion> getRestricciones() {
+		return restricciones;
 	}
 
 	public void agregarRestriccion(Restriccion restriccion) {
