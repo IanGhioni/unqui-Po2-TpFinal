@@ -130,7 +130,7 @@ class RecomendadorFavoritosTests {
 	
 	@Test
 	void testRecomendarDevuelve5Desafios() {
-		assertTrue(listaDeDesafios.size() == 23);
+		assertTrue(recomendador.recomendar().size() == 5);
 	}
 	 
 	@Test
