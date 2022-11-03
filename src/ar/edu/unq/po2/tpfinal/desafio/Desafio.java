@@ -23,15 +23,15 @@ public class Desafio {
 		return area;
 	}
 
-	public int getCantidadMinimaMuestras() {
+	public double getCantidadMinimaMuestras() {
 		return cantidadMinimaMuestras;
 	}
 
-	public int getDificultad() {
+	public double getDificultad() {
 		return dificultad;
 	}
 
-	public int getRecompensa() {
+	public double getRecompensa() {
 		return recompensa;
 	}
 
@@ -41,6 +41,17 @@ public class Desafio {
 
 	public void agregarRestriccion(Restriccion restriccion) {
 		restricciones.add(restriccion);
+	}
+
+	public double calcularSimilitudConDesafio(Desafio desafio) {
+		return 
+			(
+			Math.abs(this.getDificultad() - desafio.getDificultad())
+			+
+			Math.abs(this.getCantidadMinimaMuestras() - desafio.getCantidadMinimaMuestras())
+			+
+			Math.abs(this.getRecompensa() - desafio.getRecompensa())
+			) / 3;
 	}
 
 }
