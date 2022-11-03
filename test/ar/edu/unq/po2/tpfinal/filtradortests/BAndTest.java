@@ -8,29 +8,7 @@ import org.junit.jupiter.api.Test;
 import ar.edu.unq.po2.tpfinal.filtrador.*;
 
 
-class EvaluableDumy implements Evaluable{
-	private String nombre;
-	private Pattern pattern;
 
-
-	
-	public EvaluableDumy(String nombre) {
-
-		this.nombre=nombre;
-	}
-
-	public String getName() {
-		return nombre;
-	}
-
-	public Boolean mach(String regex) {
-
-
-		 this.pattern = Pattern.compile(regex);
-		 return pattern.matcher(this.nombre).matches();
-
-	}
-}
 
 class BAndTest {
 	private ArrayList<Evaluable> lista ;

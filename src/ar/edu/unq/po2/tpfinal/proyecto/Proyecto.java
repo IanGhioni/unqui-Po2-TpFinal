@@ -6,9 +6,10 @@ import java.util.List;
 import ar.edu.unq.po2.tpfinal.muestra.Muestra;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
+import ar.edu.unq.po2.tpfinal.filtrador.Evaluable;
 
 
-public class Proyecto {
+public class Proyecto implements  Evaluable {
 
 	private String nombre;
 	private String descripcion;
