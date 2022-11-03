@@ -15,16 +15,23 @@ public abstract class Recomendador {
 		this.user = user;
 	}
 	
-	public ArrayList<Desafio> recomendar() {
-		this.ordenarDesafiosPorCoincidencia();
-		return this.enviarDesafios();
+	public List<Desafio> recomendar() {
+		listaDeDesafios = user.getSistema().getListaDeDesafios();
+		
+		this.ordenarDesafios();
+		this.seleccionarDesafios();
+		return this.listaDeDesafios;
 	}
 
-	protected abstract ArrayList<Desafio> enviarDesafios();
+	protected abstract void seleccionarDesafios();
+
+	protected abstract void ordenarDesafios();
 
 	public void ordenarDesafiosPorCoincidencia() {
-		listaDeDesafios.sort((d1,d2) -> Integer.compare(this.coincidenciaConDesafio(d1), this.coincidenciaConDesafio(d2)));;
+		listaDeDesafios.sort((d1,d2) -> Double.compare(this.coincidenciaConDesafio(d1), this.coincidenciaConDesafio(d2)));;
 	}
 
-	protected abstract int coincidenciaConDesafio(Desafio d2);
+	protected double coincidenciaConDesafio(Desafio d1) {
+		return user.getPerfildeUsuario().calcularCoincidenciaConDesafio(d1);
+	}
 }
