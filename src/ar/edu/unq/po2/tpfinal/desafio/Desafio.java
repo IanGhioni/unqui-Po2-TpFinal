@@ -46,11 +46,11 @@ public class Desafio {
 	public double calcularSimilitudConDesafio(Desafio desafio) {
 		return 
 			(
-			Math.abs(this.getDificultad() - desafio.getDificultad())
+			(double)Math.abs(this.getDificultad() - desafio.getDificultad())
 			+
-			Math.abs(this.getCantidadMinimaMuestras() - desafio.getCantidadMinimaMuestras())
+			(double)Math.abs(this.getCantidadMinimaMuestras() - desafio.getCantidadMinimaMuestras())
 			+
-			Math.abs(this.getRecompensa() - desafio.getRecompensa())
+			(double)Math.abs(this.getRecompensa() - desafio.getRecompensa())
 			) / 3;
 	}
 
