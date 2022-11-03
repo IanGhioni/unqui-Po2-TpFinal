@@ -4,7 +4,9 @@ public class EstadoDesafioVencido extends EstadoDesafio {
 
 	@Override
 	public double porcentajeCompletitud(DesafioAceptado desafio) {
-		return (desafio.getMuestrasTomadas() / desafio.getCantidadMinimaMuestras() * 100);
+		double x = (double)desafio.getMuestrasTomadas();
+		double y = (double)desafio.getCantidadMinimaMuestras();
+		return (x/y * 100);
 	}
 
 	@Override

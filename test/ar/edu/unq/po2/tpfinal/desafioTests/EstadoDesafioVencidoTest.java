@@ -29,9 +29,9 @@ class EstadoDesafioVencidoTest {
 
 	@Test
 	void testPorcentajeCompletitudVencido() {
-//		when(desafio.getMuestrasTomadas()).thenReturn(50);
-//		when(desafio.getCantidadMinimaMuestras()).thenReturn(100);
-//		assertEquals(50, estado.porcentajeCompletitud(desafio));
+		when(desafio.getMuestrasTomadas()).thenReturn(50);
+		when(desafio.getCantidadMinimaMuestras()).thenReturn(100);
+		assertEquals(50, estado.porcentajeCompletitud(desafio));
 	}
 
 	@Test
