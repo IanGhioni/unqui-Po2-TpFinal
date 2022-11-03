@@ -1,8 +1,6 @@
 package ar.edu.unq.po2.tpfinal.recomendadorDeDesafios;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
@@ -13,6 +11,8 @@ import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
 import ar.edu.unq.po2.tpfinal.usuario.PerfilDeUsuario;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
+import static org.mockito.Mockito.*;
+
 
 class RecomendadorFavoritosTests {
 
