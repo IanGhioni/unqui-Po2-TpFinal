@@ -51,4 +51,25 @@ public class DesafioTest {
 		desafio.agregarRestriccion(restriccion);
 		assertTrue(desafio.getRestricciones().contains(restriccion));
 	}
+	
+	@Test
+	public void testCalcularSimilitudConOtroDesafio() {
+		desafio = new Desafio(area, 3, 1, 300);
+		Desafio desafio2 = new Desafio(area, 3, 1, 300);
+		assertTrue(desafio.calcularSimilitudConDesafio(desafio2) == 0);
+	}
+	
+	@Test
+	public void testCalcularSimilitudConOtroDesafio2() {
+		desafio = new Desafio(area, 5, 1, 300);
+		Desafio desafio2 = new Desafio(area, 4, 7, 150);
+		assertTrue(desafio.calcularSimilitudConDesafio(desafio2) == 52.333333333333336);
+	}
+	
+	@Test
+	public void testCalcularSimilitudConOtroDesafio3() {
+		desafio = new Desafio(area, 1, 3, 49);
+		Desafio desafio2 = new Desafio(area, 4, 7, 150);
+		assertTrue(desafio.calcularSimilitudConDesafio(desafio2) == 36);
+	}
 }
