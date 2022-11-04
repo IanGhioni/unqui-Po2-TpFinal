@@ -2,12 +2,18 @@ package ar.edu.unq.po2.tpfinal.desafioTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.po2.tpfinal.desafio.DesafioAceptado;
+import ar.edu.unq.po2.tpfinal.desafio.EstadoDesafioCompletado;
 import ar.edu.unq.po2.tpfinal.desafio.EstadoDesafioEnCurso;
 
 class EstadoDesafioEnCursoTest {
@@ -27,17 +33,29 @@ class EstadoDesafioEnCursoTest {
 
 	@Test
 	void testPorcentajeCompletitudEnCurso() {
-		
+		when(desafio.getMuestrasTomadas()).thenReturn(20);
+		when(desafio.getCantidadMinimaMuestras()).thenReturn(32);
+		assertEquals(62.5, estado.porcentajeCompletitud(desafio));
 	}
 
 	@Test
 	void testAgregarUnaMuestraEnCurso() {
-
+		when(desafio.getMuestrasTomadas()).thenReturn(75);
+		when(desafio.getCantidadMinimaMuestras()).thenReturn(100);
+		estado.agregarMuestra(1, desafio);
+		verify(desafio).setMuestrasTomadas(76);
 	}
 
 	@Test
 	void testAgregarUltimaMuestraEnCurso() {
-
+		when(desafio.getMuestrasTomadas()).thenReturn(19);
+		when(desafio.getCantidadMinimaMuestras()).thenReturn(20);
+		estado.agregarMuestra(1, desafio);
+		verify(desafio).faltaUnaMuestra();
+		verify(desafio).setMuestrasTomadas(20);
+		// verify(desafio).setEstado(estado);
+		// verify(desafio).setFechaCompletado(LocalDate.now());
+		// verify(desafio).setHoraCompletado(LocalTime.now());
 	}
 
 }
