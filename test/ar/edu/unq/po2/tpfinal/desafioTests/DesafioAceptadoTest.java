@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,6 +16,9 @@ import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.po2.tpfinal.desafio.DesafioAceptado;
 import ar.edu.unq.po2.tpfinal.desafio.EstadoDesafio;
+import ar.edu.unq.po2.tpfinal.desafio.RestriccionFechas;
+import ar.edu.unq.po2.tpfinal.desafio.RestriccionFinDeSemana;
+import ar.edu.unq.po2.tpfinal.desafio.RestriccionSemanal;
 import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
@@ -23,12 +27,18 @@ public class DesafioAceptadoTest {
 	Usuario usuario;
 	Circunferencia area;
 	EstadoDesafio estado;
+	RestriccionSemanal restriccionSemanal;
+	RestriccionFechas restriccionFechas;
+	RestriccionFinDeSemana restriccionFinDe;
 
 	@BeforeEach
 	void setUp() {
 		usuario = mock(Usuario.class);
 		area = mock(Circunferencia.class);
 		estado = mock(EstadoDesafio.class);
+		restriccionSemanal = mock(RestriccionSemanal.class);
+		restriccionFechas = mock(RestriccionFechas.class);
+		restriccionFinDe = mock(RestriccionFinDeSemana.class);
 	}
 
 	@Test
@@ -114,6 +124,64 @@ public class DesafioAceptadoTest {
 			desafio.setCalificacion(6);
 		});
 		assertEquals(exception.getMessage(), "La calificación ingresada debe estar entre 0 y 5.");
+	}
+
+	@Test
+	void testDesafioAceptadoAgregaMuestraPorRestriccionFechas() {
+		desafio = new DesafioAceptado(area, 5, 2, 500, usuario, estado);
+		desafio.agregarRestriccion(restriccionFechas);
+		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(true);
+		desafio.agregarMuestra(1, desafio);
+		verify(estado).agregarMuestra(1, desafio);
+	}
+
+	@Test
+	void testDesafioAceptadoNoAgregaMuestraPorRestriccionFechas() {
+		desafio = new DesafioAceptado(area, 5, 2, 500, usuario, estado);
+		desafio.agregarRestriccion(restriccionFechas);
+		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
+		desafio.agregarMuestra(1, desafio);
+		assertEquals(desafio.getMuestrasTomadas(), 0);
+	}
+
+	@Test
+	void testDesafioAceptadoNoAgregaMuestraPorRestriccionFinDeSemana() {
+		desafio = new DesafioAceptado(area, 5, 2, 500, usuario, estado);
+		desafio.agregarRestriccion(restriccionFinDe);
+		when(restriccionFinDe.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
+		desafio.agregarMuestra(1, desafio);
+		assertEquals(desafio.getMuestrasTomadas(), 0);
+	}
+
+	@Test
+	void testDesafioAceptadoNoAgregaMuestraPorRestriccionSemanal() {
+		desafio = new DesafioAceptado(area, 5, 2, 500, usuario, estado);
+		desafio.agregarRestriccion(restriccionSemanal);
+		when(restriccionSemanal.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
+		desafio.agregarMuestra(1, desafio);
+		assertEquals(desafio.getMuestrasTomadas(), 0);
+	}
+
+	@Test
+	void testDesafioAceptadoNoAgregaMuestraPorUnaRestriccionQueNoSeCumple() {
+		desafio = new DesafioAceptado(area, 5, 2, 500, usuario, estado);
+		desafio.agregarRestriccion(restriccionSemanal);
+		desafio.agregarRestriccion(restriccionFechas);
+		when(restriccionSemanal.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
+		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(true);
+		desafio.agregarMuestra(1, desafio);
+		assertEquals(desafio.getMuestrasTomadas(), 0);
+	}
+
+	@Test
+	void testDesafioAceptadoAgregaMuestraPorMasDeUnaRestriccionQueCumple() {
+		desafio = new DesafioAceptado(area, 5, 2, 500, usuario, estado);
+		desafio.agregarRestriccion(restriccionFechas);
+		desafio.agregarRestriccion(restriccionSemanal);
+		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(true);
+		when(restriccionSemanal.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(true);
+		desafio.agregarMuestra(1, desafio);
+		verify(estado).agregarMuestra(1, desafio);
 	}
 
 }
