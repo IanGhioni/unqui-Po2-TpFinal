@@ -26,6 +26,17 @@ public class DesafioTest {
 	}
 
 	@Test
+	public void testDesafioSetDificultadValida() {
+		desafio = new Desafio(area, 3, 5, 200);
+		assertEquals(desafio.getDificultad(), 5);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testDesafioDificultadInvalida() {
+		desafio = new Desafio(area, 3, 6, 1000);
+	}
+
+	@Test
 	public void testDesafioDevuelveSuArea() {
 		desafio = new Desafio(area, 3, 1, 300);
 		assertEquals(area, desafio.getArea());
@@ -55,26 +66,26 @@ public class DesafioTest {
 		desafio.agregarRestriccion(restriccion);
 		assertTrue(desafio.getRestricciones().contains(restriccion));
 	}
-	
+
 	@Test
 	public void testCalcularSimilitudConOtroDesafio() {
 		desafio = new Desafio(area, 3, 1, 300);
 		Desafio desafio2 = new Desafio(area, 3, 1, 300);
 		assertTrue(desafio.calcularSimilitudConDesafio(desafio2) == 0);
 	}
-	
+
 	@Test
 	public void testCalcularSimilitudConOtroDesafio2() {
 		desafio = new Desafio(area, 5, 1, 300);
-		Desafio desafio2 = new Desafio(area, 4, 7, 150);
-		assertTrue(desafio.calcularSimilitudConDesafio(desafio2) == 52.333333333333336);
+		Desafio desafio2 = new Desafio(area, 4, 3, 150);
+		assertEquals(desafio.calcularSimilitudConDesafio(desafio2), 51);
 	}
-	
+
 	@Test
 	public void testCalcularSimilitudConOtroDesafio3() {
 		desafio = new Desafio(area, 1, 3, 49);
-		Desafio desafio2 = new Desafio(area, 4, 7, 150);
-		assertTrue(desafio.calcularSimilitudConDesafio(desafio2) == 36);
+		Desafio desafio2 = new Desafio(area, 4, 4, 150);
+		assertEquals(desafio.calcularSimilitudConDesafio(desafio2), 35);
 	}
 	@Test
 	public void calcularSimilitudConPreferencia1() {

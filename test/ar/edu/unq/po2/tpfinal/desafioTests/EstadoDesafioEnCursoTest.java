@@ -43,19 +43,15 @@ class EstadoDesafioEnCursoTest {
 		when(desafio.getMuestrasTomadas()).thenReturn(75);
 		when(desafio.getCantidadMinimaMuestras()).thenReturn(100);
 		estado.agregarMuestra(1, desafio);
+		assertFalse(desafio.faltaUnaMuestra());
 		verify(desafio).setMuestrasTomadas(76);
 	}
 
-	@Test
-	void testAgregarUltimaMuestraEnCurso() {
-		when(desafio.getMuestrasTomadas()).thenReturn(19);
-		when(desafio.getCantidadMinimaMuestras()).thenReturn(20);
-		estado.agregarMuestra(1, desafio);
-		verify(desafio).faltaUnaMuestra();
-		verify(desafio).setMuestrasTomadas(20);
-		// verify(desafio).setEstado(estado);
-		// verify(desafio).setFechaCompletado(LocalDate.now());
-		// verify(desafio).setHoraCompletado(LocalTime.now());
-	}
+//	@Test
+//	void testAgregarUltimaMuestraEnCurso() {
+//		when(desafio.getMuestrasTomadas()).thenReturn(4);
+//		when(desafio.getCantidadMinimaMuestras()).thenReturn(5);
+//		assertTrue(desafio.faltaUnaMuestra());
+//	}
 
 }

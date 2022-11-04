@@ -1,6 +1,9 @@
 package ar.edu.unq.po2.tpfinal.desafioTests;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -98,10 +101,19 @@ public class DesafioAceptadoTest {
 	}
 
 	@Test
-	void testDesafioAceptadoSetCalificacion() {
+	void testDesafioAceptadoSetCalificacionValida() {
 		desafio = new DesafioAceptado(area, 5, 2, 500, usuario, estado);
 		desafio.setCalificacion(5);
 		assertEquals(5, desafio.getCalificacion());
+	}
+
+	@Test
+	void testDesafioAceptadoSetCalificacionInvalida() {
+		desafio = new DesafioAceptado(area, 5, 2, 500, usuario, estado);
+		Throwable exception = assertThrows(Exception.class, () -> {
+			desafio.setCalificacion(6);
+		});
+		assertEquals(exception.getMessage(), "La calificación ingresada debe estar entre 0 y 5.");
 	}
 
 }
