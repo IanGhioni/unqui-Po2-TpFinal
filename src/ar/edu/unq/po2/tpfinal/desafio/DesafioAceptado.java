@@ -60,7 +60,7 @@ public class DesafioAceptado extends Desafio {
 
 	public void setCalificacion(int calificacion) {
 		if (calificacion < 0 || calificacion > 5) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("La calificación ingresada debe estar entre 0 y 5.");
 		}
 		this.calificacion = calificacion;
 	}

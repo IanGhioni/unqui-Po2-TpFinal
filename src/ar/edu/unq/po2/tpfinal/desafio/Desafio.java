@@ -21,7 +21,7 @@ public class Desafio {
 
 	private void setDificultad(int dificultad) {
 		if (dificultad < 0 || dificultad > 5) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("La dificultad ingresada debe estar entre 1 y 5.");
 		}
 		this.dificultad = dificultad;
 	}
