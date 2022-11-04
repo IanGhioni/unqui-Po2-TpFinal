@@ -2,6 +2,7 @@ package ar.edu.unq.po2.tpfinal.desafioTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,16 +10,19 @@ import org.junit.jupiter.api.BeforeEach;
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.desafio.Restriccion;
 import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
+import ar.edu.unq.po2.tpfinal.usuario.PerfilDeUsuario;
 
 public class DesafioTest {
 	Desafio desafio;
 	Circunferencia area;
 	Restriccion restriccion;
+	PerfilDeUsuario perfilDeUsuario;
 
 	@BeforeEach
 	public void setUp() {
 		area = mock(Circunferencia.class);
 		restriccion = mock(Restriccion.class);
+		perfilDeUsuario = mock(PerfilDeUsuario.class);
 	}
 
 	@Test
@@ -71,5 +75,32 @@ public class DesafioTest {
 		desafio = new Desafio(area, 1, 3, 49);
 		Desafio desafio2 = new Desafio(area, 4, 7, 150);
 		assertTrue(desafio.calcularSimilitudConDesafio(desafio2) == 36);
+	}
+	@Test
+	public void calcularSimilitudConPreferencia1() {
+
+		desafio = new Desafio(area, 1, 3, 49);
+		perfilDeUsuario = mock(PerfilDeUsuario.class);
+		when(perfilDeUsuario.getCantidadMinimaMuestras()).thenReturn(1);
+		when(perfilDeUsuario.getDificultad()).thenReturn(3);
+		when(perfilDeUsuario.getRecompensa()).thenReturn(49);
+		assertTrue(desafio.calcularSimilitudConPreferencia(perfilDeUsuario) == 0);
+	}
+	@Test
+	public void calcularSimilitudConPreferencia2() {
+		desafio = new Desafio(area, 1, 3, 49);
+		perfilDeUsuario = mock(PerfilDeUsuario.class);
+		when(perfilDeUsuario.getCantidadMinimaMuestras()).thenReturn(2);
+		when(perfilDeUsuario.getDificultad()).thenReturn(4);
+		when(perfilDeUsuario.getRecompensa()).thenReturn(50);
+		assertTrue(desafio.calcularSimilitudConPreferencia(perfilDeUsuario) == 1);
+	}
+	public void calcularSimilitudConPreferencia3() {
+		desafio = new Desafio(area, 1, 3, 49);
+		perfilDeUsuario = mock(PerfilDeUsuario.class);
+		when(perfilDeUsuario.getCantidadMinimaMuestras()).thenReturn(1);
+		when(perfilDeUsuario.getDificultad()).thenReturn(3);
+		when(perfilDeUsuario.getRecompensa()).thenReturn(52);
+		assertTrue(desafio.calcularSimilitudConPreferencia(perfilDeUsuario) == 1);
 	}
 }
