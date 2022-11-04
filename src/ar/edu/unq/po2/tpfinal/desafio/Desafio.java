@@ -15,8 +15,15 @@ public class Desafio {
 	public Desafio(Circunferencia area, int cantidadMinimaMuestras, int dificultad, int recompensa) {
 		this.area = area;
 		this.cantidadMinimaMuestras = cantidadMinimaMuestras;
-		this.dificultad = dificultad;
+		this.setDificultad(dificultad);
 		this.recompensa = recompensa;
+	}
+
+	private void setDificultad(int dificultad) {
+		if (dificultad < 0 || dificultad > 5) {
+			throw new IllegalArgumentException();
+		}
+		this.dificultad = dificultad;
 	}
 
 	public Circunferencia getArea() {

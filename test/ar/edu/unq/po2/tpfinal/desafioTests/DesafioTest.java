@@ -62,14 +62,14 @@ public class DesafioTest {
 	@Test
 	public void testCalcularSimilitudConOtroDesafio2() {
 		desafio = new Desafio(area, 5, 1, 300);
-		Desafio desafio2 = new Desafio(area, 4, 7, 150);
-		assertTrue(desafio.calcularSimilitudConDesafio(desafio2) == 52.333333333333336);
+		Desafio desafio2 = new Desafio(area, 4, 3, 150);
+		assertEquals(desafio.calcularSimilitudConDesafio(desafio2), 51);
 	}
 	
 	@Test
 	public void testCalcularSimilitudConOtroDesafio3() {
 		desafio = new Desafio(area, 1, 3, 49);
-		Desafio desafio2 = new Desafio(area, 4, 7, 150);
-		assertTrue(desafio.calcularSimilitudConDesafio(desafio2) == 36);
+		Desafio desafio2 = new Desafio(area, 4, 4, 150);
+		assertEquals(desafio.calcularSimilitudConDesafio(desafio2), 35);
 	}
 }

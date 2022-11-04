@@ -19,14 +19,13 @@ public class EstadoDesafioEnCurso extends EstadoDesafio {
 
 	@Override
 	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
-		int cantNueva = desafio.getMuestrasTomadas() + cantidad;
 		if (desafio.faltaUnaMuestra()) {
 			desafio.setMuestrasTomadas(desafio.getCantidadMinimaMuestras());
 			desafio.setEstado(new EstadoDesafioCompletado());
 			desafio.setFechaCompletado(LocalDate.now());
 			desafio.setHoraCompletado(LocalTime.now());
 		}
-		desafio.setMuestrasTomadas(cantNueva);
+		desafio.setMuestrasTomadas(desafio.getMuestrasTomadas() + cantidad);
 	}
 
 }

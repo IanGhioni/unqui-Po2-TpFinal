@@ -21,7 +21,7 @@ public class DesafioAceptado extends Desafio {
 		this.setEstado(estado);
 		this.muestrasTomadas = 0;
 	}
-	
+
 	public void setFechaCompletado(LocalDate fecha) {
 		this.fechaCompletado = fecha;
 	}
@@ -59,6 +59,9 @@ public class DesafioAceptado extends Desafio {
 	}
 
 	public void setCalificacion(int calificacion) {
+		if (calificacion < 0 || calificacion > 5) {
+			throw new IllegalArgumentException();
+		}
 		this.calificacion = calificacion;
 	}
 
@@ -75,7 +78,7 @@ public class DesafioAceptado extends Desafio {
 	}
 
 	public boolean faltaUnaMuestra() {
-		return ((this.getMuestrasTomadas() + 1) == this.getCantidadMinimaMuestras());
+		return (this.getMuestrasTomadas() == (this.getCantidadMinimaMuestras() - 1));
 	}
 
 }
