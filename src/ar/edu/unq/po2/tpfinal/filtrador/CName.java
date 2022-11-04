@@ -11,7 +11,6 @@ public class  CName extends Condicion{
 		pattern =  Pattern.compile(regexString);
 	}
 	public ArrayList<Evaluable> evaluar(ArrayList<Evaluable> lista) {
-		System.out.println("evaluar en CName");
 		return   (ArrayList<Evaluable>) lista
 		      .stream()
 		      .filter(e -> pattern.matcher(e.getNombre()).matches())

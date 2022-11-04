@@ -31,9 +31,9 @@ class CNameTest {
     void setUp() {
         listaVacia = new ArrayList<Evaluable>();
         // setUp
-        System.out.println("antes de crear  mock");
+
         proyecto1 = mock(Proyecto.class);
-        System.out.println("despues de crear  mock");
+
         proyecto2 = mock(Proyecto.class);
         proyecto3 = mock(Proyecto.class);
         proyecto4 = mock(Proyecto.class);
@@ -65,11 +65,11 @@ class CNameTest {
     @Test
     void TestCName1() {
         //Testeo Ctrue sobre lista vacia
-        System.out.println("antes de crear  CName");
+
         evaluador=new CName("nombre1");
-        System.out.println("antes de assert");
+
         assertTrue(listaVacia.equals(evaluador.evaluar(listaVacia)));
-        System.out.println("despues de crear  CName");
+
     }
     @Test
     void TestCName2() {
