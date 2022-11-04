@@ -44,14 +44,9 @@ public class Desafio {
 	}
 
 	public double calcularSimilitudConDesafio(Desafio desafio) {
-		return 
-			(
-			(double)Math.abs(this.getDificultad() - desafio.getDificultad())
-			+
-			(double)Math.abs(this.getCantidadMinimaMuestras() - desafio.getCantidadMinimaMuestras())
-			+
-			(double)Math.abs(this.getRecompensa() - desafio.getRecompensa())
-			) / 3;
+		return ((double) Math.abs(this.getDificultad() - desafio.getDificultad())
+				+ (double) Math.abs(this.getCantidadMinimaMuestras() - desafio.getCantidadMinimaMuestras())
+				+ (double) Math.abs(this.getRecompensa() - desafio.getRecompensa())) / 3;
 	}
 
 }

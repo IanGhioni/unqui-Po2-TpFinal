@@ -1,6 +1,8 @@
 package ar.edu.unq.po2.tpfinal.desafio;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+
 import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
@@ -8,25 +10,32 @@ public class DesafioAceptado extends Desafio {
 	private Usuario usuario;
 	private EstadoDesafio estado;
 	private int muestrasTomadas;
-	private LocalDate momentoCompletado;
+	private LocalDate fechaCompletado;
+	private LocalTime horaCompletado;
 	private int calificacion;
 
 	public DesafioAceptado(Circunferencia area, int cantidadMinimaMuestras, int dificultad, int recompensa,
-			Usuario usuario, EstadoDesafio estado, int muestrasTomadas, LocalDate momentoCompletado, int calificacion) {
+			Usuario usuario, EstadoDesafio estado) {
 		super(area, cantidadMinimaMuestras, dificultad, recompensa);
 		this.usuario = usuario;
 		this.setEstado(estado);
-		this.setMuestrasTomadas(muestrasTomadas);
-		this.setMomentoCompletado(momentoCompletado);
-		this.setCalificacion(calificacion);
+		this.muestrasTomadas = 0;
+	}
+	
+	public void setFechaCompletado(LocalDate fecha) {
+		this.fechaCompletado = fecha;
 	}
 
-	public void setMomentoCompletado(LocalDate momento) {
-		this.momentoCompletado = momento;
+	public LocalDate getFechaCompletado() {
+		return fechaCompletado;
 	}
 
-	public LocalDate getMomentoCompletado() {
-		return momentoCompletado;
+	public void setHoraCompletado(LocalTime hora) {
+		this.horaCompletado = hora;
+	}
+
+	public LocalTime getHoraCompletado() {
+		return horaCompletado;
 	}
 
 	public Usuario getUsuario() {
