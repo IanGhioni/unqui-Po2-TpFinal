@@ -11,13 +11,13 @@ public class RecomendadorFavoritos extends Recomendador {
 
 	@Override
 	protected void seleccionarDesafios() {
-		this.listaDeDesafios = this.listaDeDesafios.subList(0, 5);
+		this.listaDeDesafios = this.listaDeDesafios.stream().limit(5).toList();
 	}
 
 	@Override
 	public void ordenarDesafios() {
 		this.ordenarDesafiosPorCoincidencia();
-		this.listaDeDesafios = this.listaDeDesafios.subList(0, 20);
+		this.listaDeDesafios = this.listaDeDesafios.stream().limit(20).toList();
 		this.ordenarDesafiosPorSimilitud();
 
 	}
