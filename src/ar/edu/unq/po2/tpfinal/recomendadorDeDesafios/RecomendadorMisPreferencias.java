@@ -12,7 +12,7 @@ public class RecomendadorMisPreferencias extends Recomendador {
 
 	@Override
 	protected void seleccionarDesafios() {
-		this.listaDeDesafios = this.listaDeDesafios.stream().limit(5).toList();
+		this.listaDeDesafios = this.listaDeDesafios.subList(0, 5);
 	}
 
 	@Override
