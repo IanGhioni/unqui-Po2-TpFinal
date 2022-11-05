@@ -1,20 +1,21 @@
 package ar.edu.unq.po2.tpfinal.muestra;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import ar.edu.unq.po2.tpfinal.sistema.Coordenada;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
 public class Muestra {
 	private Usuario usuarioAutor;
-	private Date fecha;
-	private String hora;
+	private LocalDate fecha;
+	private LocalTime hora;
 	private Coordenada ubicacion;
 	
-	public Muestra(Usuario usuarioAutor, Date fecha, String hora, Coordenada ubicacion) {
+	public Muestra(Usuario usuarioAutor, Coordenada ubicacion) {
 		this.usuarioAutor = usuarioAutor;
-		this.fecha = fecha;
-		this.hora = hora;
+		this.fecha = LocalDate.now();
+		this.hora = LocalTime.now();
 		this.ubicacion = ubicacion;
 	}
 
@@ -22,11 +23,11 @@ public class Muestra {
 		return usuarioAutor;
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public String getHora() {
+	public LocalTime getHora() {
 		return hora;
 	}
 

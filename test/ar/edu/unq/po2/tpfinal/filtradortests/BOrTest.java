@@ -2,28 +2,76 @@ package ar.edu.unq.po2.tpfinal.filtradortests;
 import java.util.ArrayList; // import the ArrayList class
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ar.edu.unq.po2.tpfinal.filtrador.*;
+import ar.edu.unq.po2.tpfinal.proyecto.Proyecto;
 
+import java.util.regex.Pattern;
 
 
 
 class BOrTest {
-	private ArrayList<Evaluable> lista ;
-	private ArrayList<Evaluable> listaCorta;
-	private ArrayList<Evaluable>listaResto;
-	private ArrayList<Evaluable>lista1;
-	private ArrayList<Evaluable>lista2;
-	private Evaluable evaluable1;
-	private Evaluable evaluable2;
-	private Evaluable evaluable3;
-	private Evaluable evaluable4;
-	private Filtrador evaluador;
-	private ArrayList<Evaluable> resultado;
-	private ArrayList<Evaluable> resultadoEsperado;
+    private ArrayList<Evaluable> lista ;
+    private ArrayList<Evaluable> listaVacia;
+    private ArrayList<Evaluable> lista1;
+    private ArrayList<Evaluable> lista2;
+    private ArrayList<Evaluable> resultadoEsperado;
+    private ArrayList<Evaluable> listaCorta ;
+    private ArrayList<Evaluable> listaResto;
+    private ArrayList<Evaluable> resultado;
+    private Proyecto proyecto1;
+    private Proyecto proyecto2;
+    private Proyecto proyecto3;
+    private Proyecto proyecto4;
+    private Filtrador evaluador;
 
 
+    
+    @BeforeEach
+    void setUp() {
+        listaVacia = new ArrayList<Evaluable>();
+        // setUp
+
+        proyecto1 = mock(Proyecto.class);
+
+        proyecto2 = mock(Proyecto.class);
+        proyecto3 = mock(Proyecto.class);
+        proyecto4 = mock(Proyecto.class);
+        
+
+        /*
+        proyecto1=new Proyecto("","");
+        proyecto2=new Proyecto("","");
+        proyecto3=new Proyecto("","");
+        proyecto4=new Proyecto("","");
+        */
+
+        //Test Double Configuration
+
+        when(proyecto1.getNombre()).thenReturn("proyecto1");
+        when(proyecto2.getNombre()).thenReturn("proyecto2");
+        when(proyecto3.getNombre()).thenReturn("proyecto3");
+        when(proyecto4.getNombre()).thenReturn("proyecto4");
+        lista1 = new ArrayList<Evaluable>();
+        lista2 = new ArrayList<Evaluable>();
+        lista = new ArrayList<Evaluable>();
+        resultadoEsperado = new ArrayList<Evaluable>();
+        lista.add(proyecto1);
+        lista.add(proyecto2);
+        lista.add(proyecto3);
+        lista.add(proyecto4);
+        
+        listaCorta = new ArrayList<Evaluable>();
+        listaCorta.add(proyecto1);
+        listaCorta.add(proyecto2);
+        listaResto = new ArrayList<Evaluable>();
+        listaResto.add(proyecto3);
+        listaResto.add(proyecto4);
+    }
 	class CCustom extends Condicion{
 		
 		ArrayList<Evaluable> lista;
@@ -37,48 +85,21 @@ class BOrTest {
 
 		public ArrayList<Evaluable> evaluar(ArrayList<Evaluable> listanueva) {
 		return this.lista;
+	 }
 	}
-}
-	
-	@BeforeEach
-	void setUp() {
 
-		new ArrayList<Evaluable>();
-		lista = new ArrayList<Evaluable>();
-		listaCorta = new ArrayList<Evaluable>();
-		listaResto = new ArrayList<Evaluable>();
-		lista1 = new ArrayList<Evaluable>();
-		lista2 = new ArrayList<Evaluable>();		
-		resultadoEsperado = new ArrayList<Evaluable>();	
-		evaluable1=new EvaluableDumy("nombre1","clase1");
-		evaluable2=new EvaluableDumy("nombre2","clase2");
-		evaluable3=new EvaluableDumy("nombre3","clase3");
-		evaluable4=new EvaluableDumy("nombre4","clase4");
-		lista.add(evaluable1);
-		lista.add(evaluable2);
-		lista.add(evaluable3);
-		lista.add(evaluable4);
-		
-		listaCorta.add(evaluable1);
-		listaCorta.add(evaluable2);
-		
-		listaResto.add(evaluable3);
-		listaResto.add(evaluable4);
-		
-		
-	}
 		
 	
 
 	@Test
 	void TestBOr1() {
 		//Testeo BOR listas disjuntas
-		lista1.add(evaluable1);
-		lista2.add(evaluable2);
-		lista2.add(evaluable3);
-		resultadoEsperado.add(evaluable1);
-		resultadoEsperado.add(evaluable2);
-		resultadoEsperado.add(evaluable3);
+		lista1.add(proyecto1);
+		lista2.add(proyecto2);
+		lista2.add(proyecto3);
+		resultadoEsperado.add(proyecto1);
+		resultadoEsperado.add(proyecto2);
+		resultadoEsperado.add(proyecto3);
 		
 		evaluador=new BOr(new CCustom(lista1),new CCustom(lista2));
 		resultado=evaluador.evaluar(lista);
@@ -89,22 +110,22 @@ class BOrTest {
 
 
 
-@Test
-void TestBor2() {
-	//Testeo BOR listas con datos en la interseccion
-	lista1.add(evaluable1);
-	lista1.add(evaluable2);
-	lista2.add(evaluable2);
-	lista2.add(evaluable3);
-	resultadoEsperado.add(evaluable1);
-	resultadoEsperado.add(evaluable2);
-	resultadoEsperado.add(evaluable3);
+	@Test
+	void TestBor2() {
+		//Testeo BOR listas con datos en la interseccion
+		lista1.add(proyecto1);
+		lista1.add(proyecto2);
+		lista2.add(proyecto2);
+		lista2.add(proyecto3);
+		resultadoEsperado.add(proyecto1);
+		resultadoEsperado.add(proyecto2);
+		resultadoEsperado.add(proyecto3);
+		
+		evaluador=new BOr(new CCustom(lista1),new CCustom(lista2));
+		resultado=evaluador.evaluar(lista);
+		
 	
-	evaluador=new BOr(new CCustom(lista1),new CCustom(lista2));
-	resultado=evaluador.evaluar(lista);
-	
-
-	assertTrue(resultadoEsperado.equals(resultado));
-	}
+		assertTrue(resultadoEsperado.equals(resultado));
+		}
 
 }

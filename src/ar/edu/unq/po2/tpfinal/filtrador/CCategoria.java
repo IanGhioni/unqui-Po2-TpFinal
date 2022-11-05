@@ -2,17 +2,28 @@ package ar.edu.unq.po2.tpfinal.filtrador;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.ArrayList; // import the ArrayList class 
+import java.util.List;
+
+
 
 
 public class  CCategoria extends Condicion{
+	private String regexString;
 	private Pattern pattern;
 	public CCategoria(String regexString) {
-		this.pattern = Pattern.compile(regexString);
+		this.regexString = regexString;
+
+		pattern =  Pattern.compile(regexString);
 	}
+
 	public ArrayList<Evaluable> evaluar(ArrayList<Evaluable> lista) {
 		return   (ArrayList<Evaluable>) lista
-			      .stream()
-			      .filter(e -> pattern.matcher(e.getCategoriaName()).matches())
-			      .collect(Collectors.toList());
+		      .stream()
+		      .filter(e -> e.getListaDeCategorias()
+		    		       .stream()
+		    		       .anyMatch(c -> pattern.matcher(c).matches())
+		    		 )
+		      		  .collect(Collectors.toList());
 	}
+
 }
