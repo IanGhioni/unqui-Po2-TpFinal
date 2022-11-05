@@ -74,7 +74,10 @@ public class DesafioAceptado extends Desafio {
 	}
 
 	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
-		this.estado.agregarMuestra(cantidad, this);
+		if (restricciones.stream()
+				.allMatch(restriccion -> restriccion.verificarRestriccionAlDesafio(this, LocalDate.now()))) {
+			this.estado.agregarMuestra(cantidad, this);
+		}
 	}
 
 	public boolean faltaUnaMuestra() {
