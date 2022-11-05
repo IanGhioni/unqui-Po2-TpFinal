@@ -91,6 +91,13 @@ public class Proyecto implements  Evaluable, MuestraAgregable{
 		return this.listaDeMuestras;
 	}
 
+	@Override
+	public void notify(Usuario user) {
+		int ultimaMuestra = user.getMuestras().size() - 1;
+		Muestra muestra = user.getMuestras().get(ultimaMuestra);
+		this.agregarMuestra(muestra);
+	}
+
 	
 
 	
