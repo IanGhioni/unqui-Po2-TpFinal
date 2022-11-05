@@ -19,6 +19,7 @@ public class PerfilDeUsuario {
 		return recompensa;
 	}
 
+
 	public double calcularCoincidenciaConDesafio(Desafio d) {
 		return(
 			Math.abs(d.getDificultad() - this.dificultad)
@@ -28,5 +29,6 @@ public class PerfilDeUsuario {
 			Math.abs(d.getRecompensa() - this.recompensa)
 		);
 	}
+
 
 }
