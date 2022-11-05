@@ -57,7 +57,7 @@ class RecomendadorFavoritosTests {
 		this.setUpSistema();
 		
 		when(user.desafioMasGustado()).thenReturn(desafioMasGustado);
-		when(user.getPerfildeUsuario()).thenReturn(perfil);
+		when(user.getPerfilDeUsuario()).thenReturn(perfil);
 		
 		recomendador = new RecomendadorFavoritos(user);
 

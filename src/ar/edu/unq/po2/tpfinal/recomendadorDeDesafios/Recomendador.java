@@ -32,6 +32,6 @@ public abstract class Recomendador implements Recomendable{
 	}
 
 	protected double coincidenciaConDesafio(Desafio d1) {
-		return user.getPerfildeUsuario().calcularCoincidenciaConDesafio(d1);
+		return user.getPerfilDeUsuario().calcularCoincidenciaConDesafio(d1);
 	}
 }
