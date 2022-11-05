@@ -82,7 +82,7 @@ class ProyectoTest {
 	void testProyectoAñadeMuestra() {
 		muestra = mock(Muestra.class);
 		proyecto = new Proyecto("nombre","descripcion", sistema);
-		proyecto.añadirMuestra(muestra);
+		proyecto.agregarMuestra(muestra);
 		
 		assertTrue(proyecto.getListaDeMuestras().contains(muestra));
 	}
