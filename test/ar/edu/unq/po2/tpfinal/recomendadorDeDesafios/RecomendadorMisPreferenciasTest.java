@@ -309,4 +309,15 @@ class RecomendadorMisPreferenciasTest {
 		assertTrue(this.recomendador.recomendar().contains(d4));
 		assertTrue(this.recomendador.recomendar().size() == 4);
 	}
+	
+	@Test
+	void testRecomendarConUnaListaDeDesafiosVacia() {
+		
+		listaDeDesafios = new ArrayList<Desafio>();
+		
+		when(user.getSistema()).thenReturn(sistema);
+		when(sistema.getListaDeDesafios()).thenReturn(listaDeDesafios);
+		
+		assertTrue(this.recomendador.recomendar().size() == 0);
+	}
 }

@@ -388,6 +388,7 @@ class RecomendadorFavoritosTests {
 	@Test
 	void testRecomendarConUnaListaDeDesafiosVacia() {
 		
+		
 		listaDeDesafios = new ArrayList<Desafio>();
 		
 		when(user.getSistema()).thenReturn(sistema);
