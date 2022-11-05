@@ -42,14 +42,6 @@ class BAndTest {
         proyecto3 = mock(Proyecto.class);
         proyecto4 = mock(Proyecto.class);
         
-
-        /*
-        proyecto1=new Proyecto("","");
-        proyecto2=new Proyecto("","");
-        proyecto3=new Proyecto("","");
-        proyecto4=new Proyecto("","");
-        */
-
         //Test Double Configuration
 
         when(proyecto1.getNombre()).thenReturn("proyecto1");
