@@ -88,14 +88,18 @@ public class Usuario {
 		muestras.add(muestra);
 		for (MuestraAgregable elemento : muestrasAgregables) {
 			elemento.agregarMuestra(muestra); 	// El agregar muestra del desafio, a diferencia del proyecto, 
-												// recibe una cantidad como parametro
+												// recibe una cantidad como parametro.
 		}
 	}
-	//
-	//public void aceptarDesafio(Desafio desafio) {
+	
+	// aca no supe como instanciar un desafio aceptado 
+	
+	//public void aceptarDesafio(Desafio desafio) {  
 	// TO DO
 	//}
 	//
+	
+	
 	public void calificarDesafio(DesafioAceptado desafio, int calificacion) {
 		if (desafios.contains(desafio)) {
 			desafio.setCalificacion(calificacion);
@@ -127,7 +131,8 @@ public class Usuario {
 	}
 	
 	public double getPorcentajeDeCompletitudDeDesafio(DesafioAceptado desafio) {
-		return desafio.porcentajeCompletitud(desafio);
+		return desafio.porcentajeCompletitud(desafio); // Aca el metodo recibe un desafio como parametro, pero dentro del 
+													  // cuerpo del metodo se manda a si mismo como this, hace falta el parametro entonces?
 	}
 	
 	public void setDificultadPreferida(int numero) throws Exception {
