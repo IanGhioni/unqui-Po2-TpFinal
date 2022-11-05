@@ -1,27 +1,26 @@
 package ar.edu.unq.po2.tpfinal.recomendadorDeDesafios;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
-public class RecomendadorFavoritos extends Recomendador {
-
+public class RecomendadorFavoritos extends Recomendador implements Recomendable {
+	
 	public RecomendadorFavoritos(Usuario user) {
 		super(user);
 	}
 
 	@Override
-	protected void seleccionarDesafios() {
-		this.listaDeDesafios = new ArrayList<Desafio>(this.listaDeDesafios.stream().limit(5).toList());
-	}
-
-	@Override
-	public void ordenarDesafios() {
+	public List<Desafio> recomendar() {
+		listaDeDesafios = user.getSistema().getListaDeDesafios();
+		
 		this.ordenarDesafiosPorCoincidencia();
 		this.listaDeDesafios = new ArrayList<Desafio>(this.listaDeDesafios.stream().limit(20).toList());
 		this.ordenarDesafiosPorSimilitud();
-
+		this.listaDeDesafios = new ArrayList<Desafio>(this.listaDeDesafios.stream().limit(5).toList());
+		return this.listaDeDesafios;
 	}
 
 	private void ordenarDesafiosPorSimilitud() {

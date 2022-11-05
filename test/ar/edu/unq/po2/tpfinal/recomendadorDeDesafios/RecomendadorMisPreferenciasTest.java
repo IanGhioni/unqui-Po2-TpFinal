@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 class RecomendadorMisPreferenciasTest {
 
 	ArrayList<Desafio> listaDeDesafios; 
-	Recomendador recomendador;
+	Recomendable recomendador;
 	Usuario user;
 	Sistema sistema;
 	PerfilDeUsuario perfil;
