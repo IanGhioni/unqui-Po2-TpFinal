@@ -7,9 +7,11 @@ import java.util.List;
 
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.desafio.DesafioAceptado;
+import ar.edu.unq.po2.tpfinal.desafio.EstadoDesafioEnCurso;
 import ar.edu.unq.po2.tpfinal.filtrador.Evaluable;
 import ar.edu.unq.po2.tpfinal.filtrador.Filtrador;
 import ar.edu.unq.po2.tpfinal.muestra.Muestra;
+import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
 import ar.edu.unq.po2.tpfinal.proyecto.Proyecto;
 import ar.edu.unq.po2.tpfinal.recomendadorDeDesafios.Recomendable;
@@ -87,17 +89,20 @@ public class Usuario {
 	public void tomarMuestra(Muestra muestra) {
 		muestras.add(muestra);
 		for (MuestraAgregable elemento : muestrasAgregables) {
-			elemento.agregarMuestra(muestra); 	// El agregar muestra del desafio, a diferencia del proyecto, 
-												// recibe una cantidad como parametro.
+			elemento.notify(this);; 	
 		}
 	}
 	
-	// aca no supe como instanciar un desafio aceptado 
 	
-	//public void aceptarDesafio(Desafio desafio) {  
-	// TO DO
-	//}
-	//
+	
+	public void aceptarDesafio(Desafio desafio) {
+		Circunferencia area = desafio.getArea();
+		int dificultad = desafio.getDificultad();
+		int cantMinMuestras = desafio.getCantidadMinimaMuestras();
+		int recompensa = desafio.getRecompensa();
+		this.desafios.add(new DesafioAceptado(area, cantMinMuestras, dificultad, recompensa, this, new EstadoDesafioEnCurso()));
+	}
+	
 	
 	
 	public void calificarDesafio(DesafioAceptado desafio, int calificacion) {
