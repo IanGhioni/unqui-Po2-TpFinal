@@ -6,7 +6,7 @@ import java.util.List;
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
-public abstract class RecomendadorDeDesafios implements Recomendable{
+public abstract class RecomendadorDeDesafios {
 	Usuario user;
 	List<Desafio> listaDeDesafios;
 	

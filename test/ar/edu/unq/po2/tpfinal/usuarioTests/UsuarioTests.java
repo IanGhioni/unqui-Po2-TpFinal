@@ -239,5 +239,13 @@ class UsuarioTests {
 		user.buscarProyectos(filtrador);
 		verify(filtrador).evaluar(new ArrayList<Evaluable>());
 	}
-
+	
+	@Test
+	void testCambiarRecomendador() {
+		RecomendadorDeDesafios recomendadorNuevo;
+		recomendadorNuevo = mock(RecomendadorDeDesafios.class);
+		user.setRecomendador(recomendadorNuevo);
+		assertEquals(user.getRecomendador(), recomendadorNuevo);
+	}
+	
 }

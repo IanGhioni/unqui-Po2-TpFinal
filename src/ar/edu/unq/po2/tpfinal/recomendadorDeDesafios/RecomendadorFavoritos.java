@@ -6,7 +6,7 @@ import java.util.List;
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
-public class RecomendadorFavoritos extends RecomendadorDeDesafios implements Recomendable {
+public class RecomendadorFavoritos extends RecomendadorDeDesafios  {
 	
 	public RecomendadorFavoritos(Usuario user) {
 		super(user);
