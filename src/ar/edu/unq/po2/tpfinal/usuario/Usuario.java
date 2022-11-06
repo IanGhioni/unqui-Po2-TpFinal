@@ -14,7 +14,7 @@ import ar.edu.unq.po2.tpfinal.muestra.Muestra;
 import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
 import ar.edu.unq.po2.tpfinal.proyecto.Proyecto;
-import ar.edu.unq.po2.tpfinal.recomendadorDeDesafios.Recomendable;
+import ar.edu.unq.po2.tpfinal.recomendadorDeDesafios.Recomendador;
 
 
 public class Usuario {
@@ -24,10 +24,10 @@ public class Usuario {
 	List<Proyecto> proyectos;
 	List<Muestra> muestras;
 	List<DesafioAceptado> desafios;
-	Recomendable recomendador;
+	Recomendador recomendador;
 	List<MuestraAgregable> muestrasAgregables;
 	
-	public Usuario(Sistema sistema, PerfilDeUsuario perfil, Recomendable recomendador) throws Exception {
+	public Usuario(Sistema sistema, PerfilDeUsuario perfil, Recomendador recomendador) throws Exception {
 		this.sistema = sistema;
 		this.proyectos = new ArrayList<Proyecto>();
 		this.muestras = new ArrayList<Muestra>();
@@ -37,9 +37,6 @@ public class Usuario {
 		this.muestrasAgregables = new ArrayList<MuestraAgregable>();
 	}
 	
-	public PerfilDeUsuario getPerfilDeUsuario() {
-		return perfilDeUsuario;
-	}
 
 	public List<Proyecto> getProyectos() {
 		return proyectos;
@@ -53,7 +50,7 @@ public class Usuario {
 		return desafios;
 	}
 
-	public Recomendable getRecomendador() {
+	public Recomendador getRecomendador() {
 		return recomendador;
 	}
 
@@ -64,7 +61,7 @@ public class Usuario {
 	public Sistema getSistema() {
 		return this.sistema;
 	}
-	public PerfilDeUsuario getPerfildeUsuario() {
+	public PerfilDeUsuario getPerfilDeUsuario() {
 		return perfilDeUsuario;
 	}
 	
@@ -101,18 +98,18 @@ public class Usuario {
 		int cantMinMuestras = desafio.getCantidadMinimaMuestras();
 		int recompensa = desafio.getRecompensa();
 		this.desafios.add(new DesafioAceptado(area, cantMinMuestras, dificultad, recompensa, this, new EstadoDesafioEnCurso()));
+		this.muestrasAgregables.add(desafios.get(desafios.size()-1));
 	}
 	
 	
 	
 	public void calificarDesafio(DesafioAceptado desafio, int calificacion) {
-		if (desafios.contains(desafio)) {
 			desafio.setCalificacion(calificacion);
-		};
 	}
 	
 	public List<DesafioAceptado> getDesafiosCompletados() {
 		List<DesafioAceptado> listaAuxiliar = desafios;
+		
 		return listaAuxiliar.stream().filter(x -> x.getEstado() == "Desafío completado").toList();
 	}
 	
