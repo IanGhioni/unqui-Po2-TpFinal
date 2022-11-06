@@ -85,6 +85,18 @@ public class DesafioAceptado extends Desafio implements MuestraAgregable {
 				.allMatch(restriccion -> restriccion.verificarRestriccionAlDesafio(this, LocalDate.now()))) {
 			this.estado.agregarMuestra(cantidad, this);
 		}
+		this.verificarVencimiento();
+	}
+
+	public void verificarVencimiento() {
+		if (this.estaVencido()) {
+			this.setEstado(new EstadoDesafioVencido());
+		}
+	}
+
+	private boolean estaVencido() {
+		return (restricciones.stream().filter(RestriccionFechas.class::isInstance))
+				.anyMatch(restriccion -> !restriccion.verificarRestriccionAlDesafio(this, LocalDate.now()));
 	}
 
 	public boolean faltaUnaMuestra() {

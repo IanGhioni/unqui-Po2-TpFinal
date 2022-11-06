@@ -192,6 +192,7 @@ public class DesafioAceptadoTest {
 		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
 		desafio.agregarMuestra(1, desafio);
 		assertEquals(desafio.getMuestrasTomadas(), 0);
+		assertEquals(desafio.getEstado(), "Desafío vencido");
 	}
 
 }
