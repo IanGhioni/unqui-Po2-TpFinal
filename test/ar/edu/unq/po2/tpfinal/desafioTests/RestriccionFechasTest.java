@@ -41,4 +41,16 @@ class RestriccionFechasTest {
 		assertFalse(restriccion.verificarRestriccionAlDesafio(desafio, LocalDate.now()));
 	}
 
+	@Test
+	void testRestriccionFechasGetFechaInicio() {
+		restriccion = new RestriccionFechas(LocalDate.of(2022, 10, 15), LocalDate.of(2022, 10, 31));
+		assertEquals(LocalDate.of(2022, 10, 15), restriccion.getFechaInicio());
+	}
+
+	@Test
+	void testRestriccionFechasGetFechaFin() {
+		restriccion = new RestriccionFechas(LocalDate.of(2022, 10, 15), LocalDate.of(2022, 10, 31));
+		assertEquals(LocalDate.of(2022, 10, 31), restriccion.getFechaFin());
+	}
+
 }

@@ -13,6 +13,14 @@ public class RestriccionFechas extends Restriccion {
 		this.fechaFin = fechaFin;
 	}
 
+	public LocalDate getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public LocalDate getFechaFin() {
+		return fechaFin;
+	}
+
 	@Override
 	public boolean verificarRestriccionAlDesafio(DesafioAceptado desafio, LocalDate fecha) {
 		return ((fecha.isAfter(fechaInicio)) && (fecha.isBefore(fechaFin)));

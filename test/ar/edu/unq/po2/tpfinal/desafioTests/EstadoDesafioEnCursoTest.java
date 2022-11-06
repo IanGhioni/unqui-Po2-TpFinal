@@ -15,15 +15,18 @@ import org.junit.jupiter.api.Test;
 import ar.edu.unq.po2.tpfinal.desafio.DesafioAceptado;
 import ar.edu.unq.po2.tpfinal.desafio.EstadoDesafioCompletado;
 import ar.edu.unq.po2.tpfinal.desafio.EstadoDesafioEnCurso;
+import ar.edu.unq.po2.tpfinal.desafio.RestriccionFechas;
 
 class EstadoDesafioEnCursoTest {
 	DesafioAceptado desafio;
 	EstadoDesafioEnCurso estado;
+	RestriccionFechas restriccion;
 
 	@BeforeEach
 	void setUp() {
 		desafio = mock(DesafioAceptado.class);
 		estado = new EstadoDesafioEnCurso();
+		restriccion = mock(RestriccionFechas.class);
 	}
 
 	@Test
@@ -62,5 +65,4 @@ class EstadoDesafioEnCursoTest {
 		estado.agregarMuestra(1, desafio);
 		verify(desafio, times(1)).setMuestrasTomadas(5);
 	}
-
 }
