@@ -6,11 +6,11 @@ import java.util.List;
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
-public abstract class Recomendador {
+public abstract class RecomendadorDeDesafios implements Recomendable{
 	Usuario user;
 	List<Desafio> listaDeDesafios;
 	
-	public Recomendador(Usuario user) {
+	public RecomendadorDeDesafios(Usuario user) {
 		listaDeDesafios = new ArrayList<Desafio>();
 		this.user = user;
 	}
@@ -18,20 +18,20 @@ public abstract class Recomendador {
 	public List<Desafio> recomendar() {
 		listaDeDesafios = user.getSistema().getListaDeDesafios();
 		
-		this.ordenarDesafios();
+		this.ordenarDesafiosPorCoincidencia();
 		this.seleccionarDesafios();
 		return this.listaDeDesafios;
 	}
 
-	protected abstract void seleccionarDesafios();
-
-	protected abstract void ordenarDesafios();
+	protected void seleccionarDesafios() {
+		this.listaDeDesafios = new ArrayList<Desafio>(this.listaDeDesafios.stream().limit(5).toList());
+	}
 
 	public void ordenarDesafiosPorCoincidencia() {
 		listaDeDesafios.sort((d1,d2) -> Double.compare(this.coincidenciaConDesafio(d1), this.coincidenciaConDesafio(d2)));;
 	}
 
 	protected double coincidenciaConDesafio(Desafio d1) {
-		return user.getPerfildeUsuario().calcularCoincidenciaConDesafio(d1);
+		return user.getPerfilDeUsuario().calcularCoincidenciaConDesafio(d1);
 	}
 }

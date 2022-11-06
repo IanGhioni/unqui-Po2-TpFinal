@@ -4,9 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
+import ar.edu.unq.po2.tpfinal.usuario.MuestraAgregable;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
-public class DesafioAceptado extends Desafio {
+public class DesafioAceptado extends Desafio implements MuestraAgregable {
 	private Usuario usuario;
 	private EstadoDesafio estado;
 	private int muestrasTomadas;
@@ -71,6 +72,11 @@ public class DesafioAceptado extends Desafio {
 
 	public double porcentajeCompletitud(DesafioAceptado desafio) {
 		return this.estado.porcentajeCompletitud(this);
+	}
+
+	@Override
+	public void notify(Usuario user) {
+		this.agregarMuestra(1, this);
 	}
 
 	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {

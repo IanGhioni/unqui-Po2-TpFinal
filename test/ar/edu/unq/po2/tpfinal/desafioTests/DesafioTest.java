@@ -87,31 +87,5 @@ public class DesafioTest {
 		Desafio desafio2 = new Desafio(area, 4, 4, 150);
 		assertEquals(desafio.calcularSimilitudConDesafio(desafio2), 35);
 	}
-	@Test
-	public void calcularSimilitudConPreferencia1() {
-
-		desafio = new Desafio(area, 1, 3, 49);
-		perfilDeUsuario = mock(PerfilDeUsuario.class);
-		when(perfilDeUsuario.getCantidadMinimaMuestras()).thenReturn(1);
-		when(perfilDeUsuario.getDificultad()).thenReturn(3);
-		when(perfilDeUsuario.getRecompensa()).thenReturn(49);
-		assertTrue(desafio.calcularSimilitudConPreferencia(perfilDeUsuario) == 0);
-	}
-	@Test
-	public void calcularSimilitudConPreferencia2() {
-		desafio = new Desafio(area, 1, 3, 49);
-		perfilDeUsuario = mock(PerfilDeUsuario.class);
-		when(perfilDeUsuario.getCantidadMinimaMuestras()).thenReturn(2);
-		when(perfilDeUsuario.getDificultad()).thenReturn(4);
-		when(perfilDeUsuario.getRecompensa()).thenReturn(50);
-		assertTrue(desafio.calcularSimilitudConPreferencia(perfilDeUsuario) == 1);
-	}
-	public void calcularSimilitudConPreferencia3() {
-		desafio = new Desafio(area, 1, 3, 49);
-		perfilDeUsuario = mock(PerfilDeUsuario.class);
-		when(perfilDeUsuario.getCantidadMinimaMuestras()).thenReturn(1);
-		when(perfilDeUsuario.getDificultad()).thenReturn(3);
-		when(perfilDeUsuario.getRecompensa()).thenReturn(52);
-		assertTrue(desafio.calcularSimilitudConPreferencia(perfilDeUsuario) == 1);
-	}
+	
 }

@@ -19,4 +19,6 @@ public class EstadoDesafioVencido extends EstadoDesafio {
 		// no pueden agregarse muestras porque ya está vencido
 	}
 
+	
+
 }

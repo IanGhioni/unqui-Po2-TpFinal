@@ -5,11 +5,12 @@ import java.util.List;
 
 import ar.edu.unq.po2.tpfinal.muestra.Muestra;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
+import ar.edu.unq.po2.tpfinal.usuario.MuestraAgregable;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 import ar.edu.unq.po2.tpfinal.filtrador.Evaluable;
 
 
-public class Proyecto implements  Evaluable {
+public class Proyecto implements  Evaluable, MuestraAgregable{
 
 	private String nombre;
 	private String descripcion;
@@ -82,12 +83,19 @@ public class Proyecto implements  Evaluable {
 		this.listaDeUsuariosSuscriptos.remove(usuario);
 	}
 
-	public void añadirMuestra(Muestra muestra) {
+	public void agregarMuestra(Muestra muestra) {
 		this.listaDeMuestras.add(muestra);
 	}
 
 	public List<Muestra> getListaDeMuestras() {
 		return this.listaDeMuestras;
+	}
+
+	@Override
+	public void notify(Usuario user) {
+		int ultimaMuestra = user.getMuestras().size() - 1;
+		Muestra muestra = user.getMuestras().get(ultimaMuestra);
+		this.agregarMuestra(muestra);
 	}
 
 	

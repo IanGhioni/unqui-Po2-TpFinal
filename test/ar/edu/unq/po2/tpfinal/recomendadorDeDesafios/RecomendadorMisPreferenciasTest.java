@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 class RecomendadorMisPreferenciasTest {
 
 	ArrayList<Desafio> listaDeDesafios; 
-	Recomendador recomendador;
+	Recomendable recomendador;
 	Usuario user;
 	Sistema sistema;
 	PerfilDeUsuario perfil;
@@ -57,7 +57,7 @@ class RecomendadorMisPreferenciasTest {
 		this.setUpSistema();
 		
 		when(user.desafioMasGustado()).thenReturn(desafioMasGustado);
-		when(user.getPerfildeUsuario()).thenReturn(perfil);
+		when(user.getPerfilDeUsuario()).thenReturn(perfil);
 
 		
 		recomendador = new RecomendadorMisPreferencias(user);
@@ -119,8 +119,8 @@ class RecomendadorMisPreferenciasTest {
 		d23 = mock(Desafio.class);
 	}
 	
-	private void setupDesafioSimilitud(Desafio desafio,  double similitud) {
-		when(desafio.calcularSimilitudConPreferencia( user.getPerfildeUsuario())).thenReturn(similitud);	
+	private void setupDesafioCoincidencia(Desafio desafio,  double coincidencia) {
+		when(perfil.calcularCoincidenciaConDesafio(desafio)).thenReturn(coincidencia);	
 	}
 
 	
@@ -136,33 +136,33 @@ class RecomendadorMisPreferenciasTest {
 		
 		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d3,d5,d7,d10
 
-		this.setupDesafioSimilitud(d1, 0);
-		this.setupDesafioSimilitud(d3, 0);
-		this.setupDesafioSimilitud(d5, 0);
-		this.setupDesafioSimilitud(d7, 0);
-		this.setupDesafioSimilitud(d10, 0);
+		this.setupDesafioCoincidencia(d1, 0);
+		this.setupDesafioCoincidencia(d3, 0);
+		this.setupDesafioCoincidencia(d5, 0);
+		this.setupDesafioCoincidencia(d7, 0);
+		this.setupDesafioCoincidencia(d10, 0);
 		
 		// Los demas desafios que no tienen la mayor coincidencia ni la mayor similitud.
 
 		
-		this.setupDesafioSimilitud(d2, 10);
-		this.setupDesafioSimilitud(d4, 14);
-		this.setupDesafioSimilitud(d6, 10);
-		this.setupDesafioSimilitud(d8, 12);
-		this.setupDesafioSimilitud(d9, 11);
-		this.setupDesafioSimilitud(d15, 8);
-		this.setupDesafioSimilitud(d14, 7);
-		this.setupDesafioSimilitud(d13, 12);
-		this.setupDesafioSimilitud(d12, 12);
-		this.setupDesafioSimilitud(d11, 14);
-		this.setupDesafioSimilitud(d16, 12);
-		this.setupDesafioSimilitud(d17, 11);
-		this.setupDesafioSimilitud(d18, 12);
-		this.setupDesafioSimilitud(d19, 12);
-		this.setupDesafioSimilitud(d20, 9);
-		this.setupDesafioSimilitud(d23, 12);
-		this.setupDesafioSimilitud(d22, 6);
-		this.setupDesafioSimilitud(d21, 4);
+		this.setupDesafioCoincidencia(d2, 10);
+		this.setupDesafioCoincidencia(d4, 14);
+		this.setupDesafioCoincidencia(d6, 10);
+		this.setupDesafioCoincidencia(d8, 12);
+		this.setupDesafioCoincidencia(d9, 11);
+		this.setupDesafioCoincidencia(d15, 8);
+		this.setupDesafioCoincidencia(d14, 7);
+		this.setupDesafioCoincidencia(d13, 12);
+		this.setupDesafioCoincidencia(d12, 12);
+		this.setupDesafioCoincidencia(d11, 14);
+		this.setupDesafioCoincidencia(d16, 12);
+		this.setupDesafioCoincidencia(d17, 11);
+		this.setupDesafioCoincidencia(d18, 12);
+		this.setupDesafioCoincidencia(d19, 12);
+		this.setupDesafioCoincidencia(d20, 9);
+		this.setupDesafioCoincidencia(d23, 12);
+		this.setupDesafioCoincidencia(d22, 6);
+		this.setupDesafioCoincidencia(d21, 4);
 		
 		assertTrue(this.recomendador.recomendar().contains(d1));
 		assertTrue(this.recomendador.recomendar().contains(d3));
@@ -176,33 +176,33 @@ class RecomendadorMisPreferenciasTest {
 		
 		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d3,d5,d7,d10
 
-		this.setupDesafioSimilitud(d1, 0.6);
-		this.setupDesafioSimilitud(d3, 0.4);
-		this.setupDesafioSimilitud(d5, 0.1);
-		this.setupDesafioSimilitud(d7, 0.9);
-		this.setupDesafioSimilitud(d10, 0.1);
+		this.setupDesafioCoincidencia(d1, 0.6);
+		this.setupDesafioCoincidencia(d3, 0.4);
+		this.setupDesafioCoincidencia(d5, 0.1);
+		this.setupDesafioCoincidencia(d7, 0.9);
+		this.setupDesafioCoincidencia(d10, 0.1);
 		
 		// Los demas desafios que no tienen la mayor coincidencia ni la mayor similitud.
 		
 		
-		this.setupDesafioSimilitud(d2, 12.3);
-		this.setupDesafioSimilitud(d4, 14.36);
-		this.setupDesafioSimilitud(d6, 10.365);
-		this.setupDesafioSimilitud(d8, 12.6);
-		this.setupDesafioSimilitud(d9, 11.36);
-		this.setupDesafioSimilitud(d15, 7.6);
-		this.setupDesafioSimilitud(d14, 15.6);
-		this.setupDesafioSimilitud(d13, 12.11);
-		this.setupDesafioSimilitud(d12, 14.12);
-		this.setupDesafioSimilitud(d11, 17.33);
-		this.setupDesafioSimilitud(d16, 12.74);
-		this.setupDesafioSimilitud(d17, 11.47);
-		this.setupDesafioSimilitud(d18, 12.14);
-		this.setupDesafioSimilitud(d19, 11.396);
-		this.setupDesafioSimilitud(d20, 9.6);
-		this.setupDesafioSimilitud(d23, 12.4);
-		this.setupDesafioSimilitud(d22, 6.39);
-		this.setupDesafioSimilitud(d21, 4.12);
+		this.setupDesafioCoincidencia(d2, 12.3);
+		this.setupDesafioCoincidencia(d4, 14.36);
+		this.setupDesafioCoincidencia(d6, 10.365);
+		this.setupDesafioCoincidencia(d8, 12.6);
+		this.setupDesafioCoincidencia(d9, 11.36);
+		this.setupDesafioCoincidencia(d15, 7.6);
+		this.setupDesafioCoincidencia(d14, 15.6);
+		this.setupDesafioCoincidencia(d13, 12.11);
+		this.setupDesafioCoincidencia(d12, 14.12);
+		this.setupDesafioCoincidencia(d11, 17.33);
+		this.setupDesafioCoincidencia(d16, 12.74);
+		this.setupDesafioCoincidencia(d17, 11.47);
+		this.setupDesafioCoincidencia(d18, 12.14);
+		this.setupDesafioCoincidencia(d19, 11.396);
+		this.setupDesafioCoincidencia(d20, 9.6);
+		this.setupDesafioCoincidencia(d23, 12.4);
+		this.setupDesafioCoincidencia(d22, 6.39);
+		this.setupDesafioCoincidencia(d21, 4.12);
 		
 		assertTrue(this.recomendador.recomendar().contains(d1));
 		assertTrue(this.recomendador.recomendar().contains(d3));
@@ -217,33 +217,33 @@ class RecomendadorMisPreferenciasTest {
 		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d3,d5,d7,d10
 		// CASO BORDE: los desafios d1, d3, d5, d7 y d10 tienen una diferencia de 0.1 con los demas.
 		
-		this.setupDesafioSimilitud(d1, 0.9);
-		this.setupDesafioSimilitud(d3, 0.9);
-		this.setupDesafioSimilitud(d5, 0.9);
-		this.setupDesafioSimilitud(d7, 0.9);
-		this.setupDesafioSimilitud(d10, 0.9);
+		this.setupDesafioCoincidencia(d1, 0.9);
+		this.setupDesafioCoincidencia(d3, 0.9);
+		this.setupDesafioCoincidencia(d5, 0.9);
+		this.setupDesafioCoincidencia(d7, 0.9);
+		this.setupDesafioCoincidencia(d10, 0.9);
 		
 		// Los demas desafios que no tienen la mayor coincidencia ni la mayor similitud.
 		
 		
-		this.setupDesafioSimilitud(d2, 1);
-		this.setupDesafioSimilitud(d4, 1);
-		this.setupDesafioSimilitud(d6, 1);
-		this.setupDesafioSimilitud(d8, 1);
-		this.setupDesafioSimilitud(d9, 1);
-		this.setupDesafioSimilitud(d15, 1);
-		this.setupDesafioSimilitud(d14, 1);
-		this.setupDesafioSimilitud(d13, 1);
-		this.setupDesafioSimilitud(d12, 1);
-		this.setupDesafioSimilitud(d11, 1);
-		this.setupDesafioSimilitud(d16, 1);
-		this.setupDesafioSimilitud(d17, 1);
-		this.setupDesafioSimilitud(d18, 1);
-		this.setupDesafioSimilitud(d19, 1);
-		this.setupDesafioSimilitud(d20, 1);
-		this.setupDesafioSimilitud(d23, 1);
-		this.setupDesafioSimilitud(d22, 1);
-		this.setupDesafioSimilitud(d21, 1);
+		this.setupDesafioCoincidencia(d2, 1);
+		this.setupDesafioCoincidencia(d4, 1);
+		this.setupDesafioCoincidencia(d6, 1);
+		this.setupDesafioCoincidencia(d8, 1);
+		this.setupDesafioCoincidencia(d9, 1);
+		this.setupDesafioCoincidencia(d15, 1);
+		this.setupDesafioCoincidencia(d14, 1);
+		this.setupDesafioCoincidencia(d13, 1);
+		this.setupDesafioCoincidencia(d12, 1);
+		this.setupDesafioCoincidencia(d11, 1);
+		this.setupDesafioCoincidencia(d16, 1);
+		this.setupDesafioCoincidencia(d17, 1);
+		this.setupDesafioCoincidencia(d18, 1);
+		this.setupDesafioCoincidencia(d19, 1);
+		this.setupDesafioCoincidencia(d20, 1);
+		this.setupDesafioCoincidencia(d23, 1);
+		this.setupDesafioCoincidencia(d22, 1);
+		this.setupDesafioCoincidencia(d21, 1);
 		
 		assertTrue(this.recomendador.recomendar().contains(d1));
 		assertTrue(this.recomendador.recomendar().contains(d3));
@@ -252,5 +252,72 @@ class RecomendadorMisPreferenciasTest {
 		assertTrue(this.recomendador.recomendar().contains(d10));
 	}
 	
-
+	@Test
+	void testRecomendarConUnaListaDeDesafiosCon6Elementos() {
+		
+		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d2,d3,d4,d5
+		// Los desafios d1, d2, d3, d4, d5 y d10 son los unicos que hay en la lista del sistema. 
+		listaDeDesafios = new ArrayList<Desafio>();
+		listaDeDesafios.add(d1);
+		listaDeDesafios.add(d2);
+		listaDeDesafios.add(d3);
+		listaDeDesafios.add(d4);
+		listaDeDesafios.add(d5);
+		listaDeDesafios.add(d10);
+		when(user.getSistema()).thenReturn(sistema);
+		when(sistema.getListaDeDesafios()).thenReturn(listaDeDesafios);
+		
+		this.setupDesafioCoincidencia(d1, 1);
+		this.setupDesafioCoincidencia(d2, 3);
+		this.setupDesafioCoincidencia(d3, 0);
+		this.setupDesafioCoincidencia(d4, 2);
+		this.setupDesafioCoincidencia(d5, 3);
+		
+		this.setupDesafioCoincidencia(d10, 10);
+		
+		assertFalse(this.recomendador.recomendar().contains(d10));
+		assertTrue(this.recomendador.recomendar().contains(d1));
+		assertTrue(this.recomendador.recomendar().contains(d2));
+		assertTrue(this.recomendador.recomendar().contains(d3));
+		assertTrue(this.recomendador.recomendar().contains(d4));
+		assertTrue(this.recomendador.recomendar().contains(d5));
+		assertTrue(this.recomendador.recomendar().size() == 5);
+	}
+	
+	@Test
+	void testRecomendarConUnaListaDeDesafiosConMenosDe5Elementos() {
+		
+		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d2,d3,d4,d5
+		// Los desafios d1, d2, d3 y d4 son los unicos que hay en la lista del sistema. Retorna esos desafios
+		listaDeDesafios = new ArrayList<Desafio>();
+		listaDeDesafios.add(d1);
+		listaDeDesafios.add(d2);
+		listaDeDesafios.add(d3);
+		listaDeDesafios.add(d4);
+		
+		when(user.getSistema()).thenReturn(sistema);
+		when(sistema.getListaDeDesafios()).thenReturn(listaDeDesafios);
+		
+		this.setupDesafioCoincidencia(d1, 1);
+		this.setupDesafioCoincidencia(d2, 3);
+		this.setupDesafioCoincidencia(d3, 0);
+		this.setupDesafioCoincidencia(d4, 2);
+		
+		assertTrue(this.recomendador.recomendar().contains(d1));
+		assertTrue(this.recomendador.recomendar().contains(d2));
+		assertTrue(this.recomendador.recomendar().contains(d3));
+		assertTrue(this.recomendador.recomendar().contains(d4));
+		assertTrue(this.recomendador.recomendar().size() == 4);
+	}
+	
+	@Test
+	void testRecomendarConUnaListaDeDesafiosVacia() {
+		
+		listaDeDesafios = new ArrayList<Desafio>();
+		
+		when(user.getSistema()).thenReturn(sistema);
+		when(sistema.getListaDeDesafios()).thenReturn(listaDeDesafios);
+		
+		assertTrue(this.recomendador.recomendar().size() == 0);
+	}
 }

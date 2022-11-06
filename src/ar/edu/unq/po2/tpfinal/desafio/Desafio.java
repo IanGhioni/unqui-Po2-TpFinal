@@ -5,7 +5,6 @@ import java.util.List;
 
 
 import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
-import ar.edu.unq.po2.tpfinal.usuario.PerfilDeUsuario;
 
 public class Desafio {
 	protected Circunferencia area;
@@ -57,10 +56,6 @@ public class Desafio {
 				+ (double) Math.abs(this.getCantidadMinimaMuestras() - desafio.getCantidadMinimaMuestras())
 				+ (double) Math.abs(this.getRecompensa() - desafio.getRecompensa())) / 3;
 	}
-	public double calcularSimilitudConPreferencia(PerfilDeUsuario perfilDeUsuario) {
-		return ((double) Math.abs(this.getDificultad() - perfilDeUsuario.getDificultad())
-				+ (double) Math.abs(this.getCantidadMinimaMuestras() - perfilDeUsuario.getCantidadMinimaMuestras())
-				+ (double) Math.abs(this.getRecompensa() - perfilDeUsuario.getRecompensa())) / 3;
-	}
+	
 
 }

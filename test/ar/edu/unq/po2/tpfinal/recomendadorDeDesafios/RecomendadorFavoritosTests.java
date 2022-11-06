@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 class RecomendadorFavoritosTests {
 
 	ArrayList<Desafio> listaDeDesafios; 
-	Recomendador recomendador;
+	Recomendable recomendador;
 	Usuario user;
 	Sistema sistema;
 	PerfilDeUsuario perfil;
@@ -57,7 +57,7 @@ class RecomendadorFavoritosTests {
 		this.setUpSistema();
 		
 		when(user.desafioMasGustado()).thenReturn(desafioMasGustado);
-		when(user.getPerfildeUsuario()).thenReturn(perfil);
+		when(user.getPerfilDeUsuario()).thenReturn(perfil);
 		
 		recomendador = new RecomendadorFavoritos(user);
 
@@ -259,7 +259,7 @@ class RecomendadorFavoritosTests {
 	void testRecomendar3() {
 		
 		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d3,d5,d7,d10
-		// CASO BORDE: los desafios d1, d3, d5, d7 y d10 tienen una diferencia de 0.1 con los demas.
+		// Los desafios d1, d3, d5, d7 y d10 tienen una diferencia de 0.1 con los demas.
 		this.setupPerfilCoincidencia(d1, 0.9);
 		this.setupPerfilCoincidencia(d3, 0.9);
 		this.setupPerfilCoincidencia(d5, 0.9);
@@ -317,5 +317,83 @@ class RecomendadorFavoritosTests {
 		assertTrue(this.recomendador.recomendar().contains(d10));
 	}
 	
-
+	@Test
+	void testRecomendarConUnaListaDeDesafiosCon6Elementos() {
+		
+		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d2,d3,d4,d5
+		// Los desafios d1, d2, d3, d4, d5 y d10 son los unicos que hay en la lista del sistema. 
+		listaDeDesafios = new ArrayList<Desafio>();
+		listaDeDesafios.add(d1);
+		listaDeDesafios.add(d2);
+		listaDeDesafios.add(d3);
+		listaDeDesafios.add(d4);
+		listaDeDesafios.add(d5);
+		listaDeDesafios.add(d10);
+		when(user.getSistema()).thenReturn(sistema);
+		when(sistema.getListaDeDesafios()).thenReturn(listaDeDesafios);
+		
+		this.setupPerfilCoincidencia(d1, 1);
+		this.setupPerfilCoincidencia(d2, 1.2);
+		this.setupPerfilCoincidencia(d3, 2);
+		this.setupPerfilCoincidencia(d4, 0);
+		this.setupPerfilCoincidencia(d5, 0);
+		this.setupDesafioSimilitud(d1, 1);
+		this.setupDesafioSimilitud(d2, 1);
+		this.setupDesafioSimilitud(d3, 3);
+		this.setupDesafioSimilitud(d4, 2);
+		this.setupDesafioSimilitud(d5, 1);
+		
+		this.setupPerfilCoincidencia(d10, 12);
+		this.setupDesafioSimilitud(d10, 10);
+		
+		assertFalse(this.recomendador.recomendar().contains(d10));
+		assertTrue(this.recomendador.recomendar().contains(d1));
+		assertTrue(this.recomendador.recomendar().contains(d2));
+		assertTrue(this.recomendador.recomendar().contains(d3));
+		assertTrue(this.recomendador.recomendar().contains(d4));
+		assertTrue(this.recomendador.recomendar().contains(d5));
+		assertTrue(this.recomendador.recomendar().size() == 5);
+	}
+	
+	@Test
+	void testRecomendarConUnaListaDeDesafiosConMenosDe5Elementos() {
+		
+		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d2,d3,d4,d5
+		// Los desafios d1, d2, d3 y d4 son los unicos que hay en la lista del sistema. Retorna esos desafios
+		listaDeDesafios = new ArrayList<Desafio>();
+		listaDeDesafios.add(d1);
+		listaDeDesafios.add(d2);
+		listaDeDesafios.add(d3);
+		listaDeDesafios.add(d4);
+		
+		when(user.getSistema()).thenReturn(sistema);
+		when(sistema.getListaDeDesafios()).thenReturn(listaDeDesafios);
+		
+		this.setupPerfilCoincidencia(d1, 1);
+		this.setupPerfilCoincidencia(d2, 1.2);
+		this.setupPerfilCoincidencia(d3, 2);
+		this.setupPerfilCoincidencia(d4, 0);
+		this.setupDesafioSimilitud(d1, 1);
+		this.setupDesafioSimilitud(d2, 1);
+		this.setupDesafioSimilitud(d3, 3);
+		this.setupDesafioSimilitud(d4, 2);
+		
+		assertTrue(this.recomendador.recomendar().contains(d1));
+		assertTrue(this.recomendador.recomendar().contains(d2));
+		assertTrue(this.recomendador.recomendar().contains(d3));
+		assertTrue(this.recomendador.recomendar().contains(d4));
+		assertTrue(this.recomendador.recomendar().size() == 4);
+	}
+	
+	@Test
+	void testRecomendarConUnaListaDeDesafiosVacia() {
+		
+		
+		listaDeDesafios = new ArrayList<Desafio>();
+		
+		when(user.getSistema()).thenReturn(sistema);
+		when(sistema.getListaDeDesafios()).thenReturn(listaDeDesafios);
+		
+		assertTrue(this.recomendador.recomendar().size() == 0);
+	}
 }
