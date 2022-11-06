@@ -11,7 +11,7 @@ import ar.edu.unq.po2.tpfinal.filtrador.Evaluable;
 import ar.edu.unq.po2.tpfinal.filtrador.Filtrador;
 import ar.edu.unq.po2.tpfinal.muestra.Muestra;
 import ar.edu.unq.po2.tpfinal.proyecto.Proyecto;
-import ar.edu.unq.po2.tpfinal.recomendadorDeDesafios.Recomendador;
+import ar.edu.unq.po2.tpfinal.recomendadorDeDesafios.RecomendadorDeDesafios;
 import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
 import ar.edu.unq.po2.tpfinal.usuario.PerfilDeUsuario;
@@ -31,7 +31,7 @@ class UsuarioTests {
 	Muestra m1;
 	Sistema sistema;
 	PerfilDeUsuario perfil;
-	Recomendador recomendador;
+	RecomendadorDeDesafios recomendador;
 	Filtrador filtrador;
 
 	@BeforeEach
@@ -41,7 +41,7 @@ class UsuarioTests {
 		d1 = mock(Desafio.class);
 		perfil = mock(PerfilDeUsuario.class);
 		filtrador = mock(Filtrador.class);
-		recomendador = mock(Recomendador.class);
+		recomendador = mock(RecomendadorDeDesafios.class);
 		
 		user = new Usuario(sistema, perfil, recomendador);
 	}

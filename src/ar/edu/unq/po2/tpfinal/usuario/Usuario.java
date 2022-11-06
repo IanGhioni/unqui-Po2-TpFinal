@@ -14,7 +14,7 @@ import ar.edu.unq.po2.tpfinal.muestra.Muestra;
 import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
 import ar.edu.unq.po2.tpfinal.proyecto.Proyecto;
-import ar.edu.unq.po2.tpfinal.recomendadorDeDesafios.Recomendador;
+import ar.edu.unq.po2.tpfinal.recomendadorDeDesafios.RecomendadorDeDesafios;
 
 public class Usuario {
 
@@ -23,10 +23,10 @@ public class Usuario {
 	List<Proyecto> proyectos;
 	List<Muestra> muestras;
 	List<DesafioAceptado> desafios;
-	Recomendador recomendador;
+	RecomendadorDeDesafios recomendador;
 	List<MuestraAgregable> muestrasAgregables;
 
-	public Usuario(Sistema sistema, PerfilDeUsuario perfil, Recomendador recomendador) throws Exception {
+	public Usuario(Sistema sistema, PerfilDeUsuario perfil, RecomendadorDeDesafios recomendador) throws Exception {
 		this.sistema = sistema;
 		this.proyectos = new ArrayList<Proyecto>();
 		this.muestras = new ArrayList<Muestra>();
@@ -48,7 +48,7 @@ public class Usuario {
 		return desafios;
 	}
 
-	public Recomendador getRecomendador() {
+	public RecomendadorDeDesafios getRecomendador() {
 		return recomendador;
 	}
 

@@ -6,11 +6,11 @@ import java.util.List;
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
-public abstract class Recomendador implements Recomendable{
+public abstract class RecomendadorDeDesafios implements Recomendable{
 	Usuario user;
 	List<Desafio> listaDeDesafios;
 	
-	public Recomendador(Usuario user) {
+	public RecomendadorDeDesafios(Usuario user) {
 		listaDeDesafios = new ArrayList<Desafio>();
 		this.user = user;
 	}
