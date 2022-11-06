@@ -21,6 +21,7 @@ import static org.mockito.Mockito.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 class UsuarioTests {
 	
@@ -150,12 +151,14 @@ class UsuarioTests {
 		user.getDesafios().add(desafioNoCompletado);
 		user.getDesafios().add(desafioVencido);
 		
-		assertTrue(user.getDesafiosCompletados().size() == 1);
 		
+		List<DesafioAceptado> listaResultante = user.getDesafiosCompletados();
+		
+		
+		assertTrue(listaResultante.size() == 1);	
 		verify(desafioCompletado).getEstado();
 		verify(desafioNoCompletado).getEstado();
 		verify(desafioVencido).getEstado();
-		
 		assertTrue(user.getDesafiosCompletados().contains(desafioCompletado));
 		assertFalse(user.getDesafiosCompletados().contains(desafioNoCompletado));
 		assertFalse(user.getDesafiosCompletados().contains(desafioVencido));
