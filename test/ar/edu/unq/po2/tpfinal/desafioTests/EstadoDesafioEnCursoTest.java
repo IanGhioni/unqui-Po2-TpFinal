@@ -39,6 +39,13 @@ class EstadoDesafioEnCursoTest {
 	}
 
 	@Test
+	void testPorcentajeCompletitudEnCurso2() {
+		when(desafio.getMuestrasTomadas()).thenReturn(14);
+		when(desafio.getCantidadMinimaMuestras()).thenReturn(20);
+		assertEquals(70, estado.porcentajeCompletitud(desafio));
+	}
+
+	@Test
 	void testAgregarUnaMuestraEnCurso() {
 		when(desafio.getMuestrasTomadas()).thenReturn(75);
 		when(desafio.getCantidadMinimaMuestras()).thenReturn(100);
@@ -49,7 +56,11 @@ class EstadoDesafioEnCursoTest {
 
 	@Test
 	void testAgregarUltimaMuestraEnCurso() {
-
+		when(desafio.faltaUnaMuestra()).thenReturn(true);
+		when(desafio.getMuestrasTomadas()).thenReturn(4);
+		when(desafio.getCantidadMinimaMuestras()).thenReturn(5);
+		estado.agregarMuestra(1, desafio);
+		verify(desafio, times(1)).setMuestrasTomadas(5);
 	}
 
 }
