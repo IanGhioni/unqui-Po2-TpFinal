@@ -70,16 +70,16 @@ public class DesafioAceptado extends Desafio implements MuestraAgregable {
 		return calificacion;
 	}
 
-	public double porcentajeCompletitud(DesafioAceptado desafio) { // Para que recibe un desafio si no lo usa?
+	public double porcentajeCompletitud(DesafioAceptado desafio) {
 		return this.estado.porcentajeCompletitud(this);
 	}
-	
+
 	@Override
 	public void notify(Usuario user) {
 		this.agregarMuestra(1, this);
 	}
-	
-	public void agregarMuestra(int cantidad, DesafioAceptado desafio) { // Lo mismo aca, para que recibe un desafio si no lo usa?
+
+	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
 		if (restricciones.stream()
 				.allMatch(restriccion -> restriccion.verificarRestriccionAlDesafio(this, LocalDate.now()))) {
 			this.estado.agregarMuestra(cantidad, this);
@@ -89,7 +89,5 @@ public class DesafioAceptado extends Desafio implements MuestraAgregable {
 	public boolean faltaUnaMuestra() {
 		return (this.getMuestrasTomadas() == (this.getCantidadMinimaMuestras() - 1));
 	}
-
-	
 
 }
