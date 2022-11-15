@@ -7,7 +7,7 @@ import java.util.List;
 
 
 
-public class  CCategoria extends Condicion{
+public class  CCategoria extends Filtrador{
 	private String regexString;
 	private Pattern pattern;
 	public CCategoria(String regexString) {
