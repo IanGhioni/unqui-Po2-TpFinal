@@ -21,7 +21,7 @@ public class  CCategoria extends Filtrador{
 		      .stream()
 		      .filter(e -> e.getListaDeCategorias()
 		    		       .stream()
-		    		       .anyMatch(c -> pattern.matcher(c).matches())
+		    		       .anyMatch(c -> pattern.matcher(c.getNombre()).matches())
 		    		 )
 		      		  .collect(Collectors.toList());
 	}

@@ -8,9 +8,10 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.tpfinal.categoria.Categoria;
 import ar.edu.unq.po2.tpfinal.filtrador.*;
 import ar.edu.unq.po2.tpfinal.proyecto.Proyecto;
-
+import ar.edu.unq.po2.tpfinal.categoria.Categoria;
 
 
 class CCategoriaTest {
@@ -22,10 +23,26 @@ class CCategoriaTest {
     private Proyecto proyecto3;
     private Proyecto proyecto4;
     private Filtrador evaluador;
-    private ArrayList<String> listaDeCategorias1;
-    private ArrayList<String> listaDeCategorias2;
-    private ArrayList<String> listaDeCategorias3;
-    private ArrayList<String> listaDeCategorias4;
+    private ArrayList<Categoria> listaDeCategorias1;
+    private ArrayList<Categoria> listaDeCategorias2;
+    private ArrayList<Categoria> listaDeCategorias3;
+    private ArrayList<Categoria> listaDeCategorias4;
+	public Categoria categoriaA1;
+	public Categoria categoriaB1;
+	public String nombreCategoriaA1;
+	public String nombreCategoriaB1;
+	public Categoria categoriaA2;
+	public Categoria categoriaB2;
+	public String nombreCategoriaA2;
+	public String nombreCategoriaB2;
+	public Categoria categoriaA3;
+	public Categoria categoriaB3;
+	public String nombreCategoriaA3;
+	public String nombreCategoriaB3;
+	public Categoria categoriaA4;
+	public Categoria categoriaB4;
+	public String nombreCategoriaA4;
+	public String nombreCategoriaB4;
 
     @BeforeEach
     void setUp() {
@@ -37,18 +54,47 @@ class CCategoriaTest {
         proyecto2 = mock(Proyecto.class);
         proyecto3 = mock(Proyecto.class);
         proyecto4 = mock(Proyecto.class);
-        listaDeCategorias1 = new ArrayList<String>();
-        listaDeCategorias2 = new ArrayList<String>();
-        listaDeCategorias3 = new ArrayList<String>();
-        listaDeCategorias4 = new ArrayList<String>();
-        listaDeCategorias1.add("A1");
-        listaDeCategorias1.add("B1");
-        listaDeCategorias2.add("A2");
-        listaDeCategorias2.add("B2");
-        listaDeCategorias3.add("A3");
-        listaDeCategorias3.add("B3");
-        listaDeCategorias4.add("A4");
-        listaDeCategorias4.add("B4");
+        listaDeCategorias1 = new ArrayList<Categoria>();
+        listaDeCategorias2 = new ArrayList<Categoria>();
+        listaDeCategorias3 = new ArrayList<Categoria>();
+        listaDeCategorias4 = new ArrayList<Categoria>();
+        categoriaA1 = mock(Categoria.class);
+        categoriaB1 = mock(Categoria.class);
+        categoriaA2 = mock(Categoria.class);
+        categoriaB2 = mock(Categoria.class);
+        categoriaA3 = mock(Categoria.class);
+        categoriaB3 = mock(Categoria.class);
+        categoriaA4 = mock(Categoria.class);
+        categoriaB4 = mock(Categoria.class);
+        
+		nombreCategoriaA1 = "nombreA1";
+		nombreCategoriaB1 = "nombreB1";
+		when(categoriaA1.getNombre()).thenReturn(nombreCategoriaA1);
+		when(categoriaB1.getNombre()).thenReturn(nombreCategoriaB1);
+		
+		nombreCategoriaA2 = "nombreA2";
+		nombreCategoriaB2 = "nombreB2";
+		when(categoriaA2.getNombre()).thenReturn(nombreCategoriaA2);
+		when(categoriaB2.getNombre()).thenReturn(nombreCategoriaB2);
+		
+		nombreCategoriaA3 = "nombreA3";
+		nombreCategoriaB3 = "nombreB3";
+		when(categoriaA3.getNombre()).thenReturn(nombreCategoriaA3);
+		when(categoriaB3.getNombre()).thenReturn(nombreCategoriaB3);
+		
+		nombreCategoriaA4 = "nombreA4";
+		nombreCategoriaB4 = "nombreB4";
+		when(categoriaA4.getNombre()).thenReturn(nombreCategoriaA4);
+		when(categoriaB4.getNombre()).thenReturn(nombreCategoriaB4);
+
+        listaDeCategorias1.add(categoriaA1);
+        listaDeCategorias1.add(categoriaB1);
+        listaDeCategorias2.add(categoriaA2);
+        listaDeCategorias2.add(categoriaB2);
+        listaDeCategorias3.add(categoriaA3);
+        listaDeCategorias3.add(categoriaB3);
+        listaDeCategorias4.add(categoriaA4);
+        listaDeCategorias4.add(categoriaB4);
         //Test Double Configuration
 
         when(proyecto1.getNombre()).thenReturn("proyecto1");

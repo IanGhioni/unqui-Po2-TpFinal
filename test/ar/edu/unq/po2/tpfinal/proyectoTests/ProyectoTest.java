@@ -8,6 +8,7 @@ import ar.edu.unq.po2.tpfinal.muestra.Muestra;
 import ar.edu.unq.po2.tpfinal.proyecto.Proyecto;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
+import ar.edu.unq.po2.tpfinal.categoria.Categoria;
 
 import static org.mockito.Mockito.*;
 
@@ -16,10 +17,20 @@ class ProyectoTest {
 	private Usuario usuario;
 	private Muestra muestra;
 	private Sistema sistema;
+	public Categoria categoria1;
+	public Categoria categoria2;
+	public String nombreCategoria1;
+	public String nombreCategoria2;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		sistema = mock(Sistema.class);
+		categoria1 = mock(Categoria.class);
+		categoria2 = mock(Categoria.class);
+		nombreCategoria1 = "nombre1";
+		nombreCategoria1 = "nombre2";
+		when(categoria1.getNombre()).thenReturn(nombreCategoria1);
+		when(categoria2.getNombre()).thenReturn(nombreCategoria2);
 	}
 
 	@Test
@@ -45,19 +56,19 @@ class ProyectoTest {
 	void testProyectoAñadeCategorias() throws Exception {
 		proyecto = new Proyecto("nombre","descripcion", sistema);
 		
-		when(sistema.contieneLaCategoria("Una categoria")).thenReturn(true);
+		when(sistema.contieneLaCategoria(categoria1)).thenReturn(true);
 		
-		proyecto.añadirCategoria("Una categoria");
+		proyecto.añadirCategoria(categoria1);
 		
-		assertTrue(proyecto.getListaDeCategorias().contains("Una categoria"));
+		assertTrue(proyecto.getListaDeCategorias().contains(categoria1));
 	}
 	
 	@Test
 	void testProyectoEliminaCategorias() {
 		proyecto = new Proyecto("nombre","descripcion", sistema);
-		proyecto.eliminarCategoria("Una categoria");
+		proyecto.eliminarCategoria(categoria1);
 		
-		assertFalse(proyecto.getListaDeCategorias().contains("Una categoria"));
+		assertFalse(proyecto.getListaDeCategorias().contains(categoria1));
 	}
 	
 	@Test
@@ -92,10 +103,10 @@ class ProyectoTest {
 	void testExceptionCuandoSistemaNoTieneLaCategoriaAAñadir() {
 		proyecto = new Proyecto("nombre","descripcion", sistema);
 		
-		when(sistema.contieneLaCategoria("Una categoria")).thenReturn(false);
+		when(sistema.contieneLaCategoria(categoria1)).thenReturn(false);
 		
 		Throwable exception = assertThrows(Exception.class, () -> {
-			proyecto.añadirCategoria("Una categoria");
+			proyecto.añadirCategoria(categoria1);
 		});
 		assertEquals(exception.getMessage(), "El sistema no incluye la categoria dada.");
 	}
@@ -104,10 +115,10 @@ class ProyectoTest {
 	void testNoExceptionCuandoSistemaTieneLaCategoriaAAñadir() {
 		proyecto = new Proyecto("nombre","descripcion", sistema);
 		
-		when(sistema.contieneLaCategoria("Una categoria")).thenReturn(true);
+		when(sistema.contieneLaCategoria(categoria1)).thenReturn(true);
 		
 		assertDoesNotThrow(() -> {
-			proyecto.añadirCategoria("Una categoria");
+			proyecto.añadirCategoria(categoria1);
 		});
 	}
 }

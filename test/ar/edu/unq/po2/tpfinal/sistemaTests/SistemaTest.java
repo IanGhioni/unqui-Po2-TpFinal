@@ -8,20 +8,32 @@ import static org.mockito.Mockito.*;
 
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
+import ar.edu.unq.po2.tpfinal.categoria.Categoria;
 
 class SistemaTest {
 	
 	public Sistema sistema;
+	public Categoria categoria1;
+	public Categoria categoria2;
+	public String nombreCategoria1;
+	public String nombreCategoria2;
+	
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		sistema = new Sistema();
+		categoria1 = mock(Categoria.class);
+		categoria2 = mock(Categoria.class);
+		nombreCategoria1 = "nombre1";
+		nombreCategoria2 = "nombre2";
+		when(categoria1.getNombre()).thenReturn(nombreCategoria1);
+		when(categoria2.getNombre()).thenReturn(nombreCategoria2);
 	}
 
 	@Test
 	void testSistemaPuedeAgregarUnaCategoria() {
-		sistema.addCategoria("Categoria");
-		assertTrue(sistema.getListaDeCategorias().contains("Categoria"));
+		sistema.addCategoria(categoria1);
+		assertTrue(sistema.getCategorias().contains(categoria1));
 	}
 	
 	@Test
@@ -34,13 +46,14 @@ class SistemaTest {
 	
 	@Test
 	void testSistemaPuedeDecirQueIncluyeUnaCategoria() {
-		sistema.addCategoria("Categoria");
-		assertTrue(sistema.contieneLaCategoria("Categoria"));
+		sistema.addCategoria(categoria1);
+		assertTrue(sistema.contieneLaCategoria(categoria1));
 	}
 	
 	@Test
 	void testSistemaPuedeDecirQueNoIncluyeUnaCategoria() {
-		assertFalse(sistema.contieneLaCategoria("Categoria"));
+		sistema.addCategoria(categoria1);
+		assertFalse(sistema.contieneLaCategoria(categoria2));
 	}
 	
 	@Test
@@ -60,10 +73,10 @@ class SistemaTest {
 	
 	@Test
 	void testSistemaPuedeRemoverUnaCategoria() {
-		sistema.addCategoria("Categoria");
-		sistema.removeCategoria("Categoria");
-		assertFalse(sistema.getListaDeCategorias().contains("Categoria"));
-		assertTrue(sistema.getListaDeCategorias().isEmpty());
+		sistema.addCategoria(categoria1);
+		sistema.removeCategoria(categoria1);
+		assertFalse(sistema.getCategorias().contains(categoria1));
+		assertTrue(sistema.getCategorias().isEmpty());
 	}
 	
 	@Test
