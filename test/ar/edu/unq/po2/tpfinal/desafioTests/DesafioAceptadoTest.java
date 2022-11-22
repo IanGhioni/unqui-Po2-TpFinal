@@ -196,8 +196,6 @@ public class DesafioAceptadoTest {
 		assertEquals(desafio.getEstado(), "Desafío vencido");
 	}
 
-}
-
 	
 	@Test
 	void testNotifyUser() {
