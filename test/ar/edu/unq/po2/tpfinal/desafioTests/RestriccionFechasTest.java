@@ -2,6 +2,7 @@ package ar.edu.unq.po2.tpfinal.desafioTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -38,6 +39,18 @@ class RestriccionFechasTest {
 	void testRestriccionFechasVerificacionFalse() {
 		restriccion = new RestriccionFechas(LocalDate.of(2022, 10, 15), LocalDate.of(2022, 10, 31));
 		assertFalse(restriccion.verificarRestriccionAlDesafio(desafio, LocalDate.now()));
+	}
+
+	@Test
+	void testRestriccionFechasGetFechaInicio() {
+		restriccion = new RestriccionFechas(LocalDate.of(2022, 10, 15), LocalDate.of(2022, 10, 31));
+		assertEquals(LocalDate.of(2022, 10, 15), restriccion.getFechaInicio());
+	}
+
+	@Test
+	void testRestriccionFechasGetFechaFin() {
+		restriccion = new RestriccionFechas(LocalDate.of(2022, 10, 15), LocalDate.of(2022, 10, 31));
+		assertEquals(LocalDate.of(2022, 10, 31), restriccion.getFechaFin());
 	}
 
 }

@@ -15,7 +15,6 @@ public class  BAnd extends   Filtrador{
 		ArrayList<Evaluable> resultado1 = this.filtrador1.evaluar(lista);
 		ArrayList<Evaluable> resultado2 = this.filtrador2.evaluar(lista);
 		ArrayList<Evaluable> resultado = resultado1;
-		resultado=resultado1;
 		resultado.retainAll(resultado2);
 		return  resultado;
 	}

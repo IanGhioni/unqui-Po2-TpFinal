@@ -24,8 +24,9 @@ public class EstadoDesafioEnCurso extends EstadoDesafio {
 			desafio.setEstado(new EstadoDesafioCompletado());
 			desafio.setFechaCompletado(LocalDate.now());
 			desafio.setHoraCompletado(LocalTime.now());
+		} else {
+			desafio.setMuestrasTomadas(desafio.getMuestrasTomadas() + cantidad);
 		}
-		desafio.setMuestrasTomadas(desafio.getMuestrasTomadas() + cantidad);
 	}
 
 }

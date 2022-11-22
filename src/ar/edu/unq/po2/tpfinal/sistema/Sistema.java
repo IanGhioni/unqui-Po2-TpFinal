@@ -4,26 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
+import ar.edu.unq.po2.tpfinal.categoria.Categoria;
 
 public class Sistema {
-	private List<String> listaDeCategorias;
+	private List<Categoria> categorias;
 	private List<Desafio> listaDeDesafios;
 	
 	public Sistema() {
-		this.listaDeCategorias = new ArrayList<String>();
+		this.categorias = new ArrayList<Categoria>();
 		this.listaDeDesafios = new ArrayList<Desafio>();
 	}
 
-	public List<String> getListaDeCategorias() {
-		return listaDeCategorias;
+	public List<Categoria> getCategorias() {
+		return categorias;
 	}
 
 	public List<Desafio> getListaDeDesafios() {
 		return listaDeDesafios;
 	}
 
-	public void addCategoria(String categoria) {
-		listaDeCategorias.add(categoria);
+	public void addCategoria(Categoria categoria) {
+		categorias.add(categoria);
 	}
 	
 	
@@ -32,16 +33,16 @@ public class Sistema {
 		listaDeDesafios.add(desafio);
 	}
 
-	public boolean contieneLaCategoria(String string) {
-		return listaDeCategorias.contains(string);
+	public boolean contieneLaCategoria(Categoria categoria) {
+		return categorias.contains(categoria);
 	}
 
 	public boolean contieneElDesafio(Desafio desafio) {
 		return listaDeDesafios.contains(desafio);
 	}
 
-	public void removeCategoria(String string) {
-		listaDeCategorias.remove(string);
+	public void removeCategoria(Categoria categoria) {
+		categorias.remove(categoria);
 	}
 
 	public void removeDesafio(Desafio desafio) {

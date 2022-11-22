@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 import java.util.ArrayList; // import the ArrayList class 
 
 
-public class  CName extends Condicion{
+public class  CName extends Filtrador{
 	private String regexString;
 	private Pattern pattern;
 	public CName(String regexString) {

@@ -8,6 +8,7 @@ import ar.edu.unq.po2.tpfinal.sistema.Sistema;
 import ar.edu.unq.po2.tpfinal.usuario.MuestraAgregable;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 import ar.edu.unq.po2.tpfinal.filtrador.Evaluable;
+import ar.edu.unq.po2.tpfinal.categoria.Categoria;
 
 
 public class Proyecto implements  Evaluable, MuestraAgregable{
@@ -17,7 +18,7 @@ public class Proyecto implements  Evaluable, MuestraAgregable{
 	private Sistema sistema;
 	
 
-	private List<String> listaDeCategorias;
+	private List<Categoria> categorias;
 	private List<Usuario> listaDeUsuariosSuscriptos;
 	private List<Muestra> listaDeMuestras;
 
@@ -25,7 +26,7 @@ public class Proyecto implements  Evaluable, MuestraAgregable{
 		this.setNombre(nombre);
 		this.setDescripcion(descripcion);
 		this.sistema = sistema;
-		this.listaDeCategorias = new ArrayList<String>();
+		this.categorias = new ArrayList<Categoria>();
 		this.listaDeUsuariosSuscriptos = new ArrayList<Usuario>();
 		this.listaDeMuestras = new ArrayList<Muestra>();
 	}
@@ -50,9 +51,9 @@ public class Proyecto implements  Evaluable, MuestraAgregable{
 		return this.descripcion;
 	}
 
-	public void añadirCategoria(String categoria) throws Exception {
+	public void añadirCategoria(Categoria categoria) throws Exception {
 		if (sistema.contieneLaCategoria(categoria)) {
-			this.listaDeCategorias.add(categoria);
+			this.categorias.add(categoria);
 		}
 		else {
 			throw new Exception(this.mensajeExceptionDeCategoriaInexistente());
@@ -63,12 +64,12 @@ public class Proyecto implements  Evaluable, MuestraAgregable{
 		return "El sistema no incluye la categoria dada.";
 	}
 
-	public void eliminarCategoria(String string) {
-		this.listaDeCategorias.remove(string);
+	public void eliminarCategoria(Categoria categoria) {
+		this.categorias.remove(categoria);
 	}
 
-	public List<String> getListaDeCategorias() {
-		return this.listaDeCategorias;
+	public List<Categoria> getListaDeCategorias() {
+		return this.categorias;
 	}
 
 	public List<Usuario> getListaDeUsuarios() {
