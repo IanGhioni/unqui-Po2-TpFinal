@@ -185,6 +185,7 @@ public class DesafioAceptadoTest {
 		verify(estado).agregarMuestra(1, desafio);
 	}
 
+
 	@Test
 	void testDesafioAceptadoNoAgregaMuestraPorRestriccionFechasVencidaYCambiaEstadoAVencido() {
 		desafio = new DesafioAceptado(area, 5, 2, 500, usuario, estado);
@@ -196,3 +197,17 @@ public class DesafioAceptadoTest {
 	}
 
 }
+
+	
+	@Test
+	void testNotifyUser() {
+		desafio = new DesafioAceptado(area, 5, 2, 500, usuario, estado);
+		desafio.agregarRestriccion(restriccionFechas);
+		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(true);
+		
+		desafio.notify(usuario);
+		
+		verify(estado).agregarMuestra(1, desafio);
+	}
+}
+

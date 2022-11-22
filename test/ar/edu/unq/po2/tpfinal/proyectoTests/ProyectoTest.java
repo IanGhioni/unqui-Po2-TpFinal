@@ -12,6 +12,8 @@ import ar.edu.unq.po2.tpfinal.categoria.Categoria;
 
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+
 class ProyectoTest {
 	private Proyecto proyecto;
 	private Usuario usuario;
@@ -121,4 +123,21 @@ class ProyectoTest {
 			proyecto.añadirCategoria(categoria1);
 		});
 	}
+	
+	@Test
+	void testProyectoEsNotificadoPorUsuario() {
+		proyecto = new Proyecto("nombre","descripcion", sistema);
+		usuario = mock(Usuario.class);
+		muestra = mock(Muestra.class);
+		ArrayList<Muestra> lista = new ArrayList<Muestra>();
+		lista.add(muestra);
+		
+		when(usuario.getMuestras()).thenReturn(lista);
+		
+		proyecto.notify(usuario);
+		
+		verify(usuario, times(2)).getMuestras();
+
+	}
+	
 }

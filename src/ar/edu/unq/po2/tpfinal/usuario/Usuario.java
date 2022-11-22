@@ -144,7 +144,9 @@ public class Usuario {
 	public void setRecompensaPreferida(int numero) throws Exception {
 		perfilDeUsuario.setRecompensa(numero);
 	}
-
+	public void setRecomendador(RecomendadorDeDesafios nuevoRecomendador) {
+		this.recomendador = nuevoRecomendador;
+	}
 	public List<Desafio> recomendar() {
 		return this.recomendador.recomendar();
 	}
