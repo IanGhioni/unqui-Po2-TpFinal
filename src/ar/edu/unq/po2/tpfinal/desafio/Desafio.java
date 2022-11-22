@@ -3,7 +3,6 @@ package ar.edu.unq.po2.tpfinal.desafio;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
 
 public class Desafio {
@@ -23,8 +22,9 @@ public class Desafio {
 	private void setDificultad(int dificultad) {
 		if (dificultad <= 0 || dificultad > 5) {
 			throw new IllegalArgumentException("La dificultad ingresada debe estar entre 1 y 5.");
+		} else {
+			this.dificultad = dificultad;
 		}
-		this.dificultad = dificultad;
 	}
 
 	public Circunferencia getArea() {
@@ -56,6 +56,5 @@ public class Desafio {
 				+ (double) Math.abs(this.getCantidadMinimaMuestras() - desafio.getCantidadMinimaMuestras())
 				+ (double) Math.abs(this.getRecompensa() - desafio.getRecompensa())) / 3;
 	}
-	
 
 }

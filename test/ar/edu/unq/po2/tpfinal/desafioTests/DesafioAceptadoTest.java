@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.po2.tpfinal.desafio.DesafioAceptado;
 import ar.edu.unq.po2.tpfinal.desafio.EstadoDesafio;
+import ar.edu.unq.po2.tpfinal.desafio.EstadoDesafioVencido;
 import ar.edu.unq.po2.tpfinal.desafio.RestriccionFechas;
 import ar.edu.unq.po2.tpfinal.desafio.RestriccionFinDeSemana;
 import ar.edu.unq.po2.tpfinal.desafio.RestriccionSemanal;
@@ -183,6 +184,20 @@ public class DesafioAceptadoTest {
 		desafio.agregarMuestra(1, desafio);
 		verify(estado).agregarMuestra(1, desafio);
 	}
+
+
+	@Test
+	void testDesafioAceptadoNoAgregaMuestraPorRestriccionFechasVencidaYCambiaEstadoAVencido() {
+		desafio = new DesafioAceptado(area, 5, 2, 500, usuario, estado);
+		desafio.agregarRestriccion(restriccionFechas);
+		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
+		desafio.agregarMuestra(1, desafio);
+		assertEquals(desafio.getMuestrasTomadas(), 0);
+		assertEquals(desafio.getEstado(), "Desafío vencido");
+	}
+
+}
+
 	
 	@Test
 	void testNotifyUser() {
@@ -195,3 +210,4 @@ public class DesafioAceptadoTest {
 		verify(estado).agregarMuestra(1, desafio);
 	}
 }
+

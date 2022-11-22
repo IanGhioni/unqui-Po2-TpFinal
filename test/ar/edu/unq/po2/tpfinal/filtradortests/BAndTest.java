@@ -64,7 +64,7 @@ class BAndTest {
         listaResto.add(proyecto3);
         listaResto.add(proyecto4);
     }
-	class CCustom extends Condicion{
+	class CCustom extends Filtrador{
 		
 		ArrayList<Evaluable> lista;
 		

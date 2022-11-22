@@ -7,7 +7,7 @@ import java.util.List;
 
 
 
-public class  CCategoria extends Condicion{
+public class  CCategoria extends Filtrador{
 	private String regexString;
 	private Pattern pattern;
 	public CCategoria(String regexString) {
@@ -21,7 +21,7 @@ public class  CCategoria extends Condicion{
 		      .stream()
 		      .filter(e -> e.getListaDeCategorias()
 		    		       .stream()
-		    		       .anyMatch(c -> pattern.matcher(c).matches())
+		    		       .anyMatch(c -> pattern.matcher(c.getNombre()).matches())
 		    		 )
 		      		  .collect(Collectors.toList());
 	}
