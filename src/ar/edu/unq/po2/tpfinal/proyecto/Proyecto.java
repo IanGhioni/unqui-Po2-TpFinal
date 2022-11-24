@@ -19,16 +19,16 @@ public class Proyecto implements  Evaluable, MuestraAgregable{
 	
 
 	private List<Categoria> categorias;
-	private List<Usuario> listaDeUsuariosSuscriptos;
-	private List<Muestra> listaDeMuestras;
+	private List<Usuario> usuariosSuscriptos;
+	private List<Muestra> muestras;
 
 	public Proyecto(String nombre, String descripcion, Sistema sistema) {
 		this.setNombre(nombre);
 		this.setDescripcion(descripcion);
 		this.sistema = sistema;
 		this.categorias = new ArrayList<Categoria>();
-		this.listaDeUsuariosSuscriptos = new ArrayList<Usuario>();
-		this.listaDeMuestras = new ArrayList<Muestra>();
+		this.usuariosSuscriptos = new ArrayList<Usuario>();
+		this.muestras = new ArrayList<Muestra>();
 	}
 
 	private void setDescripcion(String descripcion) {
@@ -68,28 +68,28 @@ public class Proyecto implements  Evaluable, MuestraAgregable{
 		this.categorias.remove(categoria);
 	}
 
-	public List<Categoria> getListaDeCategorias() {
+	public List<Categoria> getCategorias() {
 		return this.categorias;
 	}
 
-	public List<Usuario> getListaDeUsuarios() {
-		return this.listaDeUsuariosSuscriptos;
+	public List<Usuario> getUsuarios() {
+		return this.usuariosSuscriptos;
 	}
 
 	public void suscribirUsuario(Usuario usuario) {
-		this.listaDeUsuariosSuscriptos.add(usuario);
+		this.usuariosSuscriptos.add(usuario);
 	}
 	
 	public void desuscribirUsuario(Usuario usuario) {
-		this.listaDeUsuariosSuscriptos.remove(usuario);
+		this.usuariosSuscriptos.remove(usuario);
 	}
 
 	public void agregarMuestra(Muestra muestra) {
-		this.listaDeMuestras.add(muestra);
+		this.muestras.add(muestra);
 	}
 
-	public List<Muestra> getListaDeMuestras() {
-		return this.listaDeMuestras;
+	public List<Muestra> getMuestras() {
+		return this.muestras;
 	}
 
 	@Override

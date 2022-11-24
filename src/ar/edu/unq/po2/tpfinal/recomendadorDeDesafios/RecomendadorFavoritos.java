@@ -14,17 +14,17 @@ public class RecomendadorFavoritos extends RecomendadorDeDesafios  {
 
 	@Override
 	public List<Desafio> recomendar() {
-		listaDeDesafios = user.getSistema().getListaDeDesafios();
+		desafios = user.getSistema().getListaDeDesafios();
 		
 		this.ordenarDesafiosPorCoincidencia();
-		this.listaDeDesafios = new ArrayList<Desafio>(this.listaDeDesafios.stream().limit(20).toList());
+		this.desafios = new ArrayList<Desafio>(this.desafios.stream().limit(20).toList());
 		this.ordenarDesafiosPorSimilitud();
-		this.listaDeDesafios = new ArrayList<Desafio>(this.listaDeDesafios.stream().limit(5).toList());
-		return this.listaDeDesafios;
+		this.desafios = new ArrayList<Desafio>(this.desafios.stream().limit(5).toList());
+		return this.desafios;
 	}
 
 	private void ordenarDesafiosPorSimilitud() {
-		listaDeDesafios.sort((d1,d2) -> Double.compare(this.similitudConDesafio(d1), this.similitudConDesafio(d2)));
+		desafios.sort((d1,d2) -> Double.compare(this.similitudConDesafio(d1), this.similitudConDesafio(d2)));
 	}
 
 	private double similitudConDesafio(Desafio d1) {

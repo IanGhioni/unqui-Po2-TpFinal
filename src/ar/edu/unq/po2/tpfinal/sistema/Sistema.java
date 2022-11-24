@@ -8,11 +8,11 @@ import ar.edu.unq.po2.tpfinal.categoria.Categoria;
 
 public class Sistema {
 	private List<Categoria> categorias;
-	private List<Desafio> listaDeDesafios;
+	private List<Desafio> desafios;
 	
 	public Sistema() {
 		this.categorias = new ArrayList<Categoria>();
-		this.listaDeDesafios = new ArrayList<Desafio>();
+		this.desafios = new ArrayList<Desafio>();
 	}
 
 	public List<Categoria> getCategorias() {
@@ -20,7 +20,7 @@ public class Sistema {
 	}
 
 	public List<Desafio> getListaDeDesafios() {
-		return listaDeDesafios;
+		return desafios;
 	}
 
 	public void addCategoria(Categoria categoria) {
@@ -30,7 +30,7 @@ public class Sistema {
 	
 
 	public void addDesafio(Desafio desafio) {
-		listaDeDesafios.add(desafio);
+		desafios.add(desafio);
 	}
 
 	public boolean contieneLaCategoria(Categoria categoria) {
@@ -38,7 +38,7 @@ public class Sistema {
 	}
 
 	public boolean contieneElDesafio(Desafio desafio) {
-		return listaDeDesafios.contains(desafio);
+		return desafios.contains(desafio);
 	}
 
 	public void removeCategoria(Categoria categoria) {
@@ -46,7 +46,7 @@ public class Sistema {
 	}
 
 	public void removeDesafio(Desafio desafio) {
-		listaDeDesafios.remove(desafio);
+		desafios.remove(desafio);
 		
 		
 	}

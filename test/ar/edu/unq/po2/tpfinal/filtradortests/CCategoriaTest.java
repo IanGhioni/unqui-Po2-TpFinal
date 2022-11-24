@@ -102,10 +102,10 @@ class CCategoriaTest {
         when(proyecto3.getNombre()).thenReturn("proyecto3");
         when(proyecto4.getNombre()).thenReturn("proyecto4");
         
-        when(proyecto1.getListaDeCategorias()).thenReturn(listaDeCategorias1);
-        when(proyecto2.getListaDeCategorias()).thenReturn(listaDeCategorias2);
-        when(proyecto3.getListaDeCategorias()).thenReturn(listaDeCategorias3);
-        when(proyecto4.getListaDeCategorias()).thenReturn(listaDeCategorias4);
+        when(proyecto1.getCategorias()).thenReturn(listaDeCategorias1);
+        when(proyecto2.getCategorias()).thenReturn(listaDeCategorias2);
+        when(proyecto3.getCategorias()).thenReturn(listaDeCategorias3);
+        when(proyecto4.getCategorias()).thenReturn(listaDeCategorias4);
         lista = new ArrayList<Evaluable>();
         lista.add(proyecto1);
         lista.add(proyecto2);
