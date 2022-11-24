@@ -16,7 +16,7 @@ public abstract class RecomendadorDeDesafios {
 	}
 	
 	public List<Desafio> recomendar() {
-		desafios = user.getSistema().getListaDeDesafios();
+		desafios = user.getSistema().getDesafios();
 		
 		this.ordenarDesafiosPorCoincidencia();
 		this.seleccionarDesafios();
