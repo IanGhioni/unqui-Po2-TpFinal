@@ -76,10 +76,19 @@ public class Proyecto implements  Evaluable, MuestraAgregable{
 		return this.usuariosSuscriptos;
 	}
 
-	public void suscribirUsuario(Usuario usuario) {
-		this.usuariosSuscriptos.add(usuario);
+	public void suscribirUsuario(Usuario usuario) throws Exception {
+		if (this.sistema.contieneElUsuario(usuario)) {
+			this.usuariosSuscriptos.add(usuario);
+		}
+		else {
+			throw new Exception(this.mensajeExceptionDeUsuarioInexistente());
+		}
 	}
 	
+	private String mensajeExceptionDeUsuarioInexistente() {
+		return "El sistema no incluye el usuario dado.";
+	}
+
 	public void desuscribirUsuario(Usuario usuario) {
 		this.usuariosSuscriptos.remove(usuario);
 	}

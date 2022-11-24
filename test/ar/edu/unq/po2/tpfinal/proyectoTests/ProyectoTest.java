@@ -74,9 +74,10 @@ class ProyectoTest {
 	}
 	
 	@Test
-	void testProyectoAñadeUsuario() {
+	void testProyectoAñadeUsuario() throws Exception {
 		usuario = mock(Usuario.class);
 		proyecto = new Proyecto("nombre","descripcion", sistema);
+		when(sistema.contieneElUsuario(usuario)).thenReturn(true);
 		proyecto.suscribirUsuario(usuario);
 		
 		assertTrue(proyecto.getUsuarios().contains(usuario));
@@ -140,4 +141,26 @@ class ProyectoTest {
 
 	}
 	
+	@Test
+	void testExceptionCuandoSistemaNoTieneElUsuarioAAñadir() {
+		proyecto = new Proyecto("nombre","descripcion", sistema);
+		
+		when(sistema.contieneElUsuario(usuario)).thenReturn(false);
+		
+		Throwable exception = assertThrows(Exception.class, () -> {
+			proyecto.suscribirUsuario(usuario);
+		});
+		assertEquals(exception.getMessage(), "El sistema no incluye el usuario dado.");
+	}
+	
+	@Test
+	void testNoExceptionCuandoSistemaTieneElUsuarioAAñadir() {
+		proyecto = new Proyecto("nombre","descripcion", sistema);
+		
+		when(sistema.contieneElUsuario(usuario)).thenReturn(true);
+		
+		assertDoesNotThrow(() -> {
+			proyecto.suscribirUsuario(usuario);
+		});
+	}
 }
