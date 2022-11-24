@@ -34,6 +34,8 @@ public class Usuario {
 		this.perfilDeUsuario = perfil;
 		this.recomendador = recomendador;
 		this.muestrasAgregables = new ArrayList<MuestraAgregable>();
+		
+		this.sistema.addUsuario(this);
 	}
 
 	public List<Proyecto> getProyectos() {
@@ -64,7 +66,7 @@ public class Usuario {
 		return perfilDeUsuario;
 	}
 
-	public void suscribirseAProyecto(Proyecto proyecto) {
+	public void suscribirseAProyecto(Proyecto proyecto) throws Exception {
 		this.proyectos.add(proyecto);
 		this.muestrasAgregables.add(proyecto);
 		proyecto.suscribirUsuario(this);

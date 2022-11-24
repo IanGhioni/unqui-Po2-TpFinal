@@ -45,7 +45,12 @@ class UsuarioTests {
 		
 		user = new Usuario(sistema, perfil, recomendador);
 	}
-
+	
+	@Test
+	void testVerificarQueElUsuarioSeAñadeAlSistema() throws Exception {
+		user = new Usuario(sistema, perfil, recomendador);
+		verify(sistema).addUsuario(user);
+	}
 	
 	@Test
 	void testGetPerfilDeUsuario() {
@@ -64,7 +69,7 @@ class UsuarioTests {
 	}
 
 	@Test
-	void testSuscribirseAProyecto() {
+	void testSuscribirseAProyecto() throws Exception {
 		user.suscribirseAProyecto(p1);
 		assertTrue(user.getProyectos().contains(p1));
 		assertTrue(user.getMuestrasAgregables().contains(p1));
@@ -72,7 +77,7 @@ class UsuarioTests {
 	}
 
 	@Test
-	void testDesuscribirseAProyecto() {
+	void testDesuscribirseAProyecto() throws Exception {
 		user.suscribirseAProyecto(p1);
 		user.desuscribirseAProyecto(p1);
 		assertFalse(user.getProyectos().contains(p1));
