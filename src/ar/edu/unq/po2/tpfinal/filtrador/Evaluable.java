@@ -8,7 +8,7 @@ public interface Evaluable {
 
 	public String getNombre() ;
 
-	public List<Categoria> getListaDeCategorias();
+	public List<Categoria> getCategorias();
 
 
 }

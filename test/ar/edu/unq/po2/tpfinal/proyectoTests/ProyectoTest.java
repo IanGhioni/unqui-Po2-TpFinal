@@ -62,7 +62,7 @@ class ProyectoTest {
 		
 		proyecto.añadirCategoria(categoria1);
 		
-		assertTrue(proyecto.getListaDeCategorias().contains(categoria1));
+		assertTrue(proyecto.getCategorias().contains(categoria1));
 	}
 	
 	@Test
@@ -70,7 +70,7 @@ class ProyectoTest {
 		proyecto = new Proyecto("nombre","descripcion", sistema);
 		proyecto.eliminarCategoria(categoria1);
 		
-		assertFalse(proyecto.getListaDeCategorias().contains(categoria1));
+		assertFalse(proyecto.getCategorias().contains(categoria1));
 	}
 	
 	@Test
@@ -79,7 +79,7 @@ class ProyectoTest {
 		proyecto = new Proyecto("nombre","descripcion", sistema);
 		proyecto.suscribirUsuario(usuario);
 		
-		assertTrue(proyecto.getListaDeUsuarios().contains(usuario));
+		assertTrue(proyecto.getUsuarios().contains(usuario));
 	}
 	
 	@Test
@@ -88,7 +88,7 @@ class ProyectoTest {
 		proyecto = new Proyecto("nombre","descripcion", sistema);
 		proyecto.desuscribirUsuario(usuario);
 		
-		assertFalse(proyecto.getListaDeUsuarios().contains(usuario));
+		assertFalse(proyecto.getUsuarios().contains(usuario));
 	}
 	
 	@Test
@@ -97,7 +97,7 @@ class ProyectoTest {
 		proyecto = new Proyecto("nombre","descripcion", sistema);
 		proyecto.agregarMuestra(muestra);
 		
-		assertTrue(proyecto.getListaDeMuestras().contains(muestra));
+		assertTrue(proyecto.getMuestras().contains(muestra));
 	}
 	
 	

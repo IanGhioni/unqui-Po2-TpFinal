@@ -8,27 +8,27 @@ import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
 public abstract class RecomendadorDeDesafios {
 	Usuario user;
-	List<Desafio> listaDeDesafios;
+	List<Desafio> desafios;
 	
 	public RecomendadorDeDesafios(Usuario user) {
-		listaDeDesafios = new ArrayList<Desafio>();
+		desafios = new ArrayList<Desafio>();
 		this.user = user;
 	}
 	
 	public List<Desafio> recomendar() {
-		listaDeDesafios = user.getSistema().getListaDeDesafios();
+		desafios = user.getSistema().getListaDeDesafios();
 		
 		this.ordenarDesafiosPorCoincidencia();
 		this.seleccionarDesafios();
-		return this.listaDeDesafios;
+		return this.desafios;
 	}
 
 	protected void seleccionarDesafios() {
-		this.listaDeDesafios = new ArrayList<Desafio>(this.listaDeDesafios.stream().limit(5).toList());
+		this.desafios = new ArrayList<Desafio>(this.desafios.stream().limit(5).toList());
 	}
 
 	public void ordenarDesafiosPorCoincidencia() {
-		listaDeDesafios.sort((d1,d2) -> Double.compare(this.coincidenciaConDesafio(d1), this.coincidenciaConDesafio(d2)));;
+		desafios.sort((d1,d2) -> Double.compare(this.coincidenciaConDesafio(d1), this.coincidenciaConDesafio(d2)));;
 	}
 
 	protected double coincidenciaConDesafio(Desafio d1) {

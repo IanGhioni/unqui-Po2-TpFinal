@@ -19,7 +19,7 @@ public class  CCategoria extends Filtrador{
 	public ArrayList<Evaluable> evaluar(ArrayList<Evaluable> lista) {
 		return   (ArrayList<Evaluable>) lista
 		      .stream()
-		      .filter(e -> e.getListaDeCategorias()
+		      .filter(e -> e.getCategorias()
 		    		       .stream()
 		    		       .anyMatch(c -> pattern.matcher(c.getNombre()).matches())
 		    		 )
