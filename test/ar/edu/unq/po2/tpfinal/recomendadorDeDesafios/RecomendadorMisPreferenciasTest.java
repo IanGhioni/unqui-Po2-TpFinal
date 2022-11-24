@@ -90,7 +90,7 @@ class RecomendadorMisPreferenciasTest {
 		listaDeDesafios.add(d23);
 		
 		when(user.getSistema()).thenReturn(sistema);
-		when(sistema.getListaDeDesafios()).thenReturn(listaDeDesafios);
+		when(sistema.getDesafios()).thenReturn(listaDeDesafios);
 	}
 
 	private void setUpMockDesafios() {
@@ -265,7 +265,7 @@ class RecomendadorMisPreferenciasTest {
 		listaDeDesafios.add(d5);
 		listaDeDesafios.add(d10);
 		when(user.getSistema()).thenReturn(sistema);
-		when(sistema.getListaDeDesafios()).thenReturn(listaDeDesafios);
+		when(sistema.getDesafios()).thenReturn(listaDeDesafios);
 		
 		this.setupDesafioCoincidencia(d1, 1);
 		this.setupDesafioCoincidencia(d2, 3);
@@ -296,7 +296,7 @@ class RecomendadorMisPreferenciasTest {
 		listaDeDesafios.add(d4);
 		
 		when(user.getSistema()).thenReturn(sistema);
-		when(sistema.getListaDeDesafios()).thenReturn(listaDeDesafios);
+		when(sistema.getDesafios()).thenReturn(listaDeDesafios);
 		
 		this.setupDesafioCoincidencia(d1, 1);
 		this.setupDesafioCoincidencia(d2, 3);
@@ -316,7 +316,7 @@ class RecomendadorMisPreferenciasTest {
 		listaDeDesafios = new ArrayList<Desafio>();
 		
 		when(user.getSistema()).thenReturn(sistema);
-		when(sistema.getListaDeDesafios()).thenReturn(listaDeDesafios);
+		when(sistema.getDesafios()).thenReturn(listaDeDesafios);
 		
 		assertTrue(this.recomendador.recomendar().size() == 0);
 	}

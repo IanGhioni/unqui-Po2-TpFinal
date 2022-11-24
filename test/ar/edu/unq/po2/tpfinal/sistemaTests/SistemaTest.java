@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
+import ar.edu.unq.po2.tpfinal.proyecto.Proyecto;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
+import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 import ar.edu.unq.po2.tpfinal.categoria.Categoria;
 
 class SistemaTest {
@@ -17,6 +19,8 @@ class SistemaTest {
 	public Categoria categoria2;
 	public String nombreCategoria1;
 	public String nombreCategoria2;
+	public Usuario user;
+	public Proyecto proyecto;
 	
 	
 	@BeforeEach
@@ -24,6 +28,8 @@ class SistemaTest {
 		sistema = new Sistema();
 		categoria1 = mock(Categoria.class);
 		categoria2 = mock(Categoria.class);
+		user = mock(Usuario.class);
+		proyecto = mock(Proyecto.class);
 		nombreCategoria1 = "nombre1";
 		nombreCategoria2 = "nombre2";
 		when(categoria1.getNombre()).thenReturn(nombreCategoria1);
@@ -41,7 +47,7 @@ class SistemaTest {
 		Desafio desafio;
 		desafio = mock(Desafio.class);
 		sistema.addDesafio(desafio);
-		assertTrue(sistema.getListaDeDesafios().contains(desafio));
+		assertTrue(sistema.getDesafios().contains(desafio));
 	}
 	
 	@Test
@@ -85,7 +91,58 @@ class SistemaTest {
 		desafio = mock(Desafio.class);
 		sistema.addDesafio(desafio);
 		sistema.removeDesafio(desafio);
-		assertFalse(sistema.getListaDeDesafios().contains(desafio));
-		assertTrue(sistema.getListaDeDesafios().isEmpty());
+		assertFalse(sistema.getDesafios().contains(desafio));
+		assertTrue(sistema.getDesafios().isEmpty());
+	}
+	
+	@Test
+	void testSistemaPuedeAñadirUnUsuario() {
+		sistema.addUsuario(user);
+		assertTrue(sistema.getUsuarios().contains(user));
+	}
+	
+	@Test
+	void testSistemaPuedeRemoverUnUsuario() {
+		sistema.addUsuario(user);
+
+		sistema.removeUsuario(user);
+		assertFalse(sistema.getUsuarios().contains(user));
+	}
+	
+	@Test
+	void testSistemaPuedeDecirQueIncluyeAUnUsuario() {
+		sistema.addUsuario(user);
+
+		assertTrue(sistema.contieneElUsuario(user));
+	}
+	
+	@Test
+	void testSistemaPuedeDecirQueNoIncluyeAUnUsuario() {
+		assertFalse(sistema.contieneElUsuario(user));
+	}
+	
+	@Test
+	void testSistemaPuedeAñadirUnProyecto() {
+		sistema.addProyecto(proyecto);
+		assertTrue(sistema.getProyectos().contains(proyecto));
+	}
+	
+	@Test
+	void testSistemaPuedeRemoverUnProyecto() {
+		sistema.addProyecto(proyecto);
+		sistema.removeProyecto(proyecto);
+		assertFalse(sistema.getProyectos().contains(proyecto));
+	}
+	
+	@Test
+	void testSistemaPuedeDecirQueIncluyeAUnProyecto() {
+		sistema.addProyecto(proyecto);;
+
+		assertTrue(sistema.contieneElProyecto(proyecto));
+	}
+	
+	@Test
+	void testSistemaPuedeDecirQueNoIncluyeAUnProyecto() {
+		assertFalse(sistema.contieneElProyecto(proyecto));
 	}
 }

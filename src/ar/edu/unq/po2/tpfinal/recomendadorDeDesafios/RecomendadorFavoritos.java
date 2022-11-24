@@ -14,7 +14,7 @@ public class RecomendadorFavoritos extends RecomendadorDeDesafios  {
 
 	@Override
 	public List<Desafio> recomendar() {
-		desafios = user.getSistema().getListaDeDesafios();
+		desafios = user.getSistema().getDesafios();
 		
 		this.ordenarDesafiosPorCoincidencia();
 		this.desafios = new ArrayList<Desafio>(this.desafios.stream().limit(20).toList());
