@@ -42,7 +42,7 @@ class MuestraTests {
 	@Test
 	void testGetHora() {
 		muestra = new Muestra(user,coord);
-		assertEquals(muestra.getHora(), LocalTime.now());
+		assertEquals(muestra.getHora().withNano(0), LocalTime.now().withNano(0));
 	}
 
 	@Test
