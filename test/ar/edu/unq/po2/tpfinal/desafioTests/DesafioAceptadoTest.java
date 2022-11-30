@@ -31,6 +31,7 @@ public class DesafioAceptadoTest {
 	RestriccionSemanal restriccionSemanal;
 	RestriccionFechas restriccionFechas;
 	RestriccionFinDeSemana restriccionFinDe;
+	EstadoDesafio estado;
 
 	@BeforeEach
 	void setUp() {
@@ -39,6 +40,7 @@ public class DesafioAceptadoTest {
 		restriccionSemanal = mock(RestriccionSemanal.class);
 		restriccionFechas = mock(RestriccionFechas.class);
 		restriccionFinDe = mock(RestriccionFinDeSemana.class);
+		estado = mock(EstadoDesafio.class);
 	}
 
 	@Test
@@ -83,12 +85,13 @@ public class DesafioAceptadoTest {
 		assertFalse(desafio.faltaUnaMuestra());
 	}
 
-//	@Test
-//	void testDesafioAceptadoPorcentajeCompletitud() {
-//		desafio = new DesafioAceptado(desafioInicial, usuario);
-//		desafio.porcentajeCompletitud(desafio);
-//		//verify(estado).porcentajeCompletitud(desafio);
-//	}
+	@Test
+	void testDesafioAceptadoPorcentajeCompletitud() {
+		desafio = new DesafioAceptado(desafioInicial, usuario);
+		desafio.setEstado(estado);
+		desafio.porcentajeCompletitud();
+		verify(estado).porcentajeCompletitud();
+	}
 
 	@Test
 	void testDesafioAceptadoSetFechaCompletado() {
@@ -139,43 +142,47 @@ public class DesafioAceptadoTest {
 		assertEquals(desafio.getMuestrasTomadas(), 1);
 	}
 
-//	@Test
-//	void testDesafioAceptadoNoAgregaMuestraPorRestriccionFechas() {
-//		desafio = new DesafioAceptado(desafioInicial, usuario);
-//		desafio.getDesafio().agregarRestriccion(restriccionFechas);
-//		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
-//		desafio.agregarMuestra(1, desafio);
-//		assertEquals(desafio.getMuestrasTomadas(), 0);
-//	}
+	@Test
+	void testDesafioAceptadoNoAgregaMuestraPorRestriccionFechas() {
+		desafio = new DesafioAceptado(desafioInicial, usuario);
+		desafio.setEstado(estado);
+		desafio.getDesafio().agregarRestriccion(restriccionFechas);
+		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
+		desafio.agregarMuestra(1);
+		assertEquals(desafio.getMuestrasTomadas(), 0);
+	}
 
-//	@Test
-//	void testDesafioAceptadoNoAgregaMuestraPorRestriccionFinDeSemana() {
-//		desafio = new DesafioAceptado(desafioInicial, usuario);
-//		desafio.getDesafio().agregarRestriccion(restriccionFinDe);
-//		when(restriccionFinDe.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
-//		desafio.agregarMuestra(1, desafio);
-//		assertEquals(desafio.getMuestrasTomadas(), 0);
-//	}
+	@Test
+	void testDesafioAceptadoNoAgregaMuestraPorRestriccionFinDeSemana() {
+		desafio = new DesafioAceptado(desafioInicial, usuario);
+		desafio.setEstado(estado);
+		desafio.getDesafio().agregarRestriccion(restriccionFinDe);
+		when(restriccionFinDe.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
+		desafio.agregarMuestra(1);
+		assertEquals(desafio.getMuestrasTomadas(), 0);
+	}
 
-//	@Test
-//	void testDesafioAceptadoNoAgregaMuestraPorRestriccionSemanal() {
-//		desafio = new DesafioAceptado(desafioInicial, usuario);
-//		desafio.getDesafio().agregarRestriccion(restriccionSemanal);
-//		when(restriccionSemanal.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
-//		desafio.agregarMuestra(1, desafio);
-//		assertEquals(desafio.getMuestrasTomadas(), 0);
-//	}
+	@Test
+	void testDesafioAceptadoNoAgregaMuestraPorRestriccionSemanal() {
+		desafio = new DesafioAceptado(desafioInicial, usuario);
+		desafio.setEstado(estado);
+		desafio.getDesafio().agregarRestriccion(restriccionSemanal);
+		when(restriccionSemanal.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
+		desafio.agregarMuestra(1);
+		assertEquals(desafio.getMuestrasTomadas(), 0);
+	}
 
-//	@Test
-//	void testDesafioAceptadoNoAgregaMuestraPorUnaRestriccionQueNoSeCumple() {
-//		desafio = new DesafioAceptado(desafioInicial, usuario);
-//		desafio.getDesafio().agregarRestriccion(restriccionSemanal);
-//		desafio.getDesafio().agregarRestriccion(restriccionFechas);
-//		when(restriccionSemanal.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
-//		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(true);
-//		desafio.agregarMuestra(1, desafio);
-//		assertEquals(desafio.getMuestrasTomadas(), 0);
-//	}
+	@Test
+	void testDesafioAceptadoNoAgregaMuestraPorUnaRestriccionQueNoSeCumple() {
+		desafio = new DesafioAceptado(desafioInicial, usuario);
+		desafio.setEstado(estado);
+		desafio.getDesafio().agregarRestriccion(restriccionSemanal);
+		desafio.getDesafio().agregarRestriccion(restriccionFechas);
+		when(restriccionSemanal.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
+		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(true);
+		desafio.agregarMuestra(1);
+		assertEquals(desafio.getMuestrasTomadas(), 0);
+	}
 
 	@Test
 	void testDesafioAceptadoAgregaMuestraPorMasDeUnaRestriccionQueCumple() {
@@ -187,16 +194,6 @@ public class DesafioAceptadoTest {
 		desafio.agregarMuestra(1);
 		assertEquals(desafio.getMuestrasTomadas(), 1);
 	}
-
-//	@Test
-//	void testDesafioAceptadoNoAgregaMuestraPorRestriccionFechasVencidaYCambiaEstadoAVencido() {
-//		desafio = new DesafioAceptado(desafioInicial, usuario);
-//		desafio.getDesafio().agregarRestriccion(restriccionFechas);
-//		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(false);
-//		desafio.agregarMuestra(1, desafio);
-//		assertEquals(desafio.getMuestrasTomadas(), 0);
-//		assertEquals(desafio.getEstado(), "Desafío vencido");
-//	}
 
 	@Test
 	void testNotifyUser() {
