@@ -28,7 +28,7 @@ class EstadoDesafioEnCursoTest {
 	void setUp() {
 		desafioInicial = mock(Desafio.class);
 		desafio = mock(DesafioAceptado.class);
-		estado = new EstadoDesafioEnCurso();
+		estado = new EstadoDesafioEnCurso(desafio);
 		restriccion = mock(RestriccionFechas.class);
 	}
 
@@ -42,7 +42,7 @@ class EstadoDesafioEnCursoTest {
 		when(desafio.getMuestrasTomadas()).thenReturn(20);
 		when(desafio.getDesafio()).thenReturn(desafioInicial);
 		when(desafio.getDesafio().getCantidadMinimaMuestras()).thenReturn(32);
-		assertEquals(62.5, estado.porcentajeCompletitud(desafio));
+		assertEquals(62.5, estado.porcentajeCompletitud());
 	}
 
 	@Test
@@ -50,7 +50,7 @@ class EstadoDesafioEnCursoTest {
 		when(desafio.getMuestrasTomadas()).thenReturn(14);
 		when(desafio.getDesafio()).thenReturn(desafioInicial);
 		when(desafio.getDesafio().getCantidadMinimaMuestras()).thenReturn(20);
-		assertEquals(70, estado.porcentajeCompletitud(desafio));
+		assertEquals(70, estado.porcentajeCompletitud());
 	}
 
 	@Test
@@ -59,7 +59,7 @@ class EstadoDesafioEnCursoTest {
 		when(desafio.getDesafio()).thenReturn(desafioInicial);
 		when(desafio.getDesafio().getCantidadMinimaMuestras()).thenReturn(100);
 		assertFalse(desafio.faltaUnaMuestra());
-		estado.agregarMuestra(1, desafio);
+		estado.agregarMuestra(1);
 		verify(desafio).setMuestrasTomadas(76);
 	}
 
@@ -69,7 +69,7 @@ class EstadoDesafioEnCursoTest {
 		when(desafio.getMuestrasTomadas()).thenReturn(4);
 		when(desafio.getDesafio()).thenReturn(desafioInicial);
 		when(desafio.getDesafio().getCantidadMinimaMuestras()).thenReturn(5);
-		estado.agregarMuestra(1, desafio);
+		estado.agregarMuestra(1);
 		verify(desafio, times(1)).setMuestrasTomadas(5);
 	}
 }

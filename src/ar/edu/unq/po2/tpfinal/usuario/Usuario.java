@@ -91,12 +91,7 @@ public class Usuario {
 	}
 
 	public void aceptarDesafio(Desafio desafio) {
-		Circunferencia area = desafio.getArea();
-		int dificultad = desafio.getDificultad();
-		int cantMinMuestras = desafio.getCantidadMinimaMuestras();
-		int recompensa = desafio.getRecompensa();
-		this.desafios.add(
-				new DesafioAceptado(area, cantMinMuestras, dificultad, recompensa, this, new EstadoDesafioEnCurso()));
+		this.desafios.add(new DesafioAceptado(desafio, this));
 		this.muestrasAgregables.add(desafios.get(desafios.size() - 1));
 	}
 
@@ -113,7 +108,7 @@ public class Usuario {
 	public int calcularPorcentajeDeCompletitud() {
 		int x = 0;
 		for (DesafioAceptado desafio : desafios) {
-			x += desafio.porcentajeCompletitud(desafio);
+			x += desafio.porcentajeCompletitud();
 		}
 
 		x = x / desafios.size();
@@ -130,7 +125,7 @@ public class Usuario {
 	}
 
 	public double getPorcentajeDeCompletitudDeDesafio(DesafioAceptado desafio) {
-		return desafio.porcentajeCompletitud(desafio);
+		return desafio.porcentajeCompletitud();
 	}
 
 	public void setDificultadPreferida(int numero) throws Exception {
@@ -144,9 +139,11 @@ public class Usuario {
 	public void setRecompensaPreferida(int numero) throws Exception {
 		perfilDeUsuario.setRecompensa(numero);
 	}
+
 	public void setRecomendador(RecomendadorDeDesafios nuevoRecomendador) {
 		this.recomendador = nuevoRecomendador;
 	}
+
 	public List<Desafio> recomendar() {
 		return this.recomendador.recomendar();
 	}

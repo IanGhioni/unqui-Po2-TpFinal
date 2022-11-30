@@ -22,7 +22,7 @@ class EstadoDesafioVencidoTest {
 	void setUp() {
 		desafioInicial = mock(Desafio.class);
 		desafio = mock(DesafioAceptado.class);
-		estado = new EstadoDesafioVencido();
+		estado = new EstadoDesafioVencido(desafio);
 	}
 
 	@Test
@@ -35,12 +35,12 @@ class EstadoDesafioVencidoTest {
 		when(desafio.getMuestrasTomadas()).thenReturn(50);
 		when(desafio.getDesafio()).thenReturn(desafioInicial);
 		when(desafio.getDesafio().getCantidadMinimaMuestras()).thenReturn(100);
-		assertEquals(50, estado.porcentajeCompletitud(desafio));
+		assertEquals(50, estado.porcentajeCompletitud());
 	}
 
 	@Test
 	void testAgregarMuestraVencido() {
-		estado.agregarMuestra(1, desafio);
+		estado.agregarMuestra(1);
 		verifyNoMoreInteractions(desafio);
 	}
 

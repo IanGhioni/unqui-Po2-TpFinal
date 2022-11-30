@@ -64,7 +64,7 @@ public class DesafioAceptadoTest {
 	@Test
 	void testDesafioAceptadoAgregaMuestra() {
 		desafio = new DesafioAceptado(desafioInicial, usuario);
-		desafio.agregarMuestra(1, desafio);
+		desafio.agregarMuestra(1);
 		assertEquals(desafio.getMuestrasTomadas(), 1);
 
 	}
@@ -135,7 +135,7 @@ public class DesafioAceptadoTest {
 		desafio.getDesafio().agregarRestriccion(restriccionFechas);
 		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(true);
 		when(desafioInicial.getCantidadMinimaMuestras()).thenReturn(5);
-		desafio.agregarMuestra(1, desafio);
+		desafio.agregarMuestra(1);
 		assertEquals(desafio.getMuestrasTomadas(), 1);
 	}
 
@@ -184,7 +184,7 @@ public class DesafioAceptadoTest {
 		desafio.getDesafio().agregarRestriccion(restriccionSemanal);
 		when(restriccionFechas.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(true);
 		when(restriccionSemanal.verificarRestriccionAlDesafio(desafio, LocalDate.now())).thenReturn(true);
-		desafio.agregarMuestra(1, desafio);
+		desafio.agregarMuestra(1);
 		assertEquals(desafio.getMuestrasTomadas(), 1);
 	}
 

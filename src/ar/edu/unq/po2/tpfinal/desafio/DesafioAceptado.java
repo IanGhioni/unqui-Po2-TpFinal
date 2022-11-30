@@ -17,19 +17,11 @@ public class DesafioAceptado implements MuestraAgregable {
 	private LocalTime horaCompletado;
 	private int calificacion;
 
-//	public DesafioAceptado(Circunferencia area, int cantidadMinimaMuestras, int dificultad, int recompensa,
-//			Usuario usuario, EstadoDesafio estado) {
-//		super(area, cantidadMinimaMuestras, dificultad, recompensa);
-//		this.usuario = usuario;
-//		this.setEstado(estado);
-//		this.muestrasTomadas = 0;
-//	}
-
 	public DesafioAceptado(Desafio desafio, Usuario usuario) {
 		this.desafio = desafio;
 		this.usuario = usuario;
 		this.muestrasTomadas = 0;
-		this.setEstado(new EstadoDesafioEnCurso());
+		this.setEstado(new EstadoDesafioEnCurso(this));
 	}
 
 	public void setFechaCompletado(LocalDate fecha) {
@@ -79,38 +71,30 @@ public class DesafioAceptado implements MuestraAgregable {
 		return calificacion;
 	}
 
-	public double porcentajeCompletitud(DesafioAceptado desafio) {
-		return this.estado.porcentajeCompletitud(this);
+	public double porcentajeCompletitud() {
+		return this.estado.porcentajeCompletitud();
 	}
 
 	@Override
 	public void notify(Usuario user) {
-		this.agregarMuestra(1, this);
+		this.agregarMuestra(1);
 	}
-
-//	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
-//		if (restricciones.stream()
-//				.allMatch(restriccion -> restriccion.verificarRestriccionAlDesafio(this, LocalDate.now()))) {
-//			this.estado.agregarMuestra(cantidad, this);
-//		}
-//		this.verificarVencimiento();
-//	}
 
 	public Desafio getDesafio() {
 		return desafio;
 	}
 
-	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
+	public void agregarMuestra(int cantidad) {
 		if (this.getDesafio().getRestricciones().stream()
 				.allMatch(restriccion -> restriccion.verificarRestriccionAlDesafio(this, LocalDate.now()))) {
-			this.estado.agregarMuestra(cantidad, this);
+			this.estado.agregarMuestra(cantidad);
 		}
 		this.verificarVencimiento();
 	}
 
 	public void verificarVencimiento() {
 		if (this.estaVencido()) {
-			this.setEstado(new EstadoDesafioVencido());
+			this.setEstado(new EstadoDesafioVencido(this));
 		}
 	}
 

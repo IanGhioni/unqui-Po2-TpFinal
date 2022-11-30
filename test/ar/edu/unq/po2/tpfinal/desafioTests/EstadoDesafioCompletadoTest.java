@@ -27,12 +27,12 @@ class EstadoDesafioCompletadoTest {
 
 	@Test
 	void testPorcentajeCompletitudCompletado() {
-		assertEquals(100, estado.porcentajeCompletitud(desafio));
+		assertEquals(100, estado.porcentajeCompletitud());
 	}
 
 	@Test
 	void testAgregarMuestraCompletado() {
-		estado.agregarMuestra(1, desafio);
+		estado.agregarMuestra(1);
 		verifyNoMoreInteractions(desafio);
 	}
 

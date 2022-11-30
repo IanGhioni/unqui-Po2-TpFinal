@@ -3,7 +3,7 @@ package ar.edu.unq.po2.tpfinal.desafio;
 public class EstadoDesafioCompletado extends EstadoDesafio {
 
 	@Override
-	public double porcentajeCompletitud(DesafioAceptado desafio) {
+	public double porcentajeCompletitud() {
 		return 100.0;
 	}
 
@@ -13,7 +13,7 @@ public class EstadoDesafioCompletado extends EstadoDesafio {
 	}
 
 	@Override
-	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
+	public void agregarMuestra(int cantidad) {
 		// no pueden agregarse muestras porque ya está completo
 	}
 
