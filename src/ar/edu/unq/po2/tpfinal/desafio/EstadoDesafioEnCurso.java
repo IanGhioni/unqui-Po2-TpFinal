@@ -8,7 +8,7 @@ public class EstadoDesafioEnCurso extends EstadoDesafio {
 	@Override
 	public double porcentajeCompletitud(DesafioAceptado desafio) {
 		double x = (double) desafio.getMuestrasTomadas();
-		double y = (double) desafio.getCantidadMinimaMuestras();
+		double y = (double) desafio.getDesafio().getCantidadMinimaMuestras();
 		return (x / y * 100);
 	}
 
@@ -20,7 +20,7 @@ public class EstadoDesafioEnCurso extends EstadoDesafio {
 	@Override
 	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
 		if (desafio.faltaUnaMuestra()) {
-			desafio.setMuestrasTomadas(desafio.getCantidadMinimaMuestras());
+			desafio.setMuestrasTomadas(desafio.getDesafio().getCantidadMinimaMuestras());
 			desafio.setEstado(new EstadoDesafioCompletado());
 			desafio.setFechaCompletado(LocalDate.now());
 			desafio.setHoraCompletado(LocalTime.now());

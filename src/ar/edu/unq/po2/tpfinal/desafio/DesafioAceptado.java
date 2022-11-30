@@ -8,7 +8,8 @@ import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
 import ar.edu.unq.po2.tpfinal.usuario.MuestraAgregable;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
-public class DesafioAceptado extends Desafio implements MuestraAgregable {
+public class DesafioAceptado implements MuestraAgregable {
+	private Desafio desafio;
 	private Usuario usuario;
 	private EstadoDesafio estado;
 	private int muestrasTomadas;
@@ -16,12 +17,19 @@ public class DesafioAceptado extends Desafio implements MuestraAgregable {
 	private LocalTime horaCompletado;
 	private int calificacion;
 
-	public DesafioAceptado(Circunferencia area, int cantidadMinimaMuestras, int dificultad, int recompensa,
-			Usuario usuario, EstadoDesafio estado) {
-		super(area, cantidadMinimaMuestras, dificultad, recompensa);
+//	public DesafioAceptado(Circunferencia area, int cantidadMinimaMuestras, int dificultad, int recompensa,
+//			Usuario usuario, EstadoDesafio estado) {
+//		super(area, cantidadMinimaMuestras, dificultad, recompensa);
+//		this.usuario = usuario;
+//		this.setEstado(estado);
+//		this.muestrasTomadas = 0;
+//	}
+
+	public DesafioAceptado(Desafio desafio, Usuario usuario) {
+		this.desafio = desafio;
 		this.usuario = usuario;
-		this.setEstado(estado);
 		this.muestrasTomadas = 0;
+		this.setEstado(new EstadoDesafioEnCurso());
 	}
 
 	public void setFechaCompletado(LocalDate fecha) {
@@ -80,8 +88,20 @@ public class DesafioAceptado extends Desafio implements MuestraAgregable {
 		this.agregarMuestra(1, this);
 	}
 
+//	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
+//		if (restricciones.stream()
+//				.allMatch(restriccion -> restriccion.verificarRestriccionAlDesafio(this, LocalDate.now()))) {
+//			this.estado.agregarMuestra(cantidad, this);
+//		}
+//		this.verificarVencimiento();
+//	}
+
+	public Desafio getDesafio() {
+		return desafio;
+	}
+
 	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
-		if (restricciones.stream()
+		if (this.getDesafio().getRestricciones().stream()
 				.allMatch(restriccion -> restriccion.verificarRestriccionAlDesafio(this, LocalDate.now()))) {
 			this.estado.agregarMuestra(cantidad, this);
 		}
@@ -95,12 +115,12 @@ public class DesafioAceptado extends Desafio implements MuestraAgregable {
 	}
 
 	private boolean estaVencido() {
-		return (restricciones.stream().filter(RestriccionFechas.class::isInstance))
+		return (this.getDesafio().getRestricciones().stream().filter(RestriccionFechas.class::isInstance))
 				.anyMatch(restriccion -> !restriccion.verificarRestriccionAlDesafio(this, LocalDate.now()));
 	}
 
 	public boolean faltaUnaMuestra() {
-		return (this.getMuestrasTomadas() == (this.getCantidadMinimaMuestras() - 1));
+		return (this.getMuestrasTomadas() == (this.getDesafio().getCantidadMinimaMuestras() - 1));
 	}
 
 }
