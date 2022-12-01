@@ -7,11 +7,9 @@ import java.util.List;
 
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.desafio.DesafioAceptado;
-import ar.edu.unq.po2.tpfinal.desafio.EstadoDesafioEnCurso;
 import ar.edu.unq.po2.tpfinal.filtrador.Evaluable;
 import ar.edu.unq.po2.tpfinal.filtrador.Filtrador;
 import ar.edu.unq.po2.tpfinal.muestra.Muestra;
-import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
 import ar.edu.unq.po2.tpfinal.proyecto.Proyecto;
 import ar.edu.unq.po2.tpfinal.recomendadorDeDesafios.RecomendadorDeDesafios;
@@ -81,7 +79,7 @@ public class Usuario {
 	public Desafio desafioMasGustado() {
 		List<DesafioAceptado> listaAuxiliar = desafios;
 		listaAuxiliar.sort((d1, d2) -> Double.compare(d1.getCalificacion(), d2.getCalificacion()));
-		return listaAuxiliar.get(0);
+		return listaAuxiliar.get(0).getDesafio();
 	}
 
 	public void tomarMuestra(Muestra muestra) {
@@ -93,12 +91,7 @@ public class Usuario {
 	}
 
 	public void aceptarDesafio(Desafio desafio) {
-		Circunferencia area = desafio.getArea();
-		int dificultad = desafio.getDificultad();
-		int cantMinMuestras = desafio.getCantidadMinimaMuestras();
-		int recompensa = desafio.getRecompensa();
-		this.desafios.add(
-				new DesafioAceptado(area, cantMinMuestras, dificultad, recompensa, this, new EstadoDesafioEnCurso()));
+		this.desafios.add(new DesafioAceptado(desafio, this));
 		this.muestrasAgregables.add(desafios.get(desafios.size() - 1));
 	}
 
@@ -115,7 +108,7 @@ public class Usuario {
 	public int calcularPorcentajeDeCompletitud() {
 		int x = 0;
 		for (DesafioAceptado desafio : desafios) {
-			x += desafio.porcentajeCompletitud(desafio);
+			x += desafio.porcentajeCompletitud();
 		}
 
 		x = x / desafios.size();
@@ -132,7 +125,7 @@ public class Usuario {
 	}
 
 	public double getPorcentajeDeCompletitudDeDesafio(DesafioAceptado desafio) {
-		return desafio.porcentajeCompletitud(desafio);
+		return desafio.porcentajeCompletitud();
 	}
 
 	public void setDificultadPreferida(int numero) throws Exception {
@@ -146,9 +139,11 @@ public class Usuario {
 	public void setRecompensaPreferida(int numero) throws Exception {
 		perfilDeUsuario.setRecompensa(numero);
 	}
+
 	public void setRecomendador(RecomendadorDeDesafios nuevoRecomendador) {
 		this.recomendador = nuevoRecomendador;
 	}
+
 	public List<Desafio> recomendar() {
 		return this.recomendador.recomendar();
 	}
