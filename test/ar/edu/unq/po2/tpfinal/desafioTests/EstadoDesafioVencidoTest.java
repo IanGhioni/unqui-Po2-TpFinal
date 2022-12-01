@@ -9,17 +9,20 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.desafio.DesafioAceptado;
 import ar.edu.unq.po2.tpfinal.desafio.EstadoDesafioVencido;
 
 class EstadoDesafioVencidoTest {
 	DesafioAceptado desafio;
 	EstadoDesafioVencido estado;
+	Desafio desafioInicial;
 
 	@BeforeEach
 	void setUp() {
+		desafioInicial = mock(Desafio.class);
 		desafio = mock(DesafioAceptado.class);
-		estado = new EstadoDesafioVencido();
+		estado = new EstadoDesafioVencido(desafio);
 	}
 
 	@Test
@@ -30,13 +33,14 @@ class EstadoDesafioVencidoTest {
 	@Test
 	void testPorcentajeCompletitudVencido() {
 		when(desafio.getMuestrasTomadas()).thenReturn(50);
-		when(desafio.getCantidadMinimaMuestras()).thenReturn(100);
-		assertEquals(50, estado.porcentajeCompletitud(desafio));
+		when(desafio.getDesafio()).thenReturn(desafioInicial);
+		when(desafio.getDesafio().getCantidadMinimaMuestras()).thenReturn(100);
+		assertEquals(50, estado.porcentajeCompletitud());
 	}
 
 	@Test
 	void testAgregarMuestraVencido() {
-		estado.agregarMuestra(1, desafio);
+		estado.agregarMuestra(1);
 		verifyNoMoreInteractions(desafio);
 	}
 

@@ -13,20 +13,23 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.desafio.DesafioAceptado;
 import ar.edu.unq.po2.tpfinal.desafio.Restriccion;
 import ar.edu.unq.po2.tpfinal.desafio.RestriccionFechas;
 
 class RestriccionFechasTest {
-
+	Desafio desafioInicial;
 	DesafioAceptado desafio;
 	RestriccionFechas restriccion;
 
 	@BeforeEach
 	void setUp() {
 		List<Restriccion> restricciones = Arrays.asList(restriccion);
+		desafioInicial = mock(Desafio.class);
 		desafio = mock(DesafioAceptado.class);
-		when(desafio.getRestricciones()).thenReturn(restricciones);
+		when(desafio.getDesafio()).thenReturn(desafioInicial);
+		when(desafio.getDesafio().getRestricciones()).thenReturn(restricciones);
 	}
 
 	@Test

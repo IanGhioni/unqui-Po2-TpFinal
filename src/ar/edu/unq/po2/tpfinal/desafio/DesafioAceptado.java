@@ -8,7 +8,8 @@ import ar.edu.unq.po2.tpfinal.sistema.Circunferencia;
 import ar.edu.unq.po2.tpfinal.usuario.MuestraAgregable;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
 
-public class DesafioAceptado extends Desafio implements MuestraAgregable {
+public class DesafioAceptado implements MuestraAgregable {
+	private Desafio desafio;
 	private Usuario usuario;
 	private EstadoDesafio estado;
 	private int muestrasTomadas;
@@ -16,12 +17,11 @@ public class DesafioAceptado extends Desafio implements MuestraAgregable {
 	private LocalTime horaCompletado;
 	private int calificacion;
 
-	public DesafioAceptado(Circunferencia area, int cantidadMinimaMuestras, int dificultad, int recompensa,
-			Usuario usuario, EstadoDesafio estado) {
-		super(area, cantidadMinimaMuestras, dificultad, recompensa);
+	public DesafioAceptado(Desafio desafio, Usuario usuario) {
+		this.desafio = desafio;
 		this.usuario = usuario;
-		this.setEstado(estado);
 		this.muestrasTomadas = 0;
+		this.setEstado(new EstadoDesafioEnCurso(this));
 	}
 
 	public void setFechaCompletado(LocalDate fecha) {
@@ -71,36 +71,40 @@ public class DesafioAceptado extends Desafio implements MuestraAgregable {
 		return calificacion;
 	}
 
-	public double porcentajeCompletitud(DesafioAceptado desafio) {
-		return this.estado.porcentajeCompletitud(this);
+	public double porcentajeCompletitud() {
+		return this.estado.porcentajeCompletitud();
 	}
 
 	@Override
 	public void notify(Usuario user) {
-		this.agregarMuestra(1, this);
+		this.agregarMuestra(1);
 	}
 
-	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
-		if (restricciones.stream()
+	public Desafio getDesafio() {
+		return desafio;
+	}
+
+	public void agregarMuestra(int cantidad) {
+		if (this.getDesafio().getRestricciones().stream()
 				.allMatch(restriccion -> restriccion.verificarRestriccionAlDesafio(this, LocalDate.now()))) {
-			this.estado.agregarMuestra(cantidad, this);
+			this.estado.agregarMuestra(cantidad);
 		}
 		this.verificarVencimiento();
 	}
 
 	public void verificarVencimiento() {
 		if (this.estaVencido()) {
-			this.setEstado(new EstadoDesafioVencido());
+			this.setEstado(new EstadoDesafioVencido(this));
 		}
 	}
 
 	private boolean estaVencido() {
-		return (restricciones.stream().filter(RestriccionFechas.class::isInstance))
+		return (this.getDesafio().getRestricciones().stream().filter(RestriccionFechas.class::isInstance))
 				.anyMatch(restriccion -> !restriccion.verificarRestriccionAlDesafio(this, LocalDate.now()));
 	}
 
 	public boolean faltaUnaMuestra() {
-		return (this.getMuestrasTomadas() == (this.getCantidadMinimaMuestras() - 1));
+		return (this.getMuestrasTomadas() == (this.getDesafio().getCantidadMinimaMuestras() - 1));
 	}
 
 }
