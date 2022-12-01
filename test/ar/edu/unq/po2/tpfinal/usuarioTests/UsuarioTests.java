@@ -24,10 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 class UsuarioTests {
-	
+
 	Usuario user;
 	Proyecto p1;
-	Desafio d1;	
+	Desafio d1;
 	Muestra m1;
 	Sistema sistema;
 	PerfilDeUsuario perfil;
@@ -42,16 +42,21 @@ class UsuarioTests {
 		perfil = mock(PerfilDeUsuario.class);
 		filtrador = mock(Filtrador.class);
 		recomendador = mock(RecomendadorDeDesafios.class);
-		
+
 		user = new Usuario(sistema, perfil, recomendador);
 	}
 
 	
 	@Test
+	void testVerificarQueElUsuarioSeAñadeAlSistema() throws Exception {
+		user = new Usuario(sistema, perfil, recomendador);
+		verify(sistema).addUsuario(user);
+	}
+	
+	@Test
 	void testGetPerfilDeUsuario() {
 		assertEquals(user.getPerfilDeUsuario(), perfil);
 	}
-
 
 	@Test
 	void testGetRecomendador() {
@@ -60,11 +65,11 @@ class UsuarioTests {
 
 	@Test
 	void testGetSistema() {
-		assertEquals(user.getSistema(),sistema);
+		assertEquals(user.getSistema(), sistema);
 	}
 
 	@Test
-	void testSuscribirseAProyecto() {
+	void testSuscribirseAProyecto() throws Exception {
 		user.suscribirseAProyecto(p1);
 		assertTrue(user.getProyectos().contains(p1));
 		assertTrue(user.getMuestrasAgregables().contains(p1));
@@ -72,73 +77,66 @@ class UsuarioTests {
 	}
 
 	@Test
-	void testDesuscribirseAProyecto() {
+	void testDesuscribirseAProyecto() throws Exception {
 		user.suscribirseAProyecto(p1);
 		user.desuscribirseAProyecto(p1);
 		assertFalse(user.getProyectos().contains(p1));
 		assertFalse(user.getMuestrasAgregables().contains(p1));
 		verify(p1).desuscribirUsuario(user);
 	}
-	
+
 	@Test
 	void testAceptarDesafio() {
 		when(d1.getArea()).thenReturn(mock(Circunferencia.class));
 		when(d1.getCantidadMinimaMuestras()).thenReturn(3);
 		when(d1.getDificultad()).thenReturn(5);
 		when(d1.getRecompensa()).thenReturn(200);
-		
+
 		user.aceptarDesafio(d1);
-		
-		verify(d1).getArea();
-		verify(d1).getCantidadMinimaMuestras();
-		verify(d1).getDificultad();
-		verify(d1).getRecompensa();
-		
+
 		assertTrue(!user.getDesafios().isEmpty());
 		assertTrue(!user.getMuestrasAgregables().isEmpty());
 	}
-	
+
 	@Test
 	void testCalificarDesafio() {
 		DesafioAceptado desafioAceptado = mock(DesafioAceptado.class);
 		user.calificarDesafio(desafioAceptado, 4);
 		verify(desafioAceptado).setCalificacion(4);
 	}
-	
+
 	@Test
 	void testDesafioMasGustado() {
-		DesafioAceptado desafioMenosGustado = mock(DesafioAceptado.class);
-		DesafioAceptado desafioMasGustado = mock(DesafioAceptado.class);
-		user.getDesafios().add(desafioMasGustado);
-		user.getDesafios().add(desafioMenosGustado);
-		user.calificarDesafio(desafioMenosGustado, 1);
-		user.calificarDesafio(desafioMasGustado, 4);
+		DesafioAceptado desafioAceptadoMenosGustado = mock(DesafioAceptado.class);
+		DesafioAceptado desafioAceptadoMasGustado = mock(DesafioAceptado.class);
+		Desafio desafioMasGustado = mock(Desafio.class);
+		user.getDesafios().add(desafioAceptadoMasGustado);
+		user.getDesafios().add(desafioAceptadoMenosGustado);
+		user.calificarDesafio(desafioAceptadoMenosGustado, 1);
+		user.calificarDesafio(desafioAceptadoMasGustado, 4);
 		
+		when(desafioAceptadoMasGustado.getDesafio()).thenReturn(desafioMasGustado);
+
 		assertEquals(user.desafioMasGustado(), desafioMasGustado);
 	}
 
 	@Test
 	void testTomarMuestra() {
 		DesafioAceptado desafioAceptado = mock(DesafioAceptado.class);
-		
+
 		user.getDesafios().add(desafioAceptado);
 		user.getProyectos().add(p1);
-		
+
 		user.getMuestrasAgregables().add(desafioAceptado);
 		user.getMuestrasAgregables().add(p1);
-		
+
 		user.tomarMuestra(m1);
-		
+
 		assertTrue(user.getMuestras().contains(m1));
 		verify(p1).notify(user);
 		verify(desafioAceptado).notify(user);
 	}
-	
-	
-	
-	
-	
-	
+
 	@Test
 	void testGetDesafiosCompletados() {
 		DesafioAceptado desafioCompletado = mock(DesafioAceptado.class);
@@ -150,12 +148,10 @@ class UsuarioTests {
 		user.getDesafios().add(desafioCompletado);
 		user.getDesafios().add(desafioNoCompletado);
 		user.getDesafios().add(desafioVencido);
-		
-		
+
 		List<DesafioAceptado> listaResultante = user.getDesafiosCompletados();
-		
-		
-		assertTrue(listaResultante.size() == 1);	
+
+		assertTrue(listaResultante.size() == 1);
 		verify(desafioCompletado).getEstado();
 		verify(desafioNoCompletado).getEstado();
 		verify(desafioVencido).getEstado();
@@ -163,31 +159,26 @@ class UsuarioTests {
 		assertFalse(user.getDesafiosCompletados().contains(desafioNoCompletado));
 		assertFalse(user.getDesafiosCompletados().contains(desafioVencido));
 	}
-	
-	
-	
-	
-	
-	
+
 	@Test
 	void testCalcularPorcentajeDeCompletitud() {
 		DesafioAceptado desafioAceptado1 = mock(DesafioAceptado.class);
 		user.getDesafios().add(desafioAceptado1);
 		DesafioAceptado desafioAceptado2 = mock(DesafioAceptado.class);
 		user.getDesafios().add(desafioAceptado2);
-		
-		when(desafioAceptado1.porcentajeCompletitud(desafioAceptado1)).thenReturn(50.0);
-		when(desafioAceptado2.porcentajeCompletitud(desafioAceptado2)).thenReturn(50.0);
+
+		when(desafioAceptado1.porcentajeCompletitud()).thenReturn(50.0);
+		when(desafioAceptado2.porcentajeCompletitud()).thenReturn(50.0);
 		assertEquals(user.calcularPorcentajeDeCompletitud(), 50.0);
-		verify(desafioAceptado1).porcentajeCompletitud(desafioAceptado1);
+		verify(desafioAceptado1).porcentajeCompletitud();
 	}
-	
+
 	@Test
 	void testGetPorcentajeDeCompletitudDeDesafio() {
-		
+
 		DesafioAceptado desafioAceptado = mock(DesafioAceptado.class);
-		when(desafioAceptado.porcentajeCompletitud(desafioAceptado)).thenReturn(50.0);
-		
+		when(desafioAceptado.porcentajeCompletitud()).thenReturn(50.0);
+
 		assertTrue(user.getPorcentajeDeCompletitudDeDesafio(desafioAceptado) == 50.0);
 	}
 
@@ -196,19 +187,17 @@ class UsuarioTests {
 		LocalTime hora = LocalTime.now();
 		DesafioAceptado desafioAceptado = mock(DesafioAceptado.class);
 		when(desafioAceptado.getHoraCompletado()).thenReturn(hora);
-		assertEquals(user.getHoraDeCompletitudDeDesafio(desafioAceptado),hora);
+		assertEquals(user.getHoraDeCompletitudDeDesafio(desafioAceptado), hora);
 	}
 
 	@Test
 	void testGetFechaDeCompletitudDeDesafio() {
-		LocalDate fecha= LocalDate.now();
+		LocalDate fecha = LocalDate.now();
 		DesafioAceptado desafioAceptado = mock(DesafioAceptado.class);
-		
-		when(desafioAceptado.getFechaCompletado()).thenReturn(fecha);
-		assertEquals(user.getFechaDeCompletitudDeDesafio(desafioAceptado),fecha);
-	}
 
-	
+		when(desafioAceptado.getFechaCompletado()).thenReturn(fecha);
+		assertEquals(user.getFechaDeCompletitudDeDesafio(desafioAceptado), fecha);
+	}
 
 	@Test
 	void testSetDificultadPreferida() throws Exception {
@@ -225,7 +214,8 @@ class UsuarioTests {
 	@Test
 	void testSetRecompensaPreferida() throws Exception {
 		user.setRecompensaPreferida(100);
-		verify(perfil).setRecompensa(100);;
+		verify(perfil).setRecompensa(100);
+		;
 	}
 
 	@Test
@@ -239,7 +229,7 @@ class UsuarioTests {
 		user.buscarProyectos(filtrador);
 		verify(filtrador).evaluar(new ArrayList<Evaluable>());
 	}
-	
+
 	@Test
 	void testCambiarRecomendador() {
 		RecomendadorDeDesafios recomendadorNuevo;
@@ -247,5 +237,5 @@ class UsuarioTests {
 		user.setRecomendador(recomendadorNuevo);
 		assertEquals(user.getRecomendador(), recomendadorNuevo);
 	}
-	
+
 }
