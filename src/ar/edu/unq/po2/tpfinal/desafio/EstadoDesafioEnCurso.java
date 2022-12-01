@@ -5,10 +5,16 @@ import java.time.LocalTime;
 
 public class EstadoDesafioEnCurso extends EstadoDesafio {
 
+	private DesafioAceptado desafioAceptado;
+
+	public EstadoDesafioEnCurso(DesafioAceptado desafioAceptado) {
+		this.desafioAceptado = desafioAceptado;
+	}
+
 	@Override
-	public double porcentajeCompletitud(DesafioAceptado desafio) {
-		double x = (double) desafio.getMuestrasTomadas();
-		double y = (double) desafio.getCantidadMinimaMuestras();
+	public double porcentajeCompletitud() {
+		double x = (double) desafioAceptado.getMuestrasTomadas();
+		double y = (double) desafioAceptado.getDesafio().getCantidadMinimaMuestras();
 		return (x / y * 100);
 	}
 
@@ -18,14 +24,14 @@ public class EstadoDesafioEnCurso extends EstadoDesafio {
 	}
 
 	@Override
-	public void agregarMuestra(int cantidad, DesafioAceptado desafio) {
-		if (desafio.faltaUnaMuestra()) {
-			desafio.setMuestrasTomadas(desafio.getCantidadMinimaMuestras());
-			desafio.setEstado(new EstadoDesafioCompletado());
-			desafio.setFechaCompletado(LocalDate.now());
-			desafio.setHoraCompletado(LocalTime.now());
+	public void agregarMuestra(int cantidad) {
+		if (desafioAceptado.faltaUnaMuestra()) {
+			desafioAceptado.setMuestrasTomadas(desafioAceptado.getDesafio().getCantidadMinimaMuestras());
+			desafioAceptado.setEstado(new EstadoDesafioCompletado());
+			desafioAceptado.setFechaCompletado(LocalDate.now());
+			desafioAceptado.setHoraCompletado(LocalTime.now());
 		} else {
-			desafio.setMuestrasTomadas(desafio.getMuestrasTomadas() + cantidad);
+			desafioAceptado.setMuestrasTomadas(desafioAceptado.getMuestrasTomadas() + cantidad);
 		}
 	}
 

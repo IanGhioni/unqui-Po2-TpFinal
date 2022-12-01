@@ -12,12 +12,13 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.tpfinal.desafio.Desafio;
 import ar.edu.unq.po2.tpfinal.desafio.DesafioAceptado;
 import ar.edu.unq.po2.tpfinal.desafio.Restriccion;
 import ar.edu.unq.po2.tpfinal.desafio.RestriccionSemanal;
 
 class RestriccionSemanalTest {
-
+	Desafio desafioInicial;
 	DesafioAceptado desafio;
 	RestriccionSemanal restriccion;
 	LocalDate diaDeSemana;
@@ -27,7 +28,9 @@ class RestriccionSemanalTest {
 	void setUp() {
 		List<Restriccion> restricciones = Arrays.asList(restriccion);
 		desafio = mock(DesafioAceptado.class);
-		when(desafio.getRestricciones()).thenReturn(restricciones);
+		desafioInicial = mock(Desafio.class);
+		when(desafio.getDesafio()).thenReturn(desafioInicial);
+		when(desafio.getDesafio().getRestricciones()).thenReturn(restricciones);
 	}
 
 	@Test
