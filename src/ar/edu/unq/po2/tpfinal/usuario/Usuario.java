@@ -79,7 +79,7 @@ public class Usuario {
 	public Desafio desafioMasGustado() {
 		List<DesafioAceptado> listaAuxiliar = desafios;
 		listaAuxiliar.sort((d1, d2) -> Double.compare(d1.getCalificacion(), d2.getCalificacion()));
-		return listaAuxiliar.get(0).getDesafio();
+		return listaAuxiliar.get(listaAuxiliar.size()-1).getDesafio();
 	}
 
 	public void tomarMuestra(Muestra muestra) {
@@ -95,9 +95,7 @@ public class Usuario {
 		this.muestrasAgregables.add(desafios.get(desafios.size() - 1));
 	}
 
-	public void calificarDesafio(DesafioAceptado desafio, int calificacion) {
-		desafio.setCalificacion(calificacion);
-	}
+	
 
 	public List<DesafioAceptado> getDesafiosCompletados() {
 		List<DesafioAceptado> listaAuxiliar = desafios;
@@ -144,15 +142,4 @@ public class Usuario {
 		this.recomendador = nuevoRecomendador;
 	}
 
-	public List<Desafio> recomendar() {
-		return this.recomendador.recomendar();
-	}
-
-	public List<Evaluable> buscarProyectos(Filtrador filtrador) {
-		ArrayList<Evaluable> listaAFiltrar = new ArrayList<Evaluable>();
-
-		listaAFiltrar.addAll(proyectos);
-
-		return filtrador.evaluar(listaAFiltrar);
-	}
 }
