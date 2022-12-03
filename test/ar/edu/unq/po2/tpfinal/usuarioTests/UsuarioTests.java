@@ -98,22 +98,20 @@ class UsuarioTests {
 		assertTrue(!user.getMuestrasAgregables().isEmpty());
 	}
 
-	@Test
-	void testCalificarDesafio() {
-		DesafioAceptado desafioAceptado = mock(DesafioAceptado.class);
-		user.calificarDesafio(desafioAceptado, 4);
-		verify(desafioAceptado).setCalificacion(4);
-	}
+	
 
 	@Test
 	void testDesafioMasGustado() {
-		DesafioAceptado desafioAceptadoMenosGustado = mock(DesafioAceptado.class);
+		DesafioAceptado desafioAceptadoMenosGustado1 = mock(DesafioAceptado.class);
+		DesafioAceptado desafioAceptadoMenosGustado2 = mock(DesafioAceptado.class);
 		DesafioAceptado desafioAceptadoMasGustado = mock(DesafioAceptado.class);
 		Desafio desafioMasGustado = mock(Desafio.class);
 		user.getDesafios().add(desafioAceptadoMasGustado);
-		user.getDesafios().add(desafioAceptadoMenosGustado);
-		user.calificarDesafio(desafioAceptadoMenosGustado, 1);
-		user.calificarDesafio(desafioAceptadoMasGustado, 4);
+		user.getDesafios().add(desafioAceptadoMenosGustado1);
+		user.getDesafios().add(desafioAceptadoMenosGustado2);
+		when(desafioAceptadoMasGustado.getCalificacion()).thenReturn(5);
+		when(desafioAceptadoMenosGustado1.getCalificacion()).thenReturn(1);
+		when(desafioAceptadoMenosGustado2.getCalificacion()).thenReturn(3);
 		
 		when(desafioAceptadoMasGustado.getDesafio()).thenReturn(desafioMasGustado);
 
@@ -218,18 +216,7 @@ class UsuarioTests {
 		;
 	}
 
-	@Test
-	void testRecomendar() {
-		user.recomendar();
-		verify(recomendador).recomendar();
-	}
-
-	@Test
-	void testBuscarProyectos() {
-		user.buscarProyectos(filtrador);
-		verify(filtrador).evaluar(new ArrayList<Evaluable>());
-	}
-
+	
 	@Test
 	void testCambiarRecomendador() {
 		RecomendadorDeDesafios recomendadorNuevo;
