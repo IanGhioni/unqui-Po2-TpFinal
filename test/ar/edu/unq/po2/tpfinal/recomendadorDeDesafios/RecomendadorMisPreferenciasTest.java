@@ -3,11 +3,13 @@ package ar.edu.unq.po2.tpfinal.recomendadorDeDesafios;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.po2.tpfinal.desafio.Desafio;
+import ar.edu.unq.po2.tpfinal.desafio.DesafioAceptado;
 import ar.edu.unq.po2.tpfinal.sistema.Sistema;
 import ar.edu.unq.po2.tpfinal.usuario.PerfilDeUsuario;
 import ar.edu.unq.po2.tpfinal.usuario.Usuario;
@@ -134,7 +136,7 @@ class RecomendadorMisPreferenciasTest {
 	@Test
 	void testRecomendar1() {
 		
-		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d3,d5,d7,d10
+		// Los primeros 5 desafios con mayor coincidencia son: d1,d3,d5,d7,d10
 
 		this.setupDesafioCoincidencia(d1, 0);
 		this.setupDesafioCoincidencia(d3, 0);
@@ -142,7 +144,7 @@ class RecomendadorMisPreferenciasTest {
 		this.setupDesafioCoincidencia(d7, 0);
 		this.setupDesafioCoincidencia(d10, 0);
 		
-		// Los demas desafios que no tienen la mayor coincidencia ni la mayor similitud.
+		// Los demas desafios que no tienen la mayor coincidencia.
 
 		
 		this.setupDesafioCoincidencia(d2, 10);
@@ -174,7 +176,7 @@ class RecomendadorMisPreferenciasTest {
 	@Test
 	void testRecomendar2() {
 		
-		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d3,d5,d7,d10
+		// Los primeros 5 desafios con mayor coincidencia son: d1,d3,d5,d7,d10
 
 		this.setupDesafioCoincidencia(d1, 0.6);
 		this.setupDesafioCoincidencia(d3, 0.4);
@@ -182,7 +184,7 @@ class RecomendadorMisPreferenciasTest {
 		this.setupDesafioCoincidencia(d7, 0.9);
 		this.setupDesafioCoincidencia(d10, 0.1);
 		
-		// Los demas desafios que no tienen la mayor coincidencia ni la mayor similitud.
+		// Los demas desafios que no tienen la mayor coincidencia.
 		
 		
 		this.setupDesafioCoincidencia(d2, 12.3);
@@ -214,7 +216,7 @@ class RecomendadorMisPreferenciasTest {
 	@Test
 	void testRecomendar3() {
 		
-		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d3,d5,d7,d10
+		// Los primeros 5 desafios con mayor coincidencia  son: d1,d3,d5,d7,d10
 		// CASO BORDE: los desafios d1, d3, d5, d7 y d10 tienen una diferencia de 0.1 con los demas.
 		
 		this.setupDesafioCoincidencia(d1, 0.9);
@@ -223,7 +225,7 @@ class RecomendadorMisPreferenciasTest {
 		this.setupDesafioCoincidencia(d7, 0.9);
 		this.setupDesafioCoincidencia(d10, 0.9);
 		
-		// Los demas desafios que no tienen la mayor coincidencia ni la mayor similitud.
+		// Los demas desafios que no tienen la mayor coincidencia.
 		
 		
 		this.setupDesafioCoincidencia(d2, 1);
@@ -253,9 +255,62 @@ class RecomendadorMisPreferenciasTest {
 	}
 	
 	@Test
+	void testSacarDesafiosQueYaRealizo() {
+		
+		// Los desafios con mayor coincidencia son: d1,d3,d5,d7,d10,d2 y d4
+		// D2 y d4 son desafios que el usuario ya tomo, por lo que se ignoran
+		
+		this.setupDesafioCoincidencia(d1, 0.9);
+		this.setupDesafioCoincidencia(d3, 0.9);
+		this.setupDesafioCoincidencia(d5, 0.9);
+		this.setupDesafioCoincidencia(d7, 0.9);
+		this.setupDesafioCoincidencia(d10, 0.9);
+		this.setupDesafioCoincidencia(d2, 0.2);
+		this.setupDesafioCoincidencia(d4, 0.2);
+		
+		DesafioAceptado d2Aceptado = mock(DesafioAceptado.class);
+		DesafioAceptado d4Aceptado = mock(DesafioAceptado.class);
+		List<DesafioAceptado> desafiosIgnoradosDeUsuario = new ArrayList<DesafioAceptado>();
+		desafiosIgnoradosDeUsuario.add(d2Aceptado);
+		desafiosIgnoradosDeUsuario.add(d4Aceptado);
+		when(d2Aceptado.getDesafio()).thenReturn(d2);
+		when(d4Aceptado.getDesafio()).thenReturn(d4);
+		
+		when(user.getDesafios()).thenReturn(desafiosIgnoradosDeUsuario);
+		
+		// Los demas desafios que no tienen la mayor coincidencia.
+		
+		this.setupDesafioCoincidencia(d6, 1);
+		this.setupDesafioCoincidencia(d8, 1);
+		this.setupDesafioCoincidencia(d9, 1);
+		this.setupDesafioCoincidencia(d15, 1);
+		this.setupDesafioCoincidencia(d14, 1);
+		this.setupDesafioCoincidencia(d13, 1);
+		this.setupDesafioCoincidencia(d12, 1);
+		this.setupDesafioCoincidencia(d11, 1);
+		this.setupDesafioCoincidencia(d16, 1);
+		this.setupDesafioCoincidencia(d17, 1);
+		this.setupDesafioCoincidencia(d18, 1);
+		this.setupDesafioCoincidencia(d19, 1);
+		this.setupDesafioCoincidencia(d20, 1);
+		this.setupDesafioCoincidencia(d23, 1);
+		this.setupDesafioCoincidencia(d22, 1);
+		this.setupDesafioCoincidencia(d21, 1);
+		
+		assertTrue(this.recomendador.recomendar().contains(d1));
+		assertTrue(this.recomendador.recomendar().contains(d3));
+		assertTrue(this.recomendador.recomendar().contains(d5));
+		assertTrue(this.recomendador.recomendar().contains(d7));
+		assertTrue(this.recomendador.recomendar().contains(d10));
+		
+		assertFalse(this.recomendador.recomendar().contains(d4));
+		assertFalse(this.recomendador.recomendar().contains(d2));
+	}
+	
+	@Test
 	void testRecomendarConUnaListaDeDesafiosCon6Elementos() {
 		
-		// Los primeros 5 desafios con mayor coincidencia y con mayor similitud son: d1,d2,d3,d4,d5
+		// Los primeros 5 desafios con mayor coincidencia son: d1,d2,d3,d4,d5
 		// Los desafios d1, d2, d3, d4, d5 y d10 son los unicos que hay en la lista del sistema. 
 		listaDeDesafios = new ArrayList<Desafio>();
 		listaDeDesafios.add(d1);

@@ -15,13 +15,7 @@ public abstract class RecomendadorDeDesafios {
 		this.user = user;
 	}
 	
-	public List<Desafio> recomendar() {
-		desafios = user.getSistema().getDesafios();
-		
-		this.ordenarDesafiosPorCoincidencia();
-		this.seleccionarDesafios();
-		return this.desafios;
-	}
+	abstract public List<Desafio> recomendar();
 
 	protected void seleccionarDesafios() {
 		this.desafios = new ArrayList<Desafio>(this.desafios.stream().limit(5).toList());
